@@ -23,6 +23,9 @@
 
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebSite","name":"Pulsebyte","url":"https://pulsebytes.github.io/","description":"Discover trending developer projects and technical articles.","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://pulsebytes.github.io/#q={search_term_string}"},"query-input":"required name=search_term_string"}}
+
+
+
 </script>
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%236366f1'/%3E%3Cpath d='M5 17h5l3-8 5 14 3-6h6' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
@@ -338,6 +341,43 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:none}
 .topic-tag{font-size:12px;background:var(--bg2);border:1px solid var(--line);padding:2px 9px;border-radius:999px;color:var(--ink2)}
 .acts{display:flex;gap:8px;flex-wrap:wrap}
 
+
+/* ══ ARTICLE CARD ENHANCEMENTS ══ */
+.article-card{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);
+  overflow:hidden;box-shadow:var(--sh-sm);cursor:pointer;display:flex;flex-direction:column;
+  transition:all .2s;
+}
+.art-thumb-wrap{
+  position:relative;width:100%;aspect-ratio:16/9;background:#0d1117;overflow:hidden;
+}
+.art-thumb{
+  width:100%;height:100%;object-fit:cover;transition:transform .3s ease;
+}
+.article-card:hover .art-thumb{transform:scale(1.05)}
+.art-badge-src{
+  position:absolute;bottom:8px;right:8px;
+  background:rgba(15,23,42,.85);backdrop-filter:blur(6px);
+  color:#e2e8f0;font-size:11px;font-weight:600;padding:2px 7px;border-radius:5px;
+}
+.art-body{padding:18px;display:flex;flex-direction:column;flex:1}
+
+/* Reader project showcase banner */
+.reader-project-banner{
+  background:var(--bg2);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:16px;margin:16px 0 24px;display:flex;gap:16px;align-items:center;
+}
+.reader-project-thumb{
+  width:96px;height:54px;object-fit:cover;border-radius:8px;border:1px solid var(--line);flex-shrink:0;background:#0d1117;
+}
+.rpb-details{flex:1;min-width:0}
+.rpb-title{font-weight:700;font-size:14px;color:var(--ink);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.rpb-desc{font-size:12.5px;color:var(--ink2);margin-top:2px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.reader-hero-img{
+  width:100%;max-height:300px;object-fit:cover;border-radius:var(--r-lg);
+  border:1px solid var(--line);margin-bottom:16px;box-shadow:var(--sh-sm);
+}
+
 /* ══ ARTICLES VIEW ══ */
 .articles-view{display:none}
 .articles-view.active{display:block}
@@ -357,22 +397,12 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:none}
 .art-footer{display:flex;align-items:center;justify-content:space-between;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--acc);font-weight:600}
 
 /* ══ ARTICLE READER MODAL ══ */
-.reader-modal{
-  position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);
-  z-index:999;display:none;align-items:center;justify-content:center;padding:20px;
-}
-.reader-modal.open{display:flex}
-.reader-box{
-  background:var(--panel);border:1px solid var(--line);border-radius:var(--r-xl);
-  max-width:760px;width:100%;max-height:90vh;overflow-y:auto;padding:36px;
-  box-shadow:var(--sh-lg);position:relative;line-height:1.7;
-}
-.reader-close{
-  position:absolute;top:20px;right:20px;width:34px;height:34px;border-radius:50%;
-  background:var(--bg2);border:1px solid var(--line);display:grid;place-items:center;
-  cursor:pointer;font-size:18px;color:var(--ink2);
-}
-.reader-close:hover{background:var(--line);color:var(--ink)}
+/* ══ ARTICLE FULL PAGE ══ */
+#view-article{display:none;min-height:80vh}
+.article-page-wrap{max-width:740px;margin:0 auto;padding:32px 20px 80px}
+.art-back-btn{display:inline-flex;align-items:center;gap:6px;margin-bottom:28px;font-size:14px;font-weight:600;color:var(--ink2);background:var(--bg2);border:1px solid var(--line);padding:7px 14px;border-radius:var(--r);cursor:pointer;transition:background .15s,color .15s}
+.art-back-btn:hover{background:var(--line);color:var(--ink)}
+.art-back-btn svg{flex-shrink:0}
 .reader-title{font-family:"Bricolage Grotesque",sans-serif;font-size:1.85rem;font-weight:800;letter-spacing:-.03em;line-height:1.2;margin:12px 0}
 .reader-tldr{background:var(--acc-soft);border-left:4px solid var(--acc);padding:14px 18px;border-radius:var(--r);font-size:15px;margin-bottom:24px;font-style:italic}
 .reader-content h3{font-family:"Bricolage Grotesque",sans-serif;font-size:1.25rem;font-weight:700;margin:24px 0 10px;color:var(--ink)}
@@ -423,6 +453,11 @@ footer{
   font-size:13.5px;font-weight:500;opacity:0;pointer-events:none;transition:all .2s;z-index:999;
 }
 #toast.on{opacity:1;transform:translate(-50%,0)}
+
+/* ══ VIEW SWITCHING ══ */
+#view-trending, #view-articles { display: none; }
+#view-trending.active { display: block; }
+#view-articles.active { display: block; }
 </style>
 </head>
 <body>
@@ -443,7 +478,7 @@ footer{
       🔥 Trending <span class="badge-count" id="count-trending">0</span>
     </button>
     <button class="nav-tab" id="tab-articles" role="tab" aria-selected="false" onclick="switchView('articles')">
-      📰 Deep Dives <span class="badge-count" id="count-articles">0</span>
+      📰 Articles <span class="badge-count" id="count-articles">0</span>
     </button>
   </nav>
 
@@ -528,7 +563,7 @@ footer{
   <section id="view-articles" class="articles-view" aria-label="Articles section">
     <div style="margin-bottom:20px;display:flex;align-items:center;justify-content:space-between">
       <div>
-        <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.4rem;font-weight:800;letter-spacing:-.02em">Technical Deep Dives</h2>
+        <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.4rem;font-weight:800;letter-spacing:-.02em">Technical Articles</h2>
         <p style="font-size:14px;color:var(--ink2)">Comprehensive breakdowns of breakthrough trending projects, generated and published from Pulsebyte.</p>
       </div>
     </div>
@@ -539,24 +574,30 @@ footer{
 
 </div>
 
-<!-- ══ ARTICLE READER MODAL ══ -->
-<div id="reader-modal" class="reader-modal" onclick="if(event.target===this)closeReader()">
-  <article class="reader-box" role="dialog" aria-modal="true" aria-labelledby="r-title">
-    <button class="reader-close" onclick="closeReader()" aria-label="Close">&times;</button>
+<!-- ══ ARTICLE FULL PAGE ══ -->
+<section id="view-article" aria-label="Article reader">
+  <div class="article-page-wrap">
+    <button class="art-back-btn" onclick="goBackToArticles()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      Back to Articles
+    </button>
     <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
-      <span class="art-badge" id="r-badge">Deep Dive</span>
+      <span class="art-badge" id="r-badge">Article</span>
       <span style="font-size:12px;color:var(--ink3)" id="r-time">4 min read</span>
       <span style="font-size:12px;color:var(--ink3)" id="r-date"></span>
     </div>
     <h1 class="reader-title" id="r-title"></h1>
     <div class="reader-tldr" id="r-tldr"></div>
     <div class="reader-content" id="r-content"></div>
-    <div style="margin-top:28px;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+    <div style="margin-top:36px;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
       <a class="btn p" id="r-url" href="#" target="_blank" rel="noopener noreferrer">Explore Repository &rarr;</a>
-      <button class="btn" onclick="closeReader()">Close</button>
+      <button class="art-back-btn" onclick="goBackToArticles()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+        Back to Articles
+      </button>
     </div>
-  </article>
-</div>
+  </div>
+</section>
 
 <!-- ══ FOOTER (MOVED TEXT + SOCIAL) ══ -->
 <footer role="contentinfo">
@@ -615,9 +656,20 @@ function getProjectImage(item){
 /* ══ NAVIGATION VIEW SWITCHER ══ */
 function switchView(v){
   S.view = v;
+  // Nav tabs only light up for trending / articles
   document.querySelectorAll('.nav-tab').forEach(t=>t.classList.toggle('active', t.id === 'tab-'+v));
-  $('#view-trending').classList.toggle('active', v==='trending');
-  $('#view-articles').classList.toggle('active', v==='articles');
+  $('#view-trending').style.display  = v==='trending'  ? '' : 'none';
+  $('#view-articles').style.display  = v==='articles'  ? '' : 'none';
+  $('#view-article').style.display   = v==='article'   ? '' : 'none';
+  // Restore initial state: trending uses .active class, others use display
+  if(v==='trending')  { $('#view-trending').style.display=''; }
+  if(v==='articles')  { $('#view-articles').style.display=''; }
+}
+
+function goBackToArticles(){
+  history.pushState(null, '', location.pathname);
+  switchView('articles');
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
 /* ══ CAROUSEL WITH IMAGES ══ */
@@ -686,6 +738,13 @@ async function loadArticles(){
     S.articles = await res.json();
     $('#count-articles').textContent = S.articles.length;
     renderArticles();
+    // Hash routing: open article directly if URL contains #article=<slug>
+    const hash = location.hash;
+    if(hash.startsWith('#article=')){
+      const slug = decodeURIComponent(hash.slice('#article='.length));
+      const idx = S.articles.findIndex(a=>(a.slug||a.id||'')===slug);
+      if(idx >= 0){ openReader(idx); }
+    }
   } catch(e){}
 }
 
@@ -694,7 +753,7 @@ function renderArticles(){
   if(!grid) return;
   if(!S.articles.length){
     grid.innerHTML = `<div class="state" style="grid-column:1/-1">
-      <h3>No published deep dives yet</h3>
+      <h3>No published articles yet</h3>
       <p>Technical articles written inside the Pulsebyte app will appear right here.</p>
     </div>`;
     return;
@@ -702,7 +761,7 @@ function renderArticles(){
   grid.innerHTML = S.articles.map((a, idx) => `
     <article class="article-card" onclick="openReader(${idx})">
       <div class="art-meta">
-        <span class="art-badge">Deep Dive</span>
+        <span class="art-badge">Article</span>
         <span>${esc(a.read_time || '4 min read')}</span>
         <span>&middot;</span>
         <span>${ago(a.published_at || a.created_at)}</span>
@@ -721,17 +780,42 @@ function renderArticles(){
 function openReader(idx){
   const a = S.articles[idx];
   if(!a) return;
+  const item = a.item || {};
+  const imgUrl = getProjectImage(item);
+
   $('#r-title').textContent = a.title;
   $('#r-tldr').textContent = a.tldr || '';
-  $('#r-content').innerHTML = a.content || '';
   $('#r-time').textContent = a.read_time || '4 min read';
   $('#r-date').textContent = a.published_at ? 'Published ' + ago(a.published_at) : '';
-  $('#r-url').href = a.item?.url || '#';
-  $('#reader-modal').classList.add('open');
-}
+  $('#r-url').href = item.url || '#';
+  $('#r-url').textContent = 'Explore ' + (item.name || 'Project') + ' on ' + (item.src || 'GitHub') + ' →';
 
-function closeReader(){
-  $('#reader-modal').classList.remove('open');
+  // Inject project showcase box with image at top of reader
+  const projectBox = `
+    <img class="reader-hero-img" src="${imgUrl}" alt="${esc(item.name||'')}" onerror="this.style.display='none'">
+    <div class="reader-project-banner">
+      <div class="rpb-details">
+        <div class="rpb-title">
+          <span>📦 Featured Project: <strong>${esc(item.name || '')}</strong></span>
+          <span class="chip" style="font-size:11px;padding:2px 8px">${esc(item.src || '')}</span>
+          <span style="color:var(--hot);font-weight:700;font-size:12px">⭐ ${fmt(item.score || 0)}</span>
+          ${item.lang ? `<span style="font-size:11px;color:var(--ink3)">(${esc(item.lang)})</span>` : ''}
+        </div>
+        <div class="rpb-desc">${esc(item.desc || '')}</div>
+      </div>
+      <a class="btn p sm" href="${esc(item.url || '#')}" target="_blank" rel="noopener noreferrer" style="flex-shrink:0">
+        Repository &rarr;
+      </a>
+    </div>
+  `;
+
+  $('#r-content').innerHTML = projectBox + (a.content || '');
+  // Store current article index for hash routing
+  S.openArticle = idx;
+  const slug = a.slug || a.id || String(idx);
+  history.pushState({articleIdx:idx}, '', location.pathname + '#article=' + encodeURIComponent(slug));
+  switchView('article');
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
 /* ══ SOCIAL BAR ══ */
@@ -907,6 +991,13 @@ async function boot(){
   } catch(e){}
 }
 boot();
+
+/* ══ HASH ROUTING: browser back/fwd ══ */
+window.addEventListener('popstate', function(){
+  if(!location.hash.startsWith('#article=')){
+    if(S.view==='article') switchView('articles');
+  }
+});
 </script>
 </body>
 </html>
