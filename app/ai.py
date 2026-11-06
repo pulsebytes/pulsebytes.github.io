@@ -29,7 +29,7 @@ def write(item, note=""):
     p = PROMPT.format(name=item["name"], src=item["src"], desc=item.get("desc", ""), score=item.get("score", 0),
                       lang=item.get("lang", ""), topics=", ".join(item.get("topics", [])), url=item["url"],
                       readme=readme(item), note=("Extra instruction: " + note) if note else "")
-    model = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+    model = os.getenv("GEMINI_MODEL", "gemini-3.5-flash")
     for i in range(3):
         r = requests.post(f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent",
             headers={"x-goog-api-key": os.getenv("GEMINI_API_KEY", "")}, timeout=90,

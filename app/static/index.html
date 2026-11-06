@@ -1,56 +1,629 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Pulsebyte</title>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<!-- SEO -->
+<title>Pulsebyte – AI-Powered Social Media Content for Dev &amp; Tech Projects</title>
+<meta name="description" content="Pulsebyte scans trending developer projects from GitHub and Product Hunt, then uses AI to generate ready-to-post Facebook, YouTube, and Telegram content in seconds.">
+<meta name="keywords" content="AI content generator, developer marketing, GitHub trending, social media automation, YouTube Shorts, Facebook posts, tech content, Pulsebyte">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://deltabytesyt.github.io/pulsebyte/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Pulsebyte – AI Social Media Content for Developers">
+<meta property="og:description" content="Turn trending GitHub and Product Hunt projects into polished Facebook posts, YouTube Shorts, and Telegram content — automatically.">
+<meta property="og:url" content="https://deltabytesyt.github.io/pulsebyte/">
+<meta property="og:site_name" content="Pulsebyte">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Pulsebyte – AI Social Media Content for Developers">
+<meta name="twitter:description" content="Turn trending GitHub and Product Hunt projects into polished posts in seconds.">
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Pulsebyte",
+  "description": "AI-powered social media content generator for trending developer and tech projects.",
+  "url": "https://deltabytesyt.github.io/pulsebyte/",
+  "applicationCategory": "ProductivityApplication",
+  "operatingSystem": "Windows"
+}
+</script>
+
 <style>
-:root{--bg:#eef2f3;--panel:#fff;--ink:#14202b;--mute:#5b6b78;--line:#d5dde2;--accent:#0f766e;--on:#fff;--star:#b45309}
-@media(prefers-color-scheme:dark){:root{--bg:#0e161c;--panel:#16222b;--ink:#e8eef2;--mute:#97a8b5;--line:#283844;--accent:#2dd4bf;--on:#06201d;--star:#fbbf24}}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "Segoe UI Variable","Segoe UI",system-ui,sans-serif}
-header{display:flex;gap:12px;align-items:center;padding:16px 24px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--bg);z-index:2}
-h1{font-size:20px;margin:0;flex:1;letter-spacing:-.01em}h2{font-size:16px;margin:0 0 12px}
-main{display:grid;grid-template-columns:minmax(300px,1fr) minmax(360px,1.5fr);gap:24px;padding:24px;max-width:1400px;margin:auto}
+/* ── Design Tokens ── */
+:root {
+  --bg:       #f0f4f8;
+  --surface:  #ffffff;
+  --surface2: #f8fafc;
+  --border:   #e2e8f0;
+  --ink:      #0f1923;
+  --ink2:     #4a5568;
+  --ink3:     #94a3b8;
+  --accent:   #0d9488;
+  --accent2:  #0f766e;
+  --accent-bg:#f0fdf9;
+  --warn:     #d97706;
+  --danger:   #dc2626;
+  --success:  #16a34a;
+  --on-accent:#ffffff;
+  --shadow-sm:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.04);
+  --shadow:   0 4px 12px rgba(0,0,0,.08),0 2px 4px rgba(0,0,0,.04);
+  --shadow-lg:0 12px 32px rgba(0,0,0,.12),0 4px 8px rgba(0,0,0,.06);
+  --radius:   10px;
+  --radius-lg:16px;
+  --header-h: 64px;
+  --transition:.18s ease;
+}
+@media (prefers-color-scheme:dark){
+  :root {
+    --bg:       #0a1118;
+    --surface:  #111c26;
+    --surface2: #182434;
+    --border:   #1e3045;
+    --ink:      #e8f0f7;
+    --ink2:     #94afc7;
+    --ink3:     #4a6480;
+    --accent:   #2dd4bf;
+    --accent2:  #14b8a6;
+    --accent-bg:#0d2a27;
+    --warn:     #fbbf24;
+    --danger:   #f87171;
+    --success:  #4ade80;
+    --on-accent:#06201d;
+    --shadow-sm:0 1px 3px rgba(0,0,0,.3);
+    --shadow:   0 4px 12px rgba(0,0,0,.35);
+    --shadow-lg:0 12px 32px rgba(0,0,0,.5);
+  }
+}
+
+/* ── Reset & Base ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font:15px/1.6 "Segoe UI Variable","Segoe UI",system-ui,-apple-system,sans-serif;
+  min-height:100vh;
+}
+img,video{display:block;max-width:100%}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ── Typography ── */
+h1{font-size:1.35rem;font-weight:700;letter-spacing:-.025em;line-height:1.2}
+h2{font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+h2 svg{width:18px;height:18px;stroke:var(--accent);flex-shrink:0}
+
+/* ── Header ── */
+header{
+  height:var(--header-h);
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:0 24px;
+  background:var(--surface);
+  border-bottom:1px solid var(--border);
+  position:sticky;
+  top:0;
+  z-index:100;
+  box-shadow:var(--shadow-sm);
+}
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex:1;
+  min-width:0;
+}
+.logo-icon{
+  width:36px;height:36px;border-radius:9px;
+  background:linear-gradient(135deg,var(--accent2),var(--accent));
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.logo-icon svg{width:20px;height:20px;fill:var(--on-accent)}
+.logo h1{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.logo-sub{font-size:12px;color:var(--ink3);display:none}
+@media(min-width:600px){.logo-sub{display:block}}
+
+#upd{font-size:12px;color:var(--ink3);white-space:nowrap;flex-shrink:0}
+
+.hdr-actions{display:flex;gap:8px;flex-shrink:0}
+
+/* ── Buttons ── */
+button{
+  font:inherit;
+  border:1px solid var(--border);
+  background:var(--surface);
+  color:var(--ink);
+  padding:7px 14px;
+  border-radius:7px;
+  cursor:pointer;
+  font-size:13.5px;
+  font-weight:500;
+  transition:background var(--transition),border-color var(--transition),opacity var(--transition),transform var(--transition);
+  display:inline-flex;align-items:center;gap:6px;white-space:nowrap;
+}
+button:hover:not(:disabled){background:var(--surface2);border-color:var(--ink3)}
+button:active:not(:disabled){transform:scale(.98)}
+button:disabled{opacity:.5;cursor:wait}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+button.p{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:600}
+button.p:hover:not(:disabled){background:var(--accent2);border-color:var(--accent2)}
+button.sm{padding:5px 10px;font-size:12.5px;border-radius:6px}
+button.icon-btn{padding:7px;width:34px;height:34px;justify-content:center}
+
+/* ── Layout ── */
+main{
+  display:grid;
+  grid-template-columns:380px 1fr;
+  gap:0;
+  max-width:1400px;
+  margin:0 auto;
+  min-height:calc(100vh - var(--header-h));
+}
 @media(max-width:900px){main{grid-template-columns:1fr}}
-button{font:inherit;border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:6px 12px;border-radius:6px;cursor:pointer}
-button.p{background:var(--accent);color:var(--on);border-color:var(--accent);font-weight:600}
-button:disabled{opacity:.55;cursor:wait}button:focus-visible,textarea:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.item{display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
-.item>div{flex:1;min-width:0}.item b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.item small{color:var(--mute);display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.src{font-size:12px;padding:2px 8px;border:1px solid var(--line);border-radius:10px;color:var(--mute)}.sc{color:var(--star);font-weight:600}
-.draft{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:18px}
-.draft img{width:100%;max-width:420px;border-radius:8px;display:block;margin-bottom:12px}video{max-width:240px;border-radius:8px;display:block;margin:12px 0}
-textarea,input{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:8px}
-textarea{min-height:130px}label{display:block;margin:10px 0 4px;color:var(--mute);font-size:13px}
-.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.empty{color:var(--mute)}
-</style></head><body>
-<header><h1>Pulsebyte</h1><span id="upd" class="empty"></span><button onclick="busy(this,autopost)">Autopost to channel</button><button class="p" onclick="busy(this,scan)">Scan now</button></header>
-<main><section><h2>Trending now</h2><div id="trend" class="empty">Loading...</div></section>
-<section><h2>Drafts</h2><div id="drafts" class="empty">Pick a project on the left and press Create post.</div></section></main>
+
+.panel{
+  padding:24px;
+  border-right:1px solid var(--border);
+  overflow-y:auto;
+  height:calc(100vh - var(--header-h));
+  position:sticky;
+  top:var(--header-h);
+}
+@media(max-width:900px){.panel{height:auto;position:static;border-right:none;border-bottom:1px solid var(--border)}}
+
+.content{padding:24px;overflow-y:auto}
+
+/* ── Section Headers ── */
+.sec-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:16px;
+  padding-bottom:12px;
+  border-bottom:1px solid var(--border);
+}
+.sec-header h2{margin:0}
+
+/* ── Badges ── */
+.badge{
+  display:inline-flex;align-items:center;gap:4px;
+  font-size:11.5px;padding:2px 8px;border-radius:20px;font-weight:500;
+}
+.badge.src{background:var(--surface2);border:1px solid var(--border);color:var(--ink2)}
+.badge.score{background:var(--accent-bg);color:var(--accent2);border:1px solid var(--accent2)30}
+.badge.lang{background:#fff7ed;color:#c2410c;border:1px solid #fed7aa;font-size:11px}
+@media(prefers-color-scheme:dark){
+  .badge.lang{background:#2d1b08;color:#fb923c;border-color:#78350f}
+}
+
+/* ── Trending Items ── */
+.trend-item{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8px 12px;
+  align-items:start;
+  padding:12px 0;
+  border-bottom:1px solid var(--border);
+  transition:background var(--transition);
+}
+.trend-item:last-child{border-bottom:none}
+.trend-item .meta{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:4px}
+.trend-item b{font-size:14px;font-weight:600;color:var(--ink);line-height:1.3}
+.trend-item small{font-size:12.5px;color:var(--ink2);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-top:2px}
+.trend-item .actions{display:flex;align-items:flex-start;gap:6px;padding-top:2px}
+
+/* ── Draft Cards ── */
+.draft-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:20px;
+  margin-bottom:20px;
+  box-shadow:var(--shadow-sm);
+  transition:box-shadow var(--transition);
+}
+.draft-card:hover{box-shadow:var(--shadow)}
+.draft-card:first-child{border-top:3px solid var(--accent)}
+
+.draft-title{
+  font-weight:700;font-size:1.05rem;
+  margin-bottom:14px;
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+}
+.draft-num{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:26px;height:26px;border-radius:50%;
+  background:var(--accent);color:var(--on-accent);
+  font-size:12px;font-weight:700;flex-shrink:0;
+}
+
+.draft-media{
+  display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start;
+  margin-bottom:16px;
+}
+.draft-card img{
+  width:100%;max-width:360px;border-radius:var(--radius);
+  box-shadow:var(--shadow);border:1px solid var(--border);
+}
+video{max-width:200px;border-radius:var(--radius);box-shadow:var(--shadow)}
+
+/* ── Form Controls ── */
+label{display:block;margin:12px 0 4px;font-size:12.5px;font-weight:600;color:var(--ink2);text-transform:uppercase;letter-spacing:.04em}
+textarea,input[type=text],input:not([type]){
+  width:100%;
+  font:inherit;
+  color:var(--ink);
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:7px;
+  padding:9px 11px;
+  font-size:14px;
+  transition:border-color var(--transition),box-shadow var(--transition);
+  resize:vertical;
+}
+textarea{min-height:120px}
+textarea:focus,input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent)20}
+
+/* ── Action Rows ── */
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.row.tight{margin-top:6px}
+.rewrite-row{display:flex;gap:8px;margin-top:0;align-items:center}
+.rewrite-row input{flex:1;min-width:0}
+
+/* ── Empty / Loading States ── */
+.empty{color:var(--ink3);font-size:14px;text-align:center;padding:32px 0}
+.spinner{
+  width:18px;height:18px;
+  border:2.5px solid currentColor;border-top-color:transparent;
+  border-radius:50%;animation:spin .7s linear infinite;display:inline-block;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── Toast ── */
+#toast{
+  position:fixed;bottom:24px;right:24px;z-index:999;
+  display:flex;flex-direction:column;gap:8px;pointer-events:none;
+}
+.toast-msg{
+  background:var(--ink);color:var(--bg);
+  padding:10px 16px;border-radius:8px;font-size:13.5px;font-weight:500;
+  box-shadow:var(--shadow-lg);
+  animation:slideIn .22s ease;pointer-events:auto;
+  display:flex;align-items:center;gap:10px;min-width:220px;
+}
+.toast-msg.ok{border-left:4px solid var(--success)}
+.toast-msg.err{border-left:4px solid var(--danger)}
+@keyframes slideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── Collapsible fields ── */
+.field-group{
+  border:1px solid var(--border);border-radius:var(--radius);
+  overflow:hidden;margin-top:12px;
+}
+.field-group summary{
+  list-style:none;padding:9px 12px;cursor:pointer;
+  font-size:12.5px;font-weight:600;color:var(--ink2);
+  text-transform:uppercase;letter-spacing:.04em;
+  display:flex;align-items:center;gap:6px;
+  background:var(--surface2);
+  user-select:none;
+}
+.field-group summary::-webkit-details-marker{display:none}
+.field-group summary::after{content:"›";margin-left:auto;font-size:16px;transition:transform .2s}
+details[open] summary::after{transform:rotate(90deg)}
+.field-group .inner{padding:12px}
+
+/* ── Divider ── */
+.divider{height:1px;background:var(--border);margin:16px 0}
+
+/* ── Scroll hint ── */
+.scroll-fade{
+  position:sticky;bottom:0;height:40px;
+  background:linear-gradient(to top,var(--bg),transparent);
+  pointer-events:none;
+  margin-top:-40px;
+}
+</style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<header role="banner">
+  <div class="logo">
+    <div class="logo-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+    </div>
+    <div>
+      <h1>Pulsebyte</h1>
+      <div class="logo-sub">AI social media for dev projects</div>
+    </div>
+  </div>
+  <span id="upd" aria-live="polite"></span>
+  <div class="hdr-actions">
+    <button onclick="busy(this,autopost)" title="Schedule autopost on GitHub Actions">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+      Autopost
+    </button>
+    <button class="p" onclick="busy(this,scan)" title="Re-scan GitHub &amp; Product Hunt now">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+      Scan now
+    </button>
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main>
+  <!-- ── LEFT PANEL: Trending ── -->
+  <aside class="panel" role="complementary" aria-label="Trending projects">
+    <div class="sec-header">
+      <h2>
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+        Trending now
+      </h2>
+    </div>
+    <div id="trend" class="empty" role="status">
+      <div class="spinner"></div>
+      <div style="margin-top:12px">Loading trending projects…</div>
+    </div>
+  </aside>
+
+  <!-- ── RIGHT PANEL: Drafts ── -->
+  <section class="content" aria-label="Generated drafts">
+    <div class="sec-header">
+      <h2>
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 13h6M9 17h4"/></svg>
+        Drafts
+      </h2>
+      <span id="draft-count" style="font-size:12px;color:var(--ink3)"></span>
+    </div>
+    <div id="drafts" class="empty" role="status">
+      <svg width="48" height="48" fill="none" stroke="var(--ink3)" stroke-width="1.5" viewBox="0 0 24 24" style="margin:0 auto 12px"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 13h6M9 17h4"/></svg>
+      <div>Select a trending project on the left and press <strong>Create post</strong>.</div>
+    </div>
+  </section>
+</main>
+
+<!-- ══ TOAST CONTAINER ══ -->
+<div id="toast" role="alert" aria-live="polite"></div>
+
 <script>
-const $=s=>document.querySelector(s),esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const api=async(p,m="GET",b)=>{const r=await fetch("/api/"+p,{method:m,headers:{"content-type":"application/json"},body:b?JSON.stringify(b):undefined});if(!r.ok)throw new Error(await r.text());return r.json()};
-async function busy(btn,fn){btn.disabled=true;const t=btn.textContent;btn.textContent="Working...";try{await fn()}catch(e){alert("Something went wrong: "+e.message)}btn.disabled=false;btn.textContent=t}
-function showT(t){$("#upd").textContent=t.updated_at?"Updated "+new Date(t.updated_at).toLocaleString():"";
-$("#trend").innerHTML=t.items.length?t.items.map(i=>`<div class=item><div><b>${esc(i.name)}</b><small>${esc(i.desc)}</small></div><span class=src>${esc(i.src)}</span><span class=sc>${i.score}</span><button onclick="busy(this,()=>gen('${esc(i.id)}'))">Create post</button></div>`).join(""):"No data yet. Press Scan now."}
-async function load(){showT(await api("trending"));drafts()}
-async function autopost(){await api("autopost","POST");alert("Started on GitHub. New posts reach your channel in a minute or two.")}
-async function scan(){showT(await api("scan","POST"))}
-async function gen(id){await api("generate","POST",{id});await drafts()}
-async function drafts(){const ds=await api("drafts");if(!ds.length)return;$("#drafts").innerHTML=ds.map(d=>`<div class=draft>
-<img src="/files/${d.card}?t=${Date.now()}" alt="Card">
-${d.video?`<video controls src="/files/${d.video}?t=${Date.now()}"></video>`:""}
-<label>Facebook post</label><textarea id="fb${d.id}">${esc(d.facebook)}</textarea>
-<label>YouTube title</label><input id="yt${d.id}" value="${esc(d.yt_title)}">
-<label>YouTube description</label><textarea id="yd${d.id}">${esc(d.yt_description)}</textarea>
-<div class=row><button class=p onclick="cp('fb${d.id}','https://www.facebook.com/')">Copy and open Facebook</button>
-<button class=p onclick="cp2(${d.id})">Copy and open YouTube upload</button></div>
-<div class=row><button onclick="busy(this,()=>vid('${d.id}'))">${d.video?"Remake":"Make"} Shorts video</button>
-<button onclick="busy(this,()=>api('folder/${d.id}','POST'))">Open folder</button>
-<button onclick="busy(this,()=>api('telegram/${d.id}','POST'))">Send to Telegram</button>
-<button onclick="busy(this,()=>api('channel/${d.id}','POST'))">Post to channel</button></div>
-<label>Rewrite with an instruction</label><div class=row style="margin-top:0"><input id="ed${d.id}" placeholder="Make it funnier, shorter, more technical..." style="flex:1">
-<button onclick="busy(this,()=>edit('${d.id}'))">Rewrite</button></div></div>`).join("")}
-const cp=(id,url)=>{navigator.clipboard.writeText($("#"+id).value);window.open(url,"_blank")};
-const cp2=id=>{navigator.clipboard.writeText($("#yt"+id).value+"\n\n"+$("#yd"+id).value);window.open("https://www.youtube.com/upload","_blank")};
-async function vid(id){await api("video/"+id,"POST");await drafts()}
-async function edit(id){await api("edit","POST",{id,text:$("#ed"+id).value});await drafts()}
-load().catch(e=>$("#trend").textContent="Could not reach the worker: "+e.message);
-</script></body></html>
+/* ── Helpers ── */
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+const api = async (path, method = "GET", body) => {
+  const r = await fetch("/api/" + path, {
+    method,
+    headers: {"content-type": "application/json"},
+    body: body ? JSON.stringify(body) : undefined
+  });
+  if (!r.ok) {
+    const txt = await r.text().catch(() => r.statusText);
+    throw new Error(txt || `HTTP ${r.status}`);
+  }
+  return r.json();
+};
+
+/* busy: disable button while async fn runs */
+async function busy(btn, fn) {
+  btn.disabled = true;
+  const orig = btn.innerHTML;
+  btn.innerHTML = `<span class="spinner"></span> Working…`;
+  try { await fn(); }
+  catch (e) { toast("Error: " + e.message, "err"); }
+  btn.disabled = false;
+  btn.innerHTML = orig;
+}
+
+/* Toast notifications */
+function toast(msg, type = "ok", ms = 4000) {
+  const el = document.createElement("div");
+  el.className = "toast-msg " + type;
+  el.textContent = msg;
+  $("#toast").appendChild(el);
+  setTimeout(() => el.remove(), ms);
+}
+
+/* ── Trending ── */
+function showTrending(t) {
+  $("#upd").textContent = t.updated_at
+    ? "Updated " + new Date(t.updated_at).toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"})
+    : "";
+
+  if (!t.items || !t.items.length) {
+    $("#trend").innerHTML = `<div class="empty">No data yet — press <strong>Scan now</strong>.</div>`;
+    return;
+  }
+
+  $("#trend").innerHTML = t.items.map(i => `
+    <div class="trend-item">
+      <div>
+        <b title="${esc(i.name)}">${esc(i.name)}</b>
+        <small title="${esc(i.desc)}">${esc(i.desc)}</small>
+        <div class="meta">
+          <span class="badge src">${esc(i.src)}</span>
+          <span class="badge score">⭐ ${esc(i.score)}</span>
+          ${i.lang ? `<span class="badge lang">${esc(i.lang)}</span>` : ""}
+        </div>
+      </div>
+      <div class="actions">
+        <button class="p sm" onclick="busy(this,()=>gen('${esc(i.id)}'))">
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+          Create post
+        </button>
+      </div>
+    </div>
+  `).join("");
+}
+
+async function loadTrending() {
+  const t = await api("trending");
+  showTrending(t);
+  return t;
+}
+
+async function scan() {
+  const t = await api("scan", "POST");
+  showTrending(t);
+  toast("Scan complete — " + (t.items?.length || 0) + " projects found");
+}
+
+async function autopost() {
+  await api("autopost", "POST");
+  toast("Autopost started on GitHub Actions. Posts will appear in your channel shortly.", "ok", 6000);
+}
+
+/* ── Drafts ── */
+async function gen(id) {
+  await api("generate", "POST", {id});
+  await loadDrafts();
+  toast("Draft created!");
+}
+
+async function loadDrafts() {
+  const ds = await api("drafts");
+  const el = $("#drafts");
+  const count = $("#draft-count");
+
+  if (!ds.length) {
+    el.innerHTML = `<div class="empty">
+      <svg width="48" height="48" fill="none" stroke="var(--ink3)" stroke-width="1.5" viewBox="0 0 24 24" style="margin:0 auto 12px"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 13h6M9 17h4"/></svg>
+      <div>No drafts yet. Select a project and press <strong>Create post</strong>.</div>
+    </div>`;
+    count.textContent = "";
+    return;
+  }
+
+  count.textContent = ds.length + " draft" + (ds.length !== 1 ? "s" : "");
+
+  el.innerHTML = ds.map((d, idx) => `
+    <article class="draft-card" id="draft-${esc(d.id)}">
+      <div class="draft-title">
+        <span class="draft-num">${ds.length - idx}</span>
+        <span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${esc(d.item?.name)}">${esc(d.item?.name || "Draft #" + d.id)}</span>
+        <span class="badge src">${esc(d.item?.src || "")}</span>
+      </div>
+
+      <div class="draft-media">
+        <img src="/files/${esc(d.card)}?t=${Date.now()}" alt="Generated social media card for ${esc(d.item?.name)}" loading="lazy">
+        ${d.video ? `<video controls src="/files/${esc(d.video)}?t=${Date.now()}" aria-label="YouTube Short for ${esc(d.item?.name)}"></video>` : ""}
+      </div>
+
+      ${d.hook ? `<div style="background:var(--accent-bg);border-left:3px solid var(--accent);padding:8px 12px;border-radius:0 6px 6px 0;font-weight:600;font-size:14px;margin-bottom:12px;color:var(--accent2)">${esc(d.hook)}</div>` : ""}
+
+      <!-- Facebook -->
+      <details class="field-group" open>
+        <summary>📘 Facebook Post</summary>
+        <div class="inner">
+          <textarea id="fb${esc(d.id)}" aria-label="Facebook post text">${esc(d.facebook)}</textarea>
+          <div class="row tight">
+            <button class="p sm" onclick="cp('fb${esc(d.id)}','https://www.facebook.com/')">
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+              Copy &amp; open Facebook
+            </button>
+          </div>
+        </div>
+      </details>
+
+      <!-- YouTube -->
+      <details class="field-group">
+        <summary>▶️ YouTube</summary>
+        <div class="inner">
+          <label for="yt${esc(d.id)}">Title</label>
+          <input id="yt${esc(d.id)}" type="text" value="${esc(d.yt_title)}" aria-label="YouTube title">
+          <label for="yd${esc(d.id)}">Description</label>
+          <textarea id="yd${esc(d.id)}" aria-label="YouTube description">${esc(d.yt_description)}</textarea>
+          <div class="row tight">
+            <button class="p sm" onclick="cp2('${esc(d.id)}')">
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+              Copy &amp; open YouTube upload
+            </button>
+          </div>
+        </div>
+      </details>
+
+      <!-- Script -->
+      ${d.script ? `
+      <details class="field-group">
+        <summary>🎬 Shorts Script</summary>
+        <div class="inner">
+          ${d.script.map((s,i) => `<div style="display:flex;gap:10px;margin-bottom:8px"><span style="background:var(--accent);color:var(--on-accent);border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">${i+1}</span><span style="font-size:14px">${esc(s)}</span></div>`).join("")}
+        </div>
+      </details>` : ""}
+
+      <div class="divider"></div>
+
+      <!-- Actions row 1 -->
+      <div class="row">
+        <button onclick="busy(this,()=>vid('${esc(d.id)}'))">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+          ${d.video ? "Remake" : "Make"} Shorts video
+        </button>
+        <button onclick="busy(this,()=>api('telegram/${esc(d.id)}','POST').then(()=>toast('Sent to Telegram!')))">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          Send to Telegram
+        </button>
+        <button onclick="busy(this,()=>api('channel/${esc(d.id)}','POST').then(()=>toast('Posted to channel!')))">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1zM4 22v-7"/></svg>
+          Post to channel
+        </button>
+        <button onclick="busy(this,()=>api('folder/${esc(d.id)}','POST'))">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
+          Open folder
+        </button>
+      </div>
+
+      <!-- Rewrite -->
+      <div class="divider"></div>
+      <label for="ed${esc(d.id)}">✏️ Rewrite with custom instruction</label>
+      <div class="rewrite-row">
+        <input id="ed${esc(d.id)}" type="text" placeholder="Make it funnier, shorter, more technical…" aria-label="Rewrite instruction">
+        <button class="p" onclick="busy(this,()=>edit('${esc(d.id)}'))">Rewrite</button>
+      </div>
+
+    </article>
+  `).join("");
+}
+
+/* ── Clipboard helpers ── */
+function cp(id, url) {
+  const val = $("#" + id)?.value || "";
+  navigator.clipboard.writeText(val).then(() => toast("Copied to clipboard!")).catch(() => {});
+  window.open(url, "_blank");
+}
+function cp2(id) {
+  const title = $("#yt" + id)?.value || "";
+  const desc  = $("#yd" + id)?.value || "";
+  navigator.clipboard.writeText(title + "\n\n" + desc).then(() => toast("Copied to clipboard!")).catch(() => {});
+  window.open("https://www.youtube.com/upload", "_blank");
+}
+
+/* ── Video / Edit ── */
+async function vid(id) { await api("video/" + id, "POST"); await loadDrafts(); toast("Video rendered!"); }
+async function edit(id) {
+  const note = ($("#ed" + id)?.value || "").trim();
+  await api("edit", "POST", {id, text: note || "Rewrite with a fresh angle"});
+  await loadDrafts();
+  toast("Draft rewritten!");
+}
+
+/* ── Init ── */
+async function init() {
+  try {
+    const [t] = await Promise.all([loadTrending(), loadDrafts()]);
+  } catch(e) {
+    $("#trend").innerHTML = `<div class="empty">Could not reach the server: ${esc(e.message)}</div>`;
+  }
+}
+init();
+</script>
+</body>
+</html>
