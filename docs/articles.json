@@ -1,1 +1,30 @@
-[]
+[
+  {
+    "title": "Inside DeepSeek SuperAgent: Minimal Attention, Maximum Autonomous Value",
+    "slug": "inside-deepseek-superagent-autonomous-agent",
+    "tldr": "DeepSeek's dsh-superagent prototype presents a TypeScript-based coding agent that handles GitHub tasks autonomously while respecting team bandwidth. Operating under a minimal-attention philosophy, it manages isolated work sessions and alerts developers only when human judgment is strictly required.",
+    "read_time": "4 min read",
+    "tags": [
+      "AI Agents",
+      "TypeScript",
+      "DeepSeek",
+      "GitHub Automation",
+      "DevOps"
+    ],
+    "content": "<h3>The Problem: The Hidden Cost of Noisy AI Agents</h3><p>As autonomous AI coding agents become more capable, engineering teams face a paradoxical challenge: agents designed to save time can end up wasting human attention. An agent that continuously pings developers, generates uncoordinated pull requests, or demands constant guidance creates notification fatigue and context switching across the entire engineering team.</p><p>DeepSeek's <code>dsh-superagent-prototype</code> addresses this fundamental pain point. Rather than aiming for unconstrained activity, the project introduces an operational philosophy built on a simple promise: <strong>take as little human attention as possible, and give as much value as possible.</strong></p><h3>Architecture & Key Features: Built for DeepSeek Harness</h3><p>Written in TypeScript, <code>dsh-superagent</code> is packaged as a bundle tailored for <strong>DeepSeek Harness</strong>. It operates as a proactive coding agent bound to a single GitHub repository, with optional integration for platforms like Feishu.</p><p>Key elements of its system architecture include:</p><ul><li><strong>Event Listeners:</strong> The agent continuously monitors incoming repository events or direct requests from authorized team members.</li><li><strong>Session & Directory Isolation:</strong> When triggered, the agent spins up a dedicated work item inside its own isolated agent session and directory to prevent workspace corruption.</li><li><strong>Human-in-the-Loop Web Panel:</strong> A dedicated web dashboard surfaces only the tasks that require explicit human intervention or approval, keeping noise out of general chat channels.</li><li><strong>Rule-Based Execution:</strong> The agent acts strictly when directly requested or when explicit team-defined rules permit it, speaking up only when someone must act or when a finished result (such as a pull request) is ready.</li></ul><h3>Quick Start & Practical Use Case: Meta-Agent Setup</h3><p>In a unique design choice, the project utilizes an agent-guided installation flow. Instead of manually executing complex setup commands, developers leverage their existing local coding agent to parse the setup instructions.</p><p>To bootstrap the environment, you simply instruct your current coding assistant:</p><blockquote><p><code>Read SETUP.md in this repository and set up dsh-superagent with me.</code></p></blockquote><p>The host agent follows <code>SETUP.md</code>, asking one short clarifying question at a time, displaying the comprehensive execution plan, and configuring the <code>dsh-superagent</code> bundle. Once deployed, an authorized contributor can tag the agent in an issue. The agent accepts the work item, executes changes in its isolated environment, and responds in the original thread with a tested pull request.</p><h3>Why It Matters: Rethinking Autonomous Dev Workflows</h3><p>Although DeepSeek explicitly marks this code as a research prototype—noting that engineering practices may be inconsistent and that it is not identical to their internal systems—it offers a crucial look into the future of autonomous agent design.</p><p>The project highlights a critical shift in AI tooling: moving away from hyper-active chat assistants toward quiet, autonomous background workers governed by strict attention budgets. As AI agents handle larger portions of day-to-day software maintenance, architectures like <code>dsh-superagent</code> demonstrate how to keep human developers focused on high-level decisions while letting agents handle execution cleanly in the background.</p>",
+    "id": "gh:1440705679",
+    "created_at": 1793966543361,
+    "item": {
+      "id": "gh:1440705679",
+      "src": "GitHub",
+      "name": "deepseek-ai/dsh-superagent-prototype",
+      "desc": "Towards a More Autonomous Agent System",
+      "url": "https://github.com/deepseek-ai/dsh-superagent-prototype",
+      "score": 19980,
+      "lang": "TypeScript",
+      "topics": [],
+      "created": "2026-10-31T09:32:46Z"
+    },
+    "published_at": 1793966575343
+  }
+]
