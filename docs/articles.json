@@ -1,5 +1,33 @@
 [
   {
+    "title": "Programmatic Animation Over GenAI: Inside mromidev/claude-animated-shorts",
+    "slug": "claude-animated-shorts-threejs-remotion",
+    "tldr": "mromidev/claude-animated-shorts is a free Claude skill that builds viral 2D-in-3D vertical story shorts using Three.js and Remotion on your local PC without relying on AI video generators. By pairing agentic Claude workflows with deterministic code rendering and reference benchmarks, it produces high-quality, repeatable animations.",
+    "read_time": "4 min read",
+    "tags": [
+      "TypeScript",
+      "Three.js",
+      "Remotion",
+      "Claude",
+      "Animation"
+    ],
+    "content": "<h3>The Problem: The Flicker and Cost of Generative Video</h3><p>Creating short-form animated visual stories usually forces creators to choose between two painful trade-offs: tedious manual 3D modeling and keyframing, or generative AI video tools. While AI video generators have advanced rapidly, they remain notoriously difficult to control. They suffer from temporal inconsistency, flickering characters, unpredictable camera movements, and heavy cloud rendering costs.</p><p>For developers and content creators wanting stylized, deterministic control over camera paths, lighting, character art, and audio ducking, generative video models often fall short. There has been a distinct lack of automated pipelines that can take a script and deterministically render stylized 2D-in-3D short animations locally without cloud credits or frame hallucinations.</p><h3>Architecture & Key Features: Code-Driven Storytelling</h3><p>The open-source project <strong>mromidev/claude-animated-shorts</strong> addresses this bottleneck by orchestrating programmatic rendering engines through a Claude skill. Instead of generating raw video pixels with diffusion models, Claude writes code that renders 2D characters inside a 3D environment using <code>three.js</code> and <code>Remotion</code> on your local machine.</p><p>Under the hood, the project relies on several structured components to maintain aesthetic quality and workflow rigor:</p><ul><li><strong><code>SKILL.md</code>:</strong> The central operational ruleset for Claude, dictating the step-by-step creation pipeline from facts to script, shot composition in <code>story.ts</code>, render fixes, and visual tuning.</li><li><strong>Three.js + Remotion Integration:</strong> Utilizing <code>@remotion/three</code>, the pipeline constructs vertical (55–70s) shorts featuring ink-outlined 2D characters, custom camera glides, depth-of-field lens blur, and painted world textures.</li><li><strong>Reference Reports &amp; QA Benchmark Assets:</strong> Includes 7 measured style reports (covering motion, depth, lighting, textures, and outlines) alongside 38 full-size reference frames and 20 contact sheets (1,200 total reference frames) so Claude agents can inspect and verify visual consistency during frame-by-frame QA.</li><li><strong>Synthesized Audio Pipeline:</strong> Located in <code>templates/audio/</code>, this subsystem handles march music, sound effects, loudness normalization, and audio ducking behind voiceover tracks.</li></ul><h3>Quick Start & Practical Use Case</h3><p>To start creating shorts—such as the proof-of-concept short <em>The Bridge That Fell for a Song</em> about the 1831 Broughton suspension bridge collapse—you can integrate the repository into your local Claude environment.</p><p>Ensure your system has <strong>Node</strong>, <strong>Python 3</strong>, <strong>ffmpeg</strong>, and <strong>Remotion</strong> (with <code>@remotion/three</code> installed).</p><p>1. Install the skill by placing the project inside your local Claude skills directory:</p><p><code>git clone https://github.com/mromidev/claude-animated-shorts ~/.claude/skills/cartoon-3d-short/</code></p><p>2. Set up your environment (recommended to point <code>REMOTION_TMP</code> to a drive with plenty of storage space).</p><p>3. In Claude Code, trigger the pipeline with a prompt such as:</p><blockquote><p><em>\"Use the cartoon short skill and make a short about the history of the London Underground.\"</em></p></blockquote><p>Claude will execute the entire workflow: researching facts, generating the narrative script, setting sound cues, composing the shot plan in <code>story.ts</code>, rendering stills for agentic visual inspection against reference standards, and finally assembling the 2K render with full audio mixing.</p><h3>Why It Matters: Reclaiming Control in AI Workflows</h3><p>With over <strong>1,928 GitHub stars</strong>, <a href=\"https://github.com/mromidev/claude-animated-shorts\">mromidev/claude-animated-shorts</a> highlights a growing trend in developer tooling: using Large Language Models not as raw asset generators, but as orchestrators of traditional, high-precision rendering engines.</p><p>By swapping unpredictable generative video models for programmatic Three.js code inside Remotion, developers retain full control over frame rate, camera coordinates, lighting parameters, and audio levels. It demonstrates that the future of automated video creation may be written in TypeScript, rendered locally, and guided intelligently by AI skills.</p><p>Check out the full source code, reference reports, and template packages on the <a href=\"https://github.com/mromidev/claude-animated-shorts\">mromidev/claude-animated-shorts GitHub repository</a>.</p>",
+    "id": "gh:1441526188",
+    "created_at": 1793972157054,
+    "item": {
+      "id": "gh:1441526188",
+      "src": "GitHub",
+      "name": "mromidev/claude-animated-shorts",
+      "desc": "Free Claude skill: viral animated story shorts (2D characters in a 3D world) with three.js + Remotion",
+      "url": "https://github.com/mromidev/claude-animated-shorts",
+      "score": 1928,
+      "lang": "TypeScript",
+      "topics": [],
+      "created": "2026-11-01T05:50:38Z"
+    },
+    "published_at": 1793972172574
+  },
+  {
     "title": "Inside NOIR: The Desktop Privacy Audit Tool Decoding Android Data Leaks Over ADB",
     "slug": "inside-noir-android-privacy-audit-adb",
     "tldr": "NOIR is an open-source Kotlin desktop utility that audits Android app permissions, data flows, and network endpoints over ADB. It identifies privacy risks without root access and generates automated, reversible mitigation commands.",
