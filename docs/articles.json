@@ -1,5 +1,39 @@
 [
   {
+    "title": "Inside NOIR: The Desktop Privacy Audit Tool Decoding Android Data Leaks Over ADB",
+    "slug": "inside-noir-android-privacy-audit-adb",
+    "tldr": "NOIR is an open-source Kotlin desktop utility that audits Android app permissions, data flows, and network endpoints over ADB. It identifies privacy risks without root access and generates automated, reversible mitigation commands.",
+    "read_time": "5 min read",
+    "tags": [
+      "Android",
+      "Security",
+      "Kotlin",
+      "ADB",
+      "Privacy"
+    ],
+    "content": "<h3>The Problem: The Black Box of Mobile Telemetry</h3><p>Modern Android applications frequently collect device identifiers, location telemetry, and usage patterns, transmitting this data to dynamic tracking endpoints. For developers, security auditors, and privacy-conscious users, discovering exactly what data an app gathers and where it gets sent often requires cumbersome network proxies, device rooting, or bandwidth-heavy APK extraction.</p><p>Furthermore, taking action against aggressive app telemetry via <code>adb shell pm</code> commands can accidentally break core system services. Without a clear auditing tool that links requested permissions directly to underlying domain endpoints—and without an easy rollback mechanism—auditing personal or enterprise mobile devices remains an opaque, high-risk process.</p><h3>Architecture & Key Features: How Verlintas/NOIR Works Under the Hood</h3><p>Written in Kotlin, <strong>Verlintas/NOIR</strong> operates as a zero-trust, desktop-driven security scanner that interfaces with Android devices over standard <code>adb</code>. It runs entirely offline, requiring no user account, no cloud connectivity, and no root privileges on the target device.</p><p>Key architectural components and features of Verlintas/NOIR include:</p><ul><li><strong>Lightweight On-Device Extraction:</strong> Instead of pulling massive APK files over USB, NOIR executes targeted <code>unzip + strings</code> commands directly within the device environment. It extracts URL strings from <code>.dex</code> files and returns only a few kilobytes of payload back to the host computer.</li><li><strong>Binary AXML Parsing:</strong> Reads <code>AndroidManifest.xml</code> at the byte level to pinpoint exportable components lacking permission protection, cleartext traffic flags, debug settings, and legacy <code>targetSdk</code> vulnerabilities.</li><li><strong>Data Flow & Vendor Profiling:</strong> Maps raw Android permissions (contacts, SMS, location, microphone, hardware IDs) to extracted remote endpoints. It categorizes destination domains (e.g., Xiaomi, Google, Tencent) and flags telemetry, ad networks, or analytics flows.</li><li><strong>Shared UID Identification:</strong> Tracks apps sharing system UIDs (such as <code>android.uid.system</code>) to highlight cases where packages inherit consolidated, elevated permission sets.</li><li><strong>Reversible Mitigation Engine:</strong> Categorizes actions into automatic execution, manual review, or high-risk warnings. Crucially, every suggested action automatically comes with a corresponding rollback command.</li><li><strong>Deep Inspection via JADX:</strong> For targeted deep dives, NOIR pulls candidate APKs locally and invokes <code>jadx</code> to scan decompiled code for sensitive API calls like <code>Runtime.exec</code>, <code>DexClassLoader</code>, and <code>MediaProjection</code>.</li></ul><h3>Quick Start & Practical Use Case</h3><p>To start auditing an Android device, connect it via USB with Developer Options and USB Debugging enabled, then launch NOIR from your desktop terminal:</p><pre><code># Launch the interactive setup and scanner\nnoir</code></pre><p>If standard ADB binaries are missing, NOIR offers to download them locally into <code>~/.noir/tools</code>. Once connected, the tool scans all installed packages possessing network and sensitive permissions, outputs a risk score, and presents data correlation reports.</p><p>For a non-destructive audit workflow, review the output report and copy the generated reversible fixes:</p><blockquote><p><strong>Note:</strong> NOIR never uninstalls packages automatically unless explicitly driven with the <code>--aggressive</code> flag. Generated rollback commands allow you to restore any modified permission states safely.</p></blockquote><h3>Why It Matters: Reclaiming Control Over Android Devices</h3><p>With over <strong>2,676 GitHub stars</strong>, <a href=\"https://github.com/Verlintas/NOIR\">Verlintas/NOIR</a> has gained traction among security researchers and privacy enthusiasts who need transparent mobile telemetry visibility. By bridging host-side desktop analytics with lightweight on-device extraction, NOIR eliminates the tedious overhead of manual APK decompilation for broad system scans.</p><p>By transforming raw permissions and opaque network endpoints into an actionable, fully reversible diagnostic report, NOIR sets a high standard for local-first Android auditing tools. Explore the repository and source code at <a href=\"https://github.com/Verlintas/NOIR\">github.com/Verlintas/NOIR</a>.</p>",
+    "id": "gh:1441272552",
+    "created_at": 1793971182383,
+    "item": {
+      "id": "gh:1441272552",
+      "src": "GitHub",
+      "name": "Verlintas/NOIR",
+      "desc": "手机隐私审计：用 adb 扫出 Android 应用的权限、上报端点与数据流向，并给出可回滚的处置。Desktop Android leak audit: permissions, endpoints, data flows, reversible fixes.",
+      "url": "https://github.com/Verlintas/NOIR",
+      "score": 2676,
+      "lang": "Kotlin",
+      "topics": [
+        "adb",
+        "android",
+        "android-privacy",
+        "android-security",
+        "android-tools"
+      ],
+      "created": "2026-10-31T21:34:39Z"
+    },
+    "published_at": 1793971255706
+  },
+  {
     "title": "Turnstone: The Open-Source, Self-Hosted Alternative to Grok Bot",
     "slug": "turnstone-open-source-grok-bot-alternative",
     "tldr": "Turnstone brings a completely free alternative to proprietary bots like Grok by allowing you to run interactive AI on your own backend. It eliminates subscription costs and vendor lock-in while giving developers full control over data privacy.",
