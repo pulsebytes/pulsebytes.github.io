@@ -6,6 +6,18 @@ e = dotenv_values(ENV)
 
 # ── If already deployed and not forced, skip ─────────────────────────────────
 mode = next((a for a in sys.argv[1:] if a.startswith("--")), "")
+if mode == "--private":
+    repo = e.get("GITHUB_REPO", "")
+    if not repo: sys.exit("GITHUB_REPO is not set in .env")
+    print(f"Making {repo} private...")
+    r = subprocess.run(["gh", "api", "-X", "PATCH", f"repos/{repo}", "-f", "private=true"], capture_output=True)
+    if r.returncode == 0:
+        print(f"Done. {repo} is now private.")
+        sys.exit(0)
+    else:
+        print(r.stderr.decode("utf-8", "replace"))
+        sys.exit(1)
+
 if e.get("GITHUB_REPO") and mode not in ("--force", "--orgdeploy"): sys.exit(0)
 
 def setenv(k, v):
