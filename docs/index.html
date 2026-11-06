@@ -1,273 +1,428 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>Pulsebyte – Trending Developer Projects Right Now</title>
-<meta name="description" content="Discover what developers are building and shipping right now. Trending projects from GitHub, GitLab, Codeberg, Hugging Face and Product Hunt, refreshed every 6 hours.">
-<meta name="keywords" content="trending github projects, open source trending, developer projects, github trending, product hunt, hugging face trending, tech projects, pulsebyte">
+<title>Pulsebyte – Trending Developer Projects & Deep Dives</title>
+<meta name="description" content="Discover what developers are building and shipping right now. Fresh trending projects from GitHub, Hugging Face, Product Hunt and deep-dive technical articles.">
+<meta name="keywords" content="trending github projects, open source, tech news, developer articles, hugging face, product hunt, pulsebyte">
 <meta name="robots" content="index, follow">
 <meta name="author" content="Pulsebyte">
-<link rel="canonical" href="https://deltabytesyt.github.io/pulsebyte/">
+<link rel="canonical" href="https://pulsebytes.github.io/">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Pulsebyte">
-<meta property="og:title" content="Pulsebyte – What Developers Are Shipping Right Now">
-<meta property="og:description" content="Fresh trending projects from GitHub, GitLab, Codeberg, Hugging Face & Product Hunt, refreshed every 6 hours.">
-<meta property="og:url" content="https://deltabytesyt.github.io/pulsebyte/">
+<meta property="og:title" content="Pulsebyte – Trending Developer Projects & Deep Dives">
+<meta property="og:description" content="Handpicked trending open-source projects, updated every 6 hours with deep-dive technical articles.">
+<meta property="og:url" content="https://pulsebytes.github.io/">
 
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Pulsebyte – What Developers Are Shipping Right Now">
-<meta name="twitter:description" content="Discover trending open-source projects from GitHub, Product Hunt & more. Updated every 6 hours.">
+<meta name="twitter:title" content="Pulsebyte – Trending Developer Projects">
+<meta name="twitter:description" content="Discover what developers are shipping right now with in-depth technical analysis.">
 
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","name":"Pulsebyte","url":"https://deltabytesyt.github.io/pulsebyte/","description":"Discover trending developer projects from GitHub, GitLab, Codeberg, Hugging Face and Product Hunt.","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://deltabytesyt.github.io/pulsebyte/#q={search_term_string}"},"query-input":"required name=search_term_string"}}
+{"@context":"https://schema.org","@type":"WebSite","name":"Pulsebyte","url":"https://pulsebytes.github.io/","description":"Discover trending developer projects and technical articles.","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://pulsebytes.github.io/#q={search_term_string}"},"query-input":"required name=search_term_string"}}
 </script>
 
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%235b3df5'/%3E%3Cpath d='M5 17h5l3-8 5 14 3-6h6' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%236366f1'/%3E%3Cpath d='M5 17h5l3-8 5 14 3-6h6' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <script>(function(){var t=localStorage.getItem("pb-theme")||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");document.documentElement.dataset.theme=t})();</script>
 
 <style>
-/* ══ TOKENS ══ */
+/* ══ DESIGN TOKENS ══ */
 :root{
-  --bg:#f4f5fb;--bg2:#ecedf6;--panel:#fff;
-  --ink:#0f1121;--ink2:#4b5168;--ink3:#9499b2;
-  --line:#e3e5f0;--acc:#5b3df5;--acc-h:#4a2de0;--acc-soft:#eeebff;--acc-ink:#fff;
-  --hot:#e8481f;--hot-soft:#fff1ee;
-  --sh-sm:0 1px 2px rgba(15,17,33,.06),0 1px 3px rgba(15,17,33,.04);
-  --sh:0 2px 8px rgba(15,17,33,.08),0 1px 3px rgba(15,17,33,.05);
-  --sh-lg:0 8px 24px rgba(15,17,33,.12),0 2px 6px rgba(15,17,33,.06);
-  --r:10px;--r-lg:16px;--hdr:66px;
-  --hero-bg:linear-gradient(145deg,#1a0a4a 0%,#2a1272 40%,#5b3df5 100%);
+  --bg: #f8fafc;
+  --bg2: #f1f5f9;
+  --panel: #ffffff;
+  --panel-elevated: #ffffff;
+  --ink: #0f172a;
+  --ink2: #475569;
+  --ink3: #94a3b8;
+  --line: #e2e8f0;
+  --line-strong: #cbd5e1;
+  --acc: #6366f1;
+  --acc-h: #4f46e5;
+  --acc-soft: #eef2ff;
+  --acc-ink: #ffffff;
+  --hot: #f59e0b;
+  --hot-soft: #fef3c7;
+  --success: #10b981;
+  --sh-sm: 0 1px 3px rgba(0,0,0,.05), 0 1px 2px rgba(0,0,0,.03);
+  --sh: 0 4px 14px rgba(0,0,0,.06), 0 1px 3px rgba(0,0,0,.04);
+  --sh-lg: 0 12px 32px rgba(0,0,0,.1), 0 4px 10px rgba(0,0,0,.05);
+  --r: 10px;
+  --r-lg: 16px;
+  --r-xl: 20px;
+  --hdr: 64px;
+  --hero-bg: radial-gradient(circle at 50% -20%, #1e1b4b 0%, #0f172a 100%);
+  --hero-ink: #f8fafc;
 }
 [data-theme=dark]{
-  --bg:#0c0d18;--bg2:#121323;--panel:#141527;
-  --ink:#eceef8;--ink2:#8b90b0;--ink3:#474d6b;
-  --line:#232540;--acc:#8b7bff;--acc-h:#a090ff;--acc-soft:#1e1a40;--acc-ink:#0c0d18;
-  --hot:#ff7a50;--hot-soft:#2d1208;
-  --sh-sm:0 1px 3px rgba(0,0,0,.35);--sh:0 3px 10px rgba(0,0,0,.4);--sh-lg:0 8px 28px rgba(0,0,0,.55);
-  --hero-bg:linear-gradient(145deg,#060818 0%,#0d0a2e 40%,#1e1250 100%);
+  --bg: #090d16;
+  --bg2: #0f172a;
+  --panel: #111827;
+  --panel-elevated: #162032;
+  --line: #1e293b;
+  --line-strong: #334155;
+  --ink: #f8fafc;
+  --ink2: #94a3b8;
+  --ink3: #64748b;
+  --acc: #818cf8;
+  --acc-h: #a5b4fc;
+  --acc-soft: #1e1b4b;
+  --acc-ink: #090d16;
+  --hot: #fbbf24;
+  --hot-soft: #2e1e07;
+  --sh-sm: 0 1px 3px rgba(0,0,0,.3);
+  --sh: 0 4px 16px rgba(0,0,0,.45);
+  --sh-lg: 0 14px 40px rgba(0,0,0,.6);
+  --hero-bg: radial-gradient(circle at 50% -20%, #17153b 0%, #090d16 100%);
+  --hero-ink: #f8fafc;
 }
-/* ══ BASE ══ */
+
+/* ══ BASE RESET ══ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-padding-top:calc(var(--hdr) + 12px);scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh}
+html{scroll-padding-top:calc(var(--hdr) + 16px);scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--ink);
+  font:15.5px/1.6 Inter,system-ui,-apple-system,sans-serif;
+  -webkit-font-smoothing:antialiased;min-height:100vh;
+}
 img{display:block;max-width:100%}
 a{color:var(--acc);text-decoration:none}
 a:hover{text-decoration:underline}
 button{font:inherit;color:inherit;cursor:pointer;background:none;border:none}
 :focus-visible{outline:2px solid var(--acc);outline-offset:3px;border-radius:6px}
-@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 
 /* ══ HEADER ══ */
 #site-header{
-  height:var(--hdr);display:flex;align-items:center;gap:12px;
-  padding:0 max(16px,calc(50vw - 480px));
-  background:color-mix(in srgb,var(--panel) 90%,transparent);
+  height:var(--hdr);display:flex;align-items:center;gap:16px;
+  padding:0 max(20px, calc(50vw - 580px));
+  background:color-mix(in srgb,var(--panel) 92%,transparent);
   backdrop-filter:blur(16px);border-bottom:1px solid var(--line);
   position:sticky;top:0;z-index:200;box-shadow:var(--sh-sm);
 }
-.logo{display:flex;align-items:center;gap:10px;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:1.3rem;letter-spacing:-.04em;text-decoration:none;color:var(--ink);flex:1}
+.logo{
+  display:flex;align-items:center;gap:10px;
+  font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:1.35rem;letter-spacing:-.035em;
+  color:var(--ink);text-decoration:none;flex-shrink:0;
+}
 .logo:hover{text-decoration:none}
-.logo-mark{width:34px;height:34px;border-radius:9px;background:var(--acc);display:grid;place-items:center;flex-shrink:0;box-shadow:0 2px 8px color-mix(in srgb,var(--acc) 40%,transparent)}
-.hdr-right{display:flex;align-items:center;gap:6px}
+.logo-mark{
+  width:32px;height:32px;border-radius:8px;
+  background:linear-gradient(135deg,var(--acc),#a855f7);
+  display:grid;place-items:center;flex-shrink:0;
+  box-shadow:0 2px 8px color-mix(in srgb,var(--acc) 45%,transparent);
+}
+.nav-tabs{
+  display:flex;gap:4px;background:var(--bg2);padding:3px;border-radius:999px;border:1px solid var(--line);
+}
+.nav-tab{
+  padding:6px 16px;border-radius:999px;font-size:13.5px;font-weight:600;color:var(--ink2);
+  transition:all .15s;display:inline-flex;align-items:center;gap:6px;cursor:pointer;
+}
+.nav-tab:hover{color:var(--ink)}
+.nav-tab.active{background:var(--panel);color:var(--ink);box-shadow:var(--sh-sm)}
+.nav-tab .badge-count{
+  font-size:11px;padding:1px 6px;border-radius:999px;background:var(--acc-soft);color:var(--acc);font-weight:700;
+}
+.hdr-right{display:flex;align-items:center;gap:8px;margin-left:auto}
 
 /* ══ BUTTONS ══ */
-.btn{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--panel);padding:8px 15px;border-radius:var(--r);text-decoration:none;font-weight:500;font-size:14px;box-shadow:var(--sh-sm);transition:border-color .15s,background .15s,transform .1s;white-space:nowrap;color:var(--ink)}
-.btn:hover{border-color:var(--acc);box-shadow:var(--sh);text-decoration:none;color:var(--ink)}
-.btn:active{transform:scale(.97)}
+.btn{
+  display:inline-flex;align-items:center;gap:7px;
+  border:1px solid var(--line);background:var(--panel);
+  padding:8px 15px;border-radius:var(--r);
+  text-decoration:none;font-weight:500;font-size:13.5px;
+  box-shadow:var(--sh-sm);transition:all .15s;white-space:nowrap;color:var(--ink);
+}
+.btn:hover{border-color:var(--acc);box-shadow:var(--sh);color:var(--ink);text-decoration:none}
+.btn:active{transform:scale(.98)}
 .btn.p{background:var(--acc);border-color:var(--acc);color:var(--acc-ink);font-weight:600}
 .btn.p:hover{background:var(--acc-h);border-color:var(--acc-h);color:var(--acc-ink)}
-.btn.icon{width:38px;height:38px;padding:0;justify-content:center}
-.btn.sm{padding:6px 12px;font-size:13px}
-.btn.ghost{background:transparent;border-color:transparent;box-shadow:none}
-.btn.ghost:hover{background:var(--bg2);border-color:var(--line)}
+.btn.icon{width:36px;height:36px;padding:0;justify-content:center;border-radius:8px}
+.btn.sm{padding:5px 11px;font-size:12.5px;border-radius:6px}
 
-/* ══ HERO ══ */
-.hero{background:var(--hero-bg);padding:64px max(16px,calc(50vw - 480px)) 48px;position:relative;overflow:hidden}
-.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 70% 50%,rgba(91,61,245,.3),transparent);pointer-events:none}
-.hero-inner{position:relative;max-width:620px}
-.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:5px 13px;font-size:13px;font-weight:600;color:rgba(255,255,255,.9);margin-bottom:20px;letter-spacing:.02em}
-.dot-live{width:8px;height:8px;border-radius:50%;background:#4ade80;box-shadow:0 0 0 3px rgba(74,222,128,.25);animation:pulse-live 2s ease-in-out infinite;flex-shrink:0}
-@keyframes pulse-live{0%,100%{box-shadow:0 0 0 3px rgba(74,222,128,.25)}50%{box-shadow:0 0 0 7px rgba(74,222,128,.08)}}
-.hero h1{font-family:"Bricolage Grotesque",sans-serif;font-size:clamp(1.9rem,5vw,3.3rem);font-weight:800;letter-spacing:-.04em;line-height:1.06;color:#fff;margin-bottom:14px}
-.hero h1 em{font-style:normal;color:#c4b5fd}
-.hero p{font-size:clamp(14px,2.5vw,17px);color:rgba(255,255,255,.7);margin-bottom:26px;max-width:48ch;line-height:1.65}
-.hero-actions{display:flex;gap:10px;flex-wrap:wrap}
-.hero-actions .btn{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.2);color:#fff;backdrop-filter:blur(8px)}
-.hero-actions .btn:hover{background:rgba(255,255,255,.22);color:#fff}
-.hero-actions .btn.p{background:#fff;color:var(--acc);border-color:#fff}
-.hero-actions .btn.p:hover{background:rgba(255,255,255,.9)}
-.hero-stats{display:flex;gap:24px;margin-top:32px;padding-top:24px;border-top:1px solid rgba(255,255,255,.12);flex-wrap:wrap}
-.hero-stat strong{display:block;font-family:"Bricolage Grotesque",sans-serif;font-size:1.55rem;font-weight:800;letter-spacing:-.03em;color:#fff}
-.hero-stat span{font-size:13px;color:rgba(255,255,255,.5)}
-
-/* ══ SOCIAL FOLLOW BAR ══ */
-.follow-bar{
-  background:var(--panel);border-bottom:1px solid var(--line);
-  padding:14px max(16px,calc(50vw - 480px));
-  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+/* ══ HERO (CAROUSEL CENTERPIECE) ══ */
+.hero{
+  background:var(--hero-bg);
+  padding:36px max(20px, calc(50vw - 580px)) 36px;
+  position:relative;overflow:hidden;border-bottom:1px solid var(--line);
 }
-.follow-label{font-size:13px;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
-.follow-links{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.follow-btn{
-  display:inline-flex;align-items:center;gap:7px;
-  padding:7px 14px;border-radius:999px;font-size:13.5px;font-weight:600;
-  text-decoration:none;transition:transform .12s,opacity .12s;
-  border:none;cursor:pointer;
+.hero::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 60% at 50% 0%, rgba(99,102,241,.18), transparent 70%);
+  pointer-events:none;
 }
-.follow-btn:hover{transform:translateY(-2px);opacity:.88;text-decoration:none}
-.follow-btn svg{flex-shrink:0}
-.fb-telegram  {background:#2AABEE;color:#fff}
-.fb-youtube   {background:#FF0000;color:#fff}
-.fb-twitter   {background:#000;color:#fff}
-.fb-facebook  {background:#1877F2;color:#fff}
-.fb-instagram {background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff}
-.fb-tiktok    {background:#010101;color:#fff}
-.fb-github    {background:#24292e;color:#fff}
-[data-theme=dark] .fb-github{background:#f0f6fc;color:#24292e}
-[data-theme=dark] .fb-twitter{background:#fff;color:#000}
+.hero-head{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:20px;flex-wrap:wrap;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);
+  border-radius:999px;padding:5px 14px;font-size:12.5px;font-weight:700;
+  color:#fff;letter-spacing:.03em;text-transform:uppercase;
+}
+.dot-live{
+  width:8px;height:8px;border-radius:50%;background:#10b981;
+  box-shadow:0 0 0 3px rgba(16,185,129,.25);animation:pulse-live 2s infinite;flex-shrink:0;
+}
+@keyframes pulse-live{0%,100%{box-shadow:0 0 0 3px rgba(16,185,129,.25)}50%{box-shadow:0 0 0 7px rgba(16,185,129,.05)}}
+.hero-controls{display:flex;align-items:center;gap:8px}
+.hero-btn{
+  width:34px;height:34px;border-radius:8px;border:1px solid rgba(255,255,255,.15);
+  background:rgba(255,255,255,.06);color:#fff;display:grid;place-items:center;
+  cursor:pointer;transition:all .15s;
+}
+.hero-btn:hover{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.3)}
 
-/* ══ WRAP ══ */
-.main-wrap{max-width:960px;margin:0 auto;padding:0 16px}
-
-/* ══ TOP 5 CAROUSEL ══ */
-.carousel-section{margin:28px 0 0}
-.carousel-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-.carousel-title{font-family:"Bricolage Grotesque",sans-serif;font-size:1.15rem;font-weight:800;letter-spacing:-.025em;display:flex;align-items:center;gap:10px}
-.carousel-title .fire{font-size:1.1rem}
-.carousel-nav{display:flex;gap:6px}
-.carousel-nav button{width:32px;height:32px;border:1px solid var(--line);border-radius:50%;background:var(--panel);display:flex;align-items:center;justify-content:center;box-shadow:var(--sh-sm);transition:border-color .15s,background .15s}
-.carousel-nav button:hover{border-color:var(--acc);background:var(--acc-soft)}
-
-.carousel-track-wrap{overflow:hidden;border-radius:var(--r-lg)}
-.carousel-track{display:flex;gap:16px;transition:transform .4s cubic-bezier(.4,0,.2,1)}
-
+/* ══ CAROUSEL ══ */
+.c-viewport{overflow:hidden;border-radius:var(--r-xl);position:relative}
+.c-track{display:flex;gap:16px;transition:transform .45s cubic-bezier(.22,1,.36,1)}
 .c-card{
   flex:0 0 calc(20% - 13px);min-width:0;
-  background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);
-  padding:18px 16px;box-shadow:var(--sh-sm);cursor:pointer;
-  transition:box-shadow .15s,transform .15s,border-color .15s;
-  position:relative;overflow:hidden;
+  background:rgba(255,255,255,.04);backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.12);border-radius:var(--r-lg);
+  overflow:hidden;cursor:pointer;display:flex;flex-direction:column;
+  transition:all .2s ease;
 }
-.c-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--acc);opacity:0;transition:opacity .15s}
-.c-card:hover{box-shadow:var(--sh-lg);transform:translateY(-3px);border-color:var(--acc)}
-.c-card:hover::before{opacity:1}
-.c-card.active{border-color:var(--acc);box-shadow:var(--sh)}
-.c-card.active::before{opacity:1}
+.c-card:hover{
+  background:rgba(255,255,255,.08);border-color:rgba(129,140,248,.5);
+  transform:translateY(-4px);box-shadow:0 12px 28px rgba(0,0,0,.35);
+}
+.c-card.active{
+  border-color:var(--acc);background:rgba(255,255,255,.09);
+  box-shadow:0 0 0 1px var(--acc);
+}
 
-.c-rank{font-family:"Bricolage Grotesque",sans-serif;font-size:2rem;font-weight:800;color:var(--line);letter-spacing:-.04em;line-height:1;margin-bottom:6px}
-.c-card:hover .c-rank,.c-card.active .c-rank{color:var(--acc-soft)}
-.c-name{font-size:13.5px;font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:4px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
-.c-src{font-size:11.5px;color:var(--ink3);display:flex;align-items:center;gap:5px;margin-bottom:8px}
-.c-score{font-family:"Bricolage Grotesque",sans-serif;font-size:1.1rem;font-weight:800;color:var(--hot)}
-.c-score small{font:400 11px Inter;color:var(--ink3);font-family:Inter}
-.carousel-dots{display:flex;justify-content:center;gap:6px;margin-top:14px}
-.c-dot{width:7px;height:7px;border-radius:50%;background:var(--line);border:none;padding:0;transition:background .2s,transform .2s}
-.c-dot.active{background:var(--acc);transform:scale(1.3)}
+/* Card image thumb */
+.c-thumb-wrap{
+  position:relative;width:100%;aspect-ratio:16/9;background:#0d1117;overflow:hidden;
+}
+.c-thumb{
+  width:100%;height:100%;object-fit:cover;transition:transform .3s ease;
+}
+.c-card:hover .c-thumb{transform:scale(1.05)}
+.c-badge-rank{
+  position:absolute;top:8px;left:8px;
+  background:rgba(15,23,42,.85);backdrop-filter:blur(6px);
+  color:#fff;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:12px;
+  padding:3px 8px;border-radius:6px;border:1px solid rgba(255,255,255,.15);
+}
+.c-badge-src{
+  position:absolute;bottom:8px;right:8px;
+  background:rgba(15,23,42,.85);backdrop-filter:blur(6px);
+  color:#e2e8f0;font-size:11px;font-weight:600;padding:2px 7px;border-radius:5px;
+}
 
-@media(max-width:760px){.c-card{flex:0 0 calc(50% - 8px)}}
-@media(max-width:480px){.c-card{flex:0 0 calc(80% - 8px)}}
+/* Card body */
+.c-body{padding:14px;display:flex;flex-direction:column;flex:1}
+.c-title{
+  font-size:14px;font-weight:700;color:#fff;line-height:1.3;
+  margin-bottom:6px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;
+}
+.c-desc{
+  font-size:12px;color:rgba(255,255,255,.7);line-height:1.45;
+  overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+  margin-bottom:12px;flex:1;
+}
+.c-meta{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  padding-top:10px;border-top:1px solid rgba(255,255,255,.1);font-size:12px;
+}
+.c-score{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;color:var(--hot)}
+.c-lang{color:rgba(255,255,255,.6);font-size:11px}
 
-/* ══ SEARCH ══ */
-.search-wrap{margin:28px 0 0}
-.search{position:relative}
-.search-icon{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--ink3);pointer-events:none}
-.search input{width:100%;font:inherit;font-size:16px;padding:14px 56px 14px 48px;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--panel);color:var(--ink);box-shadow:var(--sh);transition:border-color .15s,box-shadow .15s}
-.search input:focus{outline:none;border-color:var(--acc);box-shadow:0 0 0 3px color-mix(in srgb,var(--acc) 15%,transparent),var(--sh)}
-.search input::placeholder{color:var(--ink3)}
-.search-kbd{position:absolute;right:14px;top:50%;transform:translateY(-50%);border:1px solid var(--line);border-radius:5px;padding:1px 8px;color:var(--ink3);font-size:12px;background:var(--bg2);pointer-events:none}
+@media(max-width:980px){.c-card{flex:0 0 calc(33.333% - 11px)}}
+@media(max-width:640px){.c-card{flex:0 0 calc(75% - 8px)}}
 
-/* ══ FILTER BAR ══ */
-.filter-bar{position:sticky;top:var(--hdr);z-index:100;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(12px);padding:12px 0;border-bottom:1px solid var(--line)}
-.filter-inner{display:flex;gap:10px;align-items:center}
-.chips{display:flex;gap:7px;overflow-x:auto;flex:1;scrollbar-width:none;padding:2px 0}
+/* ══ SOCIAL BAR ══ */
+.follow-bar{
+  background:var(--panel);border-bottom:1px solid var(--line);
+  padding:12px max(20px, calc(50vw - 580px));
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+}
+.follow-label{font-size:12px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.05em}
+.follow-links{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.follow-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 12px;border-radius:999px;font-size:12.5px;font-weight:600;
+  text-decoration:none;transition:transform .12s,opacity .12s;color:#fff;
+}
+.follow-btn:hover{transform:translateY(-1px);opacity:.9;text-decoration:none;color:#fff}
+.fb-telegram  {background:#2AABEE}
+.fb-youtube   {background:#FF0000}
+.fb-twitter   {background:#000000}
+.fb-facebook  {background:#1877F2}
+.fb-instagram {background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)}
+.fb-tiktok    {background:#010101}
+.fb-github    {background:#24292e}
+[data-theme=dark] .fb-github{background:#334155}
+[data-theme=dark] .fb-twitter{background:#ffffff;color:#000}
+
+/* ══ MAIN LAYOUT ══ */
+.main-wrap{max-width:1160px;margin:0 auto;padding:24px 20px 48px}
+
+/* ══ SEARCH & FILTER BAR ══ */
+.toolbar{
+  display:flex;gap:12px;align-items:center;margin-bottom:16px;flex-wrap:wrap;
+}
+.search{position:relative;flex:1;min-width:240px}
+.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--ink3);pointer-events:none}
+.search input{
+  width:100%;font:inherit;font-size:14.5px;padding:11px 44px 11px 40px;
+  border:1px solid var(--line);border-radius:var(--r);background:var(--panel);color:var(--ink);
+  box-shadow:var(--sh-sm);transition:border-color .15s,box-shadow .15s;
+}
+.search input:focus{outline:none;border-color:var(--acc);box-shadow:0 0 0 3px color-mix(in srgb,var(--acc) 15%,transparent)}
+.search-kbd{
+  position:absolute;right:12px;top:50%;transform:translateY(-50%);
+  border:1px solid var(--line);border-radius:4px;padding:1px 6px;color:var(--ink3);font-size:11px;background:var(--bg2);
+}
+
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
 .chips::-webkit-scrollbar{display:none}
-.chip{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:5px 13px;font-size:13.5px;font-weight:500;white-space:nowrap;transition:background .15s,border-color .15s;box-shadow:var(--sh-sm)}
+.chip{
+  display:inline-flex;align-items:center;gap:6px;
+  border:1px solid var(--line);background:var(--panel);
+  border-radius:999px;padding:5px 12px;font-size:13px;font-weight:500;white-space:nowrap;
+  box-shadow:var(--sh-sm);transition:all .15s;
+}
 .chip:hover{border-color:var(--acc)}
 .chip[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 [data-theme=dark] .chip[aria-pressed=true]{background:var(--acc);color:var(--acc-ink);border-color:var(--acc)}
-.chip em{font-style:normal;opacity:.55;font-size:12px}
-.src-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
-.sort-seg{display:flex;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--panel);flex-shrink:0;box-shadow:var(--sh-sm)}
-.sort-seg button{border:none;background:none;padding:6px 14px;font-size:13.5px;font-weight:500;color:var(--ink2);transition:background .15s,color .15s}
+.chip em{font-style:normal;opacity:.55;font-size:11px}
+.src-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+.sort-seg{display:flex;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--panel);box-shadow:var(--sh-sm)}
+.sort-seg button{border:none;background:none;padding:6px 12px;font-size:13px;font-weight:500;color:var(--ink2)}
 .sort-seg button[aria-pressed=true]{background:var(--acc-soft);color:var(--acc);font-weight:600}
-.sort-seg button:hover:not([aria-pressed=true]){background:var(--bg2)}
 
-/* ══ META ══ */
-.meta-line{display:flex;align-items:center;justify-content:space-between;padding:14px 0 10px;font-size:13.5px;color:var(--ink3);flex-wrap:wrap;gap:8px}
-.meta-line strong{color:var(--ink2)}
-
-/* ══ PROJECT LIST ══ */
-#list{padding-bottom:40px}
-.row{border-bottom:1px solid var(--line);transition:background .12s}
-.row:last-child{border-bottom:none}
-.head{all:unset;box-sizing:border-box;width:100%;display:grid;grid-template-columns:46px 1fr auto;gap:14px;align-items:start;padding:18px 6px;cursor:pointer;border-radius:var(--r);transition:background .12s}
-.head:hover{background:var(--bg2)}
+/* ══ PROJECT ROWS ══ */
+.row{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+  margin-bottom:8px;box-shadow:var(--sh-sm);transition:border-color .15s,box-shadow .15s;
+}
+.row:hover{border-color:var(--line-strong);box-shadow:var(--sh)}
+.head{
+  all:unset;box-sizing:border-box;width:100%;
+  display:grid;grid-template-columns:40px 1fr auto;gap:14px;align-items:start;
+  padding:16px 14px;cursor:pointer;
+}
 .head:hover .nm b{color:var(--acc)}
-.rank{font-family:"Bricolage Grotesque",sans-serif;font-size:1.35rem;font-weight:800;color:var(--line);letter-spacing:-.03em;padding-top:2px}
-[data-theme=dark] .rank{color:#2a2e4a}
+.rank{font-family:"Bricolage Grotesque",sans-serif;font-size:1.35rem;font-weight:800;color:var(--ink3);padding-top:2px}
 .nm{font-size:1rem;overflow-wrap:anywhere}
 .nm span{color:var(--ink3)}
 .nm b{font-weight:600;transition:color .15s}
-.desc{font-size:14px;color:var(--ink2);margin:4px 0 8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.5}
+.desc{font-size:13.5px;color:var(--ink2);margin:4px 0 8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.5}
 .row.open .desc{-webkit-line-clamp:unset}
-.tags{display:flex;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--ink3);align-items:center}
+.tags{display:flex;gap:12px;flex-wrap:wrap;font-size:12.5px;color:var(--ink3);align-items:center}
 .tags span{display:inline-flex;gap:5px;align-items:center}
-.score{text-align:right;font-family:"Bricolage Grotesque",sans-serif;font-size:1.3rem;font-weight:800;color:var(--hot);letter-spacing:-.02em;white-space:nowrap;line-height:1}
-.score small{display:block;font:400 11.5px Inter;color:var(--ink3);letter-spacing:0;margin-top:3px}
-.more{display:none;padding:4px 6px 20px calc(46px + 14px);animation:slide-in .18s ease-out}
+.score{text-align:right;font-family:"Bricolage Grotesque",sans-serif;font-size:1.25rem;font-weight:800;color:var(--hot);white-space:nowrap;line-height:1}
+.score small{display:block;font:400 11px Inter;color:var(--ink3);margin-top:2px}
+
+.more{
+  display:none;padding:0 14px 16px 54px;border-top:1px dashed var(--line);margin-top:4px;padding-top:14px;
+}
 .row.open .more{display:block}
-@keyframes slide-in{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
-.why-box{background:var(--acc-soft);border-radius:var(--r);padding:12px 14px;margin-bottom:12px;border-left:3px solid var(--acc)}
-.why-box strong{display:block;font-size:12px;color:var(--acc);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
-.why-box p{font-size:14px;line-height:1.6;color:var(--ink2);margin:0}
-.topics{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
-.topic-tag{font-size:12.5px;background:var(--panel);border:1px solid var(--line);padding:2px 10px;border-radius:999px;color:var(--ink3);transition:border-color .15s,color .15s}
-.topic-tag:hover{border-color:var(--acc);color:var(--acc)}
+.why-box{
+  background:var(--acc-soft);border-radius:var(--r);padding:12px 14px;margin-bottom:12px;border-left:3px solid var(--acc);
+}
+.why-box strong{display:block;font-size:11.5px;color:var(--acc);font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
+.why-box p{font-size:13.5px;color:var(--ink);line-height:1.55}
+.topics{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.topic-tag{font-size:12px;background:var(--bg2);border:1px solid var(--line);padding:2px 9px;border-radius:999px;color:var(--ink2)}
 .acts{display:flex;gap:8px;flex-wrap:wrap}
 
-/* ══ SKELETONS ══ */
-.skel{display:flex;align-items:center;gap:14px;padding:18px 6px;border-bottom:1px solid var(--line)}
-.skel-b{border-radius:6px;background:linear-gradient(90deg,var(--line) 25%,var(--bg2) 50%,var(--line) 75%);background-size:200% 100%;animation:shimmer 1.6s linear infinite}
-@keyframes shimmer{to{background-position:-200% 0}}
+/* ══ ARTICLES VIEW ══ */
+.articles-view{display:none}
+.articles-view.active{display:block}
+.articles-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px}
+.article-card{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:20px;box-shadow:var(--sh-sm);cursor:pointer;display:flex;flex-direction:column;
+  transition:all .2s;
+}
+.article-card:hover{transform:translateY(-3px);border-color:var(--acc);box-shadow:var(--sh)}
+.art-meta{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink3);margin-bottom:10px}
+.art-badge{background:var(--acc-soft);color:var(--acc);font-weight:700;padding:2px 8px;border-radius:999px;font-size:11px}
+.art-title{font-family:"Bricolage Grotesque",sans-serif;font-size:1.15rem;font-weight:700;line-height:1.3;margin-bottom:8px;color:var(--ink)}
+.art-tldr{font-size:13.5px;color:var(--ink2);line-height:1.55;margin-bottom:14px;flex:1}
+.art-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.art-tag{font-size:11.5px;background:var(--bg2);border:1px solid var(--line);padding:1px 8px;border-radius:6px;color:var(--ink3)}
+.art-footer{display:flex;align-items:center;justify-content:space-between;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--acc);font-weight:600}
 
-/* ══ EMPTY STATES ══ */
-.state{text-align:center;padding:72px 20px;color:var(--ink2)}
-.state-icon{width:60px;height:60px;margin:0 auto 20px;background:var(--bg2);border-radius:50%;display:flex;align-items:center;justify-content:center}
-.state h3{font-family:"Bricolage Grotesque",sans-serif;font-size:1.4rem;font-weight:800;color:var(--ink);margin-bottom:8px}
-.state p{font-size:15px;color:var(--ink2);margin-bottom:20px;max-width:36ch;margin-inline:auto}
+/* ══ ARTICLE READER MODAL ══ */
+.reader-modal{
+  position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);
+  z-index:999;display:none;align-items:center;justify-content:center;padding:20px;
+}
+.reader-modal.open{display:flex}
+.reader-box{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--r-xl);
+  max-width:760px;width:100%;max-height:90vh;overflow-y:auto;padding:36px;
+  box-shadow:var(--sh-lg);position:relative;line-height:1.7;
+}
+.reader-close{
+  position:absolute;top:20px;right:20px;width:34px;height:34px;border-radius:50%;
+  background:var(--bg2);border:1px solid var(--line);display:grid;place-items:center;
+  cursor:pointer;font-size:18px;color:var(--ink2);
+}
+.reader-close:hover{background:var(--line);color:var(--ink)}
+.reader-title{font-family:"Bricolage Grotesque",sans-serif;font-size:1.85rem;font-weight:800;letter-spacing:-.03em;line-height:1.2;margin:12px 0}
+.reader-tldr{background:var(--acc-soft);border-left:4px solid var(--acc);padding:14px 18px;border-radius:var(--r);font-size:15px;margin-bottom:24px;font-style:italic}
+.reader-content h3{font-family:"Bricolage Grotesque",sans-serif;font-size:1.25rem;font-weight:700;margin:24px 0 10px;color:var(--ink)}
+.reader-content p{margin-bottom:14px;color:var(--ink2);font-size:15px}
+.reader-content ul{padding-left:22px;margin-bottom:16px;color:var(--ink2)}
+.reader-content li{margin-bottom:6px}
+.reader-content code{background:var(--bg2);padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:13px}
 
-/* ══ FOOTER ══ */
-footer{border-top:1px solid var(--line);padding:28px 0 48px;margin-top:12px;font-size:13.5px;color:var(--ink3)}
-.footer-inner{max-width:960px;margin:0 auto;padding:0 16px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
-.footer-links{display:flex;gap:16px;align-items:center}
-.footer-links a{color:var(--ink3);text-decoration:none;transition:color .15s}
-.footer-links a:hover{color:var(--acc)}
+/* ══ FOOTER (WITH REQUESTED TEXT) ══ */
+footer{
+  background:var(--panel);border-top:1px solid var(--line);
+  padding:48px max(20px, calc(50vw - 580px)) 56px;
+  margin-top:36px;
+}
+.footer-banner{
+  background:var(--bg2);border:1px solid var(--line);border-radius:var(--r-xl);
+  padding:28px 32px;margin-bottom:36px;display:flex;align-items:center;justify-content:space-between;
+  gap:24px;flex-wrap:wrap;
+}
+.footer-banner h2{
+  font-family:"Bricolage Grotesque",sans-serif;font-size:1.35rem;font-weight:800;
+  letter-spacing:-.03em;color:var(--ink);margin-bottom:6px;
+}
+.footer-banner p{
+  font-size:14.5px;color:var(--ink2);max-width:54ch;line-height:1.55;
+}
+.footer-bot{
+  display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
+  font-size:13px;color:var(--ink3);
+}
 .footer-social{display:flex;gap:8px;align-items:center}
-.footer-social a{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--ink3);transition:border-color .15s,color .15s,background .15s}
+.footer-social a{
+  width:32px;height:32px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;
+  color:var(--ink2);transition:all .15s;
+}
 .footer-social a:hover{border-color:var(--acc);color:var(--acc);background:var(--acc-soft)}
 
-/* ══ TOAST ══ */
-#toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,16px);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:var(--r);font-size:14px;font-weight:500;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:999;white-space:nowrap;box-shadow:var(--sh-lg)}
-#toast.on{opacity:1;transform:translate(-50%,0)}
+/* ══ SKELETON & EMPTY ══ */
+.skel{display:flex;align-items:center;gap:14px;padding:16px 14px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);margin-bottom:8px}
+.skel-b{border-radius:6px;background:linear-gradient(90deg,var(--line) 25%,var(--bg2) 50%,var(--line) 75%);background-size:200% 100%;animation:shimmer 1.6s infinite}
+@keyframes shimmer{to{background-position:-200% 0}}
+.state{text-align:center;padding:64px 20px;color:var(--ink2)}
+.state h3{font-family:"Bricolage Grotesque",sans-serif;font-size:1.3rem;font-weight:800;color:var(--ink);margin-bottom:6px}
 
-/* ══ RESPONSIVE ══ */
-@media(max-width:600px){
-  .head{grid-template-columns:32px 1fr auto;gap:10px;padding:14px 4px}
-  .more{padding-left:calc(32px + 10px)}
-  .rank,.score{font-size:1.1rem}
-  .hero{padding:48px 16px 36px}
-  .hero h1{font-size:1.85rem}
-  .hero-stats{gap:18px}
-  .filter-inner{flex-wrap:wrap}
-  .follow-bar{gap:10px}
+#toast{
+  position:fixed;left:50%;bottom:28px;transform:translate(-50%,16px);
+  background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:var(--r);
+  font-size:13.5px;font-weight:500;opacity:0;pointer-events:none;transition:all .2s;z-index:999;
 }
+#toast.on{opacity:1;transform:translate(-50%,0)}
 </style>
 </head>
 <body>
@@ -276,134 +431,150 @@ footer{border-top:1px solid var(--line);padding:28px 0 48px;margin-top:12px;font
 <header id="site-header" role="banner">
   <a class="logo" href="./" aria-label="Pulsebyte home">
     <div class="logo-mark" aria-hidden="true">
-      <svg width="18" height="18" viewBox="0 0 32 32" fill="none">
+      <svg width="17" height="17" viewBox="0 0 32 32" fill="none">
         <path d="M4 17h6l3-9 6 16 3-7h6" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </div>
     Pulsebyte
   </a>
+
+  <nav class="nav-tabs" role="tablist" aria-label="Main sections">
+    <button class="nav-tab active" id="tab-trending" role="tab" aria-selected="true" onclick="switchView('trending')">
+      🔥 Trending <span class="badge-count" id="count-trending">0</span>
+    </button>
+    <button class="nav-tab" id="tab-articles" role="tab" aria-selected="false" onclick="switchView('articles')">
+      📰 Deep Dives <span class="badge-count" id="count-articles">0</span>
+    </button>
+  </nav>
+
   <div class="hdr-right">
-    <a class="btn p" id="hdr-channel" href="#" hidden target="_blank" rel="noopener noreferrer">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-      Follow
+    <a class="btn p sm" id="hdr-channel" href="#" hidden target="_blank" rel="noopener noreferrer">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-2.04 9.61c-.152.678-.554.843-1.124.524l-3.1-2.284-1.497 1.44c-.165.165-.305.305-.625.305l.223-3.17 5.77-5.213c.25-.224-.055-.348-.39-.124L7.08 14.57l-3.03-.947c-.658-.206-.673-.658.138-.977l11.843-4.566c.548-.199 1.028.134.531.168z"/></svg>
+      Follow Channel
     </a>
-    <button class="btn icon" id="theme-btn" aria-label="Toggle light/dark theme">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+    <button class="btn icon" id="theme-btn" aria-label="Toggle theme">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
         <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
       </svg>
     </button>
   </div>
 </header>
 
-<!-- ══ HERO ══ -->
-<section class="hero" aria-label="Introduction">
-  <div class="hero-inner">
-    <div class="hero-eyebrow"><span class="dot-live" aria-hidden="true"></span>Updated every 6 hours</div>
-    <h1>What developers are <em>shipping</em> right now</h1>
-    <p>Discover trending open-source projects from GitHub, GitLab, Codeberg, Hugging Face and Product Hunt — all in one feed.</p>
-    <div class="hero-actions">
-      <a class="btn p" href="#list">
-        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/></svg>
-        Browse trending
-      </a>
-      <a class="btn" id="hero-channel" href="#" hidden target="_blank" rel="noopener noreferrer">
-        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-        Join Telegram
-      </a>
+<!-- ══ HERO (CAROUSEL IN HERO WITH IMAGES) ══ -->
+<section class="hero" aria-label="Featured projects carousel">
+  <div class="hero-head">
+    <div class="hero-badge">
+      <span class="dot-live" aria-hidden="true"></span>
+      Top 5 Trending Innovations
     </div>
-    <div class="hero-stats">
-      <div class="hero-stat"><strong id="stat-count">–</strong><span>projects tracked</span></div>
-      <div class="hero-stat"><strong id="stat-sources">5</strong><span>sources</span></div>
-      <div class="hero-stat"><strong id="stat-updated">–</strong><span>last updated</span></div>
+    <div class="hero-controls">
+      <button class="hero-btn" id="c-prev" aria-label="Previous card">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="hero-btn" id="c-next" aria-label="Next card">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="c-viewport">
+    <div class="c-track" id="c-track">
+      <!-- Carousel cards inserted by JS -->
+      <div class="c-card" style="flex:0 0 calc(20% - 13px)"><div class="skel-b" style="height:120px;width:100%"></div><div style="padding:14px"><div class="skel-b" style="height:16px;width:80%;margin-bottom:8px"></div><div class="skel-b" style="height:12px;width:100%"></div></div></div>
+      <div class="c-card" style="flex:0 0 calc(20% - 13px)"><div class="skel-b" style="height:120px;width:100%"></div><div style="padding:14px"><div class="skel-b" style="height:16px;width:70%;margin-bottom:8px"></div><div class="skel-b" style="height:12px;width:90%"></div></div></div>
+      <div class="c-card" style="flex:0 0 calc(20% - 13px)"><div class="skel-b" style="height:120px;width:100%"></div><div style="padding:14px"><div class="skel-b" style="height:16px;width:85%;margin-bottom:8px"></div><div class="skel-b" style="height:12px;width:95%"></div></div></div>
+      <div class="c-card" style="flex:0 0 calc(20% - 13px)"><div class="skel-b" style="height:120px;width:100%"></div><div style="padding:14px"><div class="skel-b" style="height:16px;width:60%;margin-bottom:8px"></div><div class="skel-b" style="height:12px;width:80%"></div></div></div>
+      <div class="c-card" style="flex:0 0 calc(20% - 13px)"><div class="skel-b" style="height:120px;width:100%"></div><div style="padding:14px"><div class="skel-b" style="height:16px;width:75%;margin-bottom:8px"></div><div class="skel-b" style="height:12px;width:85%"></div></div></div>
     </div>
   </div>
 </section>
 
 <!-- ══ SOCIAL FOLLOW BAR ══ -->
-<div class="follow-bar" id="follow-bar" aria-label="Follow us on social media">
+<div class="follow-bar" id="follow-bar" aria-label="Social media follow links">
   <span class="follow-label">Follow us</span>
   <div class="follow-links" id="follow-links"></div>
 </div>
 
-<!-- ══ MAIN ══ -->
+<!-- ══ MAIN WRAP ══ -->
 <div class="main-wrap">
 
-  <!-- TOP 5 CAROUSEL -->
-  <section class="carousel-section" aria-label="Top 5 trending projects">
-    <div class="carousel-header">
-      <div class="carousel-title">
-        <span class="fire" aria-hidden="true">🔥</span> Top 5 this scan
+  <!-- ── VIEW 1: TRENDING PROJECTS ── -->
+  <section id="view-trending" class="trending-view active" aria-label="Trending feed">
+    <div class="toolbar">
+      <div class="search">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        </span>
+        <input id="q" type="search" placeholder="Search by name, language, keyword…" autocomplete="off" spellcheck="false" aria-label="Search">
+        <span class="search-kbd" aria-hidden="true">/</span>
       </div>
-      <div class="carousel-nav" aria-label="Carousel navigation">
-        <button id="c-prev" aria-label="Previous">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-        </button>
-        <button id="c-next" aria-label="Next">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-      </div>
-    </div>
-    <div class="carousel-track-wrap">
-      <div class="carousel-track" id="carousel-track">
-        <!-- Skeleton -->
-        <div class="c-card" style="flex:0 0 calc(20% - 13px)"><div class="skel-b" style="height:36px;width:40px;margin-bottom:8px;border-radius:6px"></div><div class="skel-b" style="height:12px;width:90%;margin-bottom:6px"></div><div class="skel-b" style="height:10px;width:60%"></div></div>
-        <div class="c-card" style="flex:0 0 calc(20% - 13px)"><div class="skel-b" style="height:36px;width:40px;margin-bottom:8px;border-radius:6px"></div><div class="skel-b" style="height:12px;width:80%;margin-bottom:6px"></div><div class="skel-b" style="height:10px;width:50%"></div></div>
-        <div class="c-card" style="flex:0 0 calc(20% - 13px)"><div class="skel-b" style="height:36px;width:40px;margin-bottom:8px;border-radius:6px"></div><div class="skel-b" style="height:12px;width:95%;margin-bottom:6px"></div><div class="skel-b" style="height:10px;width:70%"></div></div>
-        <div class="c-card" style="flex:0 0 calc(20% - 13px)"><div class="skel-b" style="height:36px;width:40px;margin-bottom:8px;border-radius:6px"></div><div class="skel-b" style="height:12px;width:75%;margin-bottom:6px"></div><div class="skel-b" style="height:10px;width:55%"></div></div>
-        <div class="c-card" style="flex:0 0 calc(20% - 13px)"><div class="skel-b" style="height:36px;width:40px;margin-bottom:8px;border-radius:6px"></div><div class="skel-b" style="height:12px;width:85%;margin-bottom:6px"></div><div class="skel-b" style="height:10px;width:65%"></div></div>
+      <div class="chips" id="chips" role="group" aria-label="Filter sources"></div>
+      <div class="sort-seg" role="group" aria-label="Sort">
+        <button data-s="top" aria-pressed="true">Top</button>
+        <button data-s="new" aria-pressed="false">Newest</button>
       </div>
     </div>
-    <div class="carousel-dots" id="carousel-dots" aria-label="Carousel position"></div>
+
+    <div style="font-size:13px;color:var(--ink3);margin-bottom:12px" id="meta" aria-live="polite"></div>
+
+    <main id="list" aria-label="Projects list">
+      <div class="skel"><div class="skel-b" style="width:36px;height:36px;border-radius:50%"></div><div style="flex:1"><div class="skel-b" style="height:16px;width:45%;margin-bottom:6px"></div><div class="skel-b" style="height:12px;width:75%"></div></div></div>
+      <div class="skel"><div class="skel-b" style="width:36px;height:36px;border-radius:50%"></div><div style="flex:1"><div class="skel-b" style="height:16px;width:40%;margin-bottom:6px"></div><div class="skel-b" style="height:12px;width:65%"></div></div></div>
+      <div class="skel"><div class="skel-b" style="width:36px;height:36px;border-radius:50%"></div><div style="flex:1"><div class="skel-b" style="height:16px;width:55%;margin-bottom:6px"></div><div class="skel-b" style="height:12px;width:80%"></div></div></div>
+    </main>
   </section>
 
-  <!-- SEARCH -->
-  <div class="search-wrap">
-    <label class="search">
-      <span class="search-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
-      <input id="q" type="search" placeholder="Search by name, topic, language…" autocomplete="off" aria-label="Search projects" spellcheck="false">
-      <span class="search-kbd" aria-hidden="true">/</span>
-    </label>
-  </div>
-
-  <!-- FILTER BAR -->
-  <div class="filter-bar">
-    <div class="filter-inner">
-      <div class="chips" id="chips" role="group" aria-label="Filter by source"></div>
-      <div class="sort-seg" role="group" aria-label="Sort order">
-        <button data-s="top" aria-pressed="true">Top</button>
-        <button data-s="new" aria-pressed="false">New</button>
+  <!-- ── VIEW 2: ARTICLES ── -->
+  <section id="view-articles" class="articles-view" aria-label="Articles section">
+    <div style="margin-bottom:20px;display:flex;align-items:center;justify-content:space-between">
+      <div>
+        <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.4rem;font-weight:800;letter-spacing:-.02em">Technical Deep Dives</h2>
+        <p style="font-size:14px;color:var(--ink2)">Comprehensive breakdowns of breakthrough trending projects, generated and published from Pulsebyte.</p>
       </div>
     </div>
-  </div>
-
-  <!-- META -->
-  <div class="meta-line"><span id="meta" aria-live="polite"></span></div>
-
-  <!-- LIST -->
-  <main id="list" aria-label="Trending projects">
-    <div class="skel"><div class="skel-b" style="width:36px;height:36px;border-radius:50%;flex-shrink:0"></div><div style="flex:1;display:flex;flex-direction:column;gap:8px"><div class="skel-b" style="height:16px;width:55%"></div><div class="skel-b" style="height:12px;width:80%"></div></div><div class="skel-b" style="width:50px;height:28px;border-radius:6px"></div></div>
-    <div class="skel"><div class="skel-b" style="width:36px;height:36px;border-radius:50%;flex-shrink:0"></div><div style="flex:1;display:flex;flex-direction:column;gap:8px"><div class="skel-b" style="height:16px;width:40%"></div><div class="skel-b" style="height:12px;width:70%"></div></div><div class="skel-b" style="width:50px;height:28px;border-radius:6px"></div></div>
-    <div class="skel"><div class="skel-b" style="width:36px;height:36px;border-radius:50%;flex-shrink:0"></div><div style="flex:1;display:flex;flex-direction:column;gap:8px"><div class="skel-b" style="height:16px;width:65%"></div><div class="skel-b" style="height:12px;width:50%"></div></div><div class="skel-b" style="width:50px;height:28px;border-radius:6px"></div></div>
-    <div class="skel"><div class="skel-b" style="width:36px;height:36px;border-radius:50%;flex-shrink:0"></div><div style="flex:1;display:flex;flex-direction:column;gap:8px"><div class="skel-b" style="height:16px;width:45%"></div><div class="skel-b" style="height:12px;width:85%"></div></div><div class="skel-b" style="width:50px;height:28px;border-radius:6px"></div></div>
-    <div class="skel"><div class="skel-b" style="width:36px;height:36px;border-radius:50%;flex-shrink:0"></div><div style="flex:1;display:flex;flex-direction:column;gap:8px"><div class="skel-b" style="height:16px;width:60%"></div><div class="skel-b" style="height:12px;width:65%"></div></div><div class="skel-b" style="width:50px;height:28px;border-radius:6px"></div></div>
-  </main>
+    <div class="articles-grid" id="articles-grid">
+      <div class="state"><h3>No articles published yet</h3><p>Generate articles inside the Pulsebyte app to publish them here.</p></div>
+    </div>
+  </section>
 
 </div>
 
-<!-- ══ FOOTER ══ -->
+<!-- ══ ARTICLE READER MODAL ══ -->
+<div id="reader-modal" class="reader-modal" onclick="if(event.target===this)closeReader()">
+  <article class="reader-box" role="dialog" aria-modal="true" aria-labelledby="r-title">
+    <button class="reader-close" onclick="closeReader()" aria-label="Close">&times;</button>
+    <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
+      <span class="art-badge" id="r-badge">Deep Dive</span>
+      <span style="font-size:12px;color:var(--ink3)" id="r-time">4 min read</span>
+      <span style="font-size:12px;color:var(--ink3)" id="r-date"></span>
+    </div>
+    <h1 class="reader-title" id="r-title"></h1>
+    <div class="reader-tldr" id="r-tldr"></div>
+    <div class="reader-content" id="r-content"></div>
+    <div style="margin-top:28px;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+      <a class="btn p" id="r-url" href="#" target="_blank" rel="noopener noreferrer">Explore Repository &rarr;</a>
+      <button class="btn" onclick="closeReader()">Close</button>
+    </div>
+  </article>
+</div>
+
+<!-- ══ FOOTER (MOVED TEXT + SOCIAL) ══ -->
 <footer role="contentinfo">
-  <div class="footer-inner">
+  <!-- MOVED FROM HERO AS REQUESTED -->
+  <div class="footer-banner">
     <div>
-      <div style="font-weight:700;color:var(--ink);margin-bottom:4px;font-family:'Bricolage Grotesque',sans-serif">Pulsebyte</div>
-      <div>Trending developer projects, updated every 6 hours.</div>
+      <h2>What developers are shipping right now</h2>
+      <p>Discover trending open-source projects from GitHub, GitLab, Codeberg, Hugging Face and Product Hunt — all in one feed.</p>
     </div>
-    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:10px">
-      <div class="footer-social" id="footer-social" aria-label="Social links"></div>
-      <div class="footer-links">
-        <a id="footer-channel" href="#" hidden target="_blank" rel="noopener noreferrer">Telegram</a>
-        <a href="https://github.com/deltabytesyt/pulsebyte" target="_blank" rel="noopener noreferrer">GitHub</a>
-      </div>
-    </div>
+    <a class="btn p" href="#site-header">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+      Back to top
+    </a>
+  </div>
+
+  <div class="footer-bot">
+    <span>&copy; Pulsebyte &middot; Auto-scanned &amp; published via GitHub Actions</span>
+    <div class="footer-social" id="footer-social" aria-label="Social media"></div>
   </div>
 </footer>
 
@@ -411,7 +582,7 @@ footer{border-top:1px solid var(--line);padding:28px 0 48px;margin-top:12px;font
 
 <script src="config.js"></script>
 <script>
-/* ══ CONFIG & STATE ══ */
+/* ══ STATE & UTILS ══ */
 const CFG = window.PULSEBYTE || {};
 const SRC = {
   GitHub:      ["#8b93a7","stars"],
@@ -420,245 +591,320 @@ const SRC = {
   HuggingFace: ["#f5b400","likes"],
   ProductHunt: ["#da552f","votes"]
 };
-let S = {items:[],at:0,q:"",src:new Set(),sort:"top",open:""};
 
-/* ══ UTILS ══ */
-const $  = s => document.querySelector(s);
-const esc= s => String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const fmt= n => n>=1e4?Math.round(n/1e3)+"k":n>=1e3?(n/1e3).toFixed(1)+"k":String(n||0);
-const ago= t => {
+let S = {items:[], articles:[], at:0, q:"", src:new Set(), sort:"top", open:"", view:"trending"};
+
+const $   = s => document.querySelector(s);
+const esc = s => String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmt = n => n>=1e4?Math.round(n/1e3)+"k":n>=1e3?(n/1e3).toFixed(1)+"k":String(n||0);
+const ago = t => {
   if(!t) return "";
-  const d=Math.max(0,(Date.now()-new Date(t))/864e5);
+  const d = Math.max(0,(Date.now()-new Date(t))/864e5);
   return d<1?"today":d<2?"yesterday":d<30?Math.floor(d)+"d ago":Math.floor(d/30)+"mo ago";
 };
 const link = i => location.origin+location.pathname+"#p="+encodeURIComponent(i.id);
-const shareUrl = (i,k) => {
-  const u=encodeURIComponent(link(i)), t=encodeURIComponent(`${i.name}: ${i.desc||"trending project"} (via pulsebyte)`);
-  return k==="t"?`https://t.me/share/url?url=${u}&text=${t}`:k==="x"?`https://twitter.com/intent/tweet?text=${t}&url=${u}`:`https://wa.me/?text=${t}%20${u}`;
-};
 
-/* ══ HASH STATE ══ */
-function readHash(){const p=new URLSearchParams(location.hash.slice(1));S.q=p.get("q")||"";S.src=new Set((p.get("src")||"").split(",").filter(Boolean));S.sort=p.get("sort")||"top";S.open=p.get("p")||"";$("#q").value=S.q}
-function writeHash(){const p=new URLSearchParams();if(S.q)p.set("q",S.q);if(S.src.size)p.set("src",[...S.src]);if(S.sort!=="top")p.set("sort",S.sort);if(S.open)p.set("p",S.open);history.replaceState(null,"",p.toString()?"#"+p:location.pathname+location.search)}
+function getProjectImage(item){
+  if(item.src === 'GitHub'){
+    return `https://opengraph.githubassets.com/1/${encodeURIComponent(item.name)}`;
+  }
+  // Branded fallback
+  return `https://api.dicebear.com/8.x/shapes/svg?seed=${encodeURIComponent(item.name)}&backgroundColor=0f172a,1e1b4b,172554`;
+}
 
-/* ══ SOCIAL FOLLOW BAR ══ */
+/* ══ NAVIGATION VIEW SWITCHER ══ */
+function switchView(v){
+  S.view = v;
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.toggle('active', t.id === 'tab-'+v));
+  $('#view-trending').classList.toggle('active', v==='trending');
+  $('#view-articles').classList.toggle('active', v==='articles');
+}
+
+/* ══ CAROUSEL WITH IMAGES ══ */
+let cOffset = 0;
+let cItems  = [];
+
+function buildCarousel(items){
+  cItems = items.slice(0, 5);
+  cOffset = 0;
+  const track = $('#c-track');
+  if(!track || !cItems.length) return;
+
+  track.innerHTML = cItems.map((i, idx) => {
+    const [org,...rest]=i.name.split("/"), repo=rest.join("/")||org;
+    const [dotCol, unit] = SRC[i.src]||["#888","points"];
+    const imgUrl = getProjectImage(i);
+
+    return `<article class="c-card${idx===0?' active':''}" data-id="${esc(i.id)}" onclick="selectProject('${esc(i.id)}')" tabindex="0">
+      <div class="c-thumb-wrap">
+        <img class="c-thumb" src="${imgUrl}" alt="${esc(i.name)}" loading="lazy" onerror="this.src='https://api.dicebear.com/8.x/shapes/svg?seed=${encodeURIComponent(i.name)}'">
+        <span class="c-badge-rank">#${idx+1}</span>
+        <span class="c-badge-src">${esc(i.src)}</span>
+      </div>
+      <div class="c-body">
+        <div class="c-title" title="${esc(i.name)}">${esc(repo)}</div>
+        <div class="c-desc">${esc(i.desc || 'No description available.')}</div>
+        <div class="c-meta">
+          <span class="c-score">⭐ ${fmt(i.score)}</span>
+          <span class="c-lang">${esc(i.lang || i.src)}</span>
+        </div>
+      </div>
+    </article>`;
+  }).join('');
+}
+
+function cGo(n){
+  cOffset = Math.max(0, Math.min(cItems.length - 1, n));
+  const track = $('#c-track');
+  const cards = track?.querySelectorAll('.c-card');
+  if(!cards || !cards.length) return;
+  const cardW = cards[0].offsetWidth + 16;
+  track.style.transform = `translateX(-${cOffset * cardW}px)`;
+  cards.forEach((c,i)=>c.classList.toggle('active', i===cOffset));
+}
+
+$('#c-prev').onclick = () => cGo((cOffset - 1 + cItems.length) % cItems.length);
+$('#c-next').onclick = () => cGo((cOffset + 1) % cItems.length);
+
+setInterval(() => {
+  if(!cItems.length) return;
+  cGo((cOffset + 1) % cItems.length);
+}, 4500);
+
+function selectProject(id){
+  switchView('trending');
+  S.open = id; renderList();
+  const el = document.getElementById('r-' + id);
+  el?.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+/* ══ ARTICLES GRID & MODAL ══ */
+async function loadArticles(){
+  try {
+    const res = await fetch('articles.json?t=' + Date.now());
+    if(!res.ok) return;
+    S.articles = await res.json();
+    $('#count-articles').textContent = S.articles.length;
+    renderArticles();
+  } catch(e){}
+}
+
+function renderArticles(){
+  const grid = $('#articles-grid');
+  if(!grid) return;
+  if(!S.articles.length){
+    grid.innerHTML = `<div class="state" style="grid-column:1/-1">
+      <h3>No published deep dives yet</h3>
+      <p>Technical articles written inside the Pulsebyte app will appear right here.</p>
+    </div>`;
+    return;
+  }
+  grid.innerHTML = S.articles.map((a, idx) => `
+    <article class="article-card" onclick="openReader(${idx})">
+      <div class="art-meta">
+        <span class="art-badge">Deep Dive</span>
+        <span>${esc(a.read_time || '4 min read')}</span>
+        <span>&middot;</span>
+        <span>${ago(a.published_at || a.created_at)}</span>
+      </div>
+      <h3 class="art-title">${esc(a.title)}</h3>
+      <p class="art-tldr">${esc(a.tldr || '')}</p>
+      ${(a.tags||[]).length ? `<div class="art-tags">${a.tags.map(t=>`<span class="art-tag">#${esc(t)}</span>`).join('')}</div>` : ''}
+      <div class="art-footer">
+        <span>Read full article &rarr;</span>
+        <span>${esc(a.item?.name || '')}</span>
+      </div>
+    </article>
+  `).join('');
+}
+
+function openReader(idx){
+  const a = S.articles[idx];
+  if(!a) return;
+  $('#r-title').textContent = a.title;
+  $('#r-tldr').textContent = a.tldr || '';
+  $('#r-content').innerHTML = a.content || '';
+  $('#r-time').textContent = a.read_time || '4 min read';
+  $('#r-date').textContent = a.published_at ? 'Published ' + ago(a.published_at) : '';
+  $('#r-url').href = a.item?.url || '#';
+  $('#reader-modal').classList.add('open');
+}
+
+function closeReader(){
+  $('#reader-modal').classList.remove('open');
+}
+
+/* ══ SOCIAL BAR ══ */
 const SOCIAL_DEFS = [
-  {key:"telegram",  label:"Telegram",  cls:"fb-telegram",  icon:`<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-2.04 9.61c-.152.678-.554.843-1.124.524l-3.1-2.284-1.497 1.44c-.165.165-.305.305-.625.305l.223-3.17 5.77-5.213c.25-.224-.055-.348-.39-.124L7.08 14.57l-3.03-.947c-.658-.206-.673-.658.138-.977l11.843-4.566c.548-.199 1.028.134.531.168z"/></svg>`},
-  {key:"youtube",   label:"YouTube",   cls:"fb-youtube",   icon:`<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>`},
-  {key:"twitter",   label:"Twitter / X", cls:"fb-twitter", icon:`<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>`},
-  {key:"facebook",  label:"Facebook",  cls:"fb-facebook",  icon:`<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>`},
-  {key:"instagram", label:"Instagram", cls:"fb-instagram", icon:`<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>`},
-  {key:"tiktok",    label:"TikTok",    cls:"fb-tiktok",    icon:`<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9.07a8.16 8.16 0 004.78 1.52V7.14a4.85 4.85 0 01-1.01-.45z"/></svg>`},
-  {key:"github",    label:"GitHub",    cls:"fb-github",    icon:`<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>`},
+  {key:"telegram",  label:"Telegram",  cls:"fb-telegram",  icon:`<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-2.04 9.61c-.152.678-.554.843-1.124.524l-3.1-2.284-1.497 1.44c-.165.165-.305.305-.625.305l.223-3.17 5.77-5.213c.25-.224-.055-.348-.39-.124L7.08 14.57l-3.03-.947c-.658-.206-.673-.658.138-.977l11.843-4.566c.548-.199 1.028.134.531.168z"/></svg>`},
+  {key:"youtube",   label:"YouTube",   cls:"fb-youtube",   icon:`<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>`},
+  {key:"twitter",   label:"Twitter",   cls:"fb-twitter",   icon:`<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>`},
+  {key:"facebook",  label:"Facebook",  cls:"fb-facebook",  icon:`<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>`},
+  {key:"github",    label:"GitHub",    cls:"fb-github",    icon:`<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>`},
 ];
 
 function buildSocial(){
-  const links = $("#follow-links");
-  const footer = $("#footer-social");
-  const hdrBtn = $("#hdr-channel");
+  const links = $('#follow-links');
+  const footer = $('#footer-social');
+  const hdrBtn = $('#hdr-channel');
 
   SOCIAL_DEFS.forEach(def => {
     const url = CFG[def.key];
     if(!url) return;
-
-    // Follow bar button
-    const a = document.createElement("a");
-    a.href=url; a.target="_blank"; a.rel="noopener noreferrer";
-    a.className="follow-btn "+def.cls;
-    a.setAttribute("aria-label","Follow on "+def.label);
-    a.innerHTML=def.icon+" "+def.label;
+    const a = document.createElement('a');
+    a.href=url; a.target='_blank'; a.rel='noopener noreferrer';
+    a.className='follow-btn '+def.cls; a.innerHTML=def.icon+' '+def.label;
     links.appendChild(a);
 
-    // Footer icon
-    const fa = document.createElement("a");
-    fa.href=url; fa.target="_blank"; fa.rel="noopener noreferrer";
-    fa.setAttribute("aria-label",def.label);
+    const fa = document.createElement('a');
+    fa.href=url; fa.target='_blank'; fa.rel='noopener noreferrer';
     fa.innerHTML=def.icon;
     footer.appendChild(fa);
   });
 
-  // Header & hero channel links
-  if(CFG.channel){ hdrBtn.href=CFG.channel; hdrBtn.hidden=false; }
-  if(CFG.channel){ const h=$("#hero-channel"); h.href=CFG.channel; h.hidden=false; }
-  if(CFG.channel){ const f=$("#footer-channel"); f.href=CFG.channel; f.hidden=false; }
-
-  // Hide follow bar if no social links configured
-  if(!links.children.length) $("#follow-bar").style.display="none";
+  if(CFG.channel){
+    hdrBtn.href = CFG.channel;
+    hdrBtn.hidden = false;
+  }
+  if(!links.children.length) $('#follow-bar').style.display='none';
 }
 
-/* ══ CAROUSEL ══ */
-let carouselOffset = 0;
-let carouselItems  = [];
-const CAROUSEL_N   = 5;
-
-function buildCarousel(items){
-  carouselItems = items.slice(0,CAROUSEL_N);
-  carouselOffset = 0;
-  const track = $("#carousel-track");
-  const dots  = $("#carousel-dots");
-
-  track.innerHTML = carouselItems.map((i,n) => {
-    const [dotCol,unit] = SRC[i.src]||["#888","points"];
-    const [org,...rest]=i.name.split("/"), repo=rest.join("/")||org;
-    return `<div class="c-card${n===0?" active":""}" data-id="${esc(i.id)}" role="button" tabindex="0" aria-label="${esc(i.name)}, rank ${n+1}">
-      <div class="c-rank">#${n+1}</div>
-      <div class="c-name">${esc(repo)}</div>
-      <div class="c-src"><span class="src-dot" style="background:${dotCol}" aria-hidden="true"></span>${esc(i.src)}</div>
-      <div class="c-score">${fmt(i.score)} <small>${unit}</small></div>
-    </div>`;
-  }).join("");
-
-  dots.innerHTML = carouselItems.map((_,n) =>
-    `<button class="c-dot${n===0?" active":""}" data-n="${n}" aria-label="Go to card ${n+1}"></button>`
-  ).join("");
-
-  track.querySelectorAll(".c-card").forEach(c => {
-    c.addEventListener("click",  ()=>scrollToItem(c.dataset.id));
-    c.addEventListener("keydown",e=>e.key==="Enter"&&scrollToItem(c.dataset.id));
-  });
-  dots.querySelectorAll(".c-dot").forEach(d =>
-    d.addEventListener("click",()=>carouselGoTo(+d.dataset.n))
-  );
-}
-
-function carouselGoTo(n){
-  carouselOffset = n;
-  const track  = $("#carousel-track");
-  const cards  = track.querySelectorAll(".c-card");
-  const wrap   = track.parentElement;
-  if(!cards.length) return;
-  const cardW  = cards[0].offsetWidth + 16; // gap
-  track.style.transform = `translateX(-${carouselOffset * cardW}px)`;
-  cards.forEach((c,i)=>{c.classList.toggle("active",i===n)});
-  document.querySelectorAll(".c-dot").forEach((d,i)=>d.classList.toggle("active",i===n));
-}
-
-$("#c-prev").onclick = ()=> carouselGoTo(Math.max(0, carouselOffset-1));
-$("#c-next").onclick = ()=> carouselGoTo(Math.min(carouselItems.length-1, carouselOffset+1));
-
-// Auto-advance carousel
-setInterval(()=>{
-  if(!carouselItems.length) return;
-  carouselGoTo((carouselOffset+1) % carouselItems.length);
-}, 4000);
-
-function scrollToItem(id){
-  S.open = id; writeHash(); render();
-  const el = document.getElementById("r-"+id);
-  el?.scrollIntoView({behavior:"smooth",block:"center"});
-}
-
-/* ══ VIEW ══ */
+/* ══ TRENDING LIST VIEW ══ */
 function view(){
-  const q=S.q.toLowerCase();
-  let r=S.items.filter(i=>(!S.src.size||S.src.has(i.src))&&(!q||[i.name,i.desc,i.lang,i.src,...(i.topics||[])].join(" ").toLowerCase().includes(q)));
-  return r.sort(S.sort==="new"?(a,b)=>new Date(b.created||0)-new Date(a.created||0):(a,b)=>b.score-a.score);
+  const q = S.q.toLowerCase();
+  let r = S.items.filter(i =>
+    (!S.src.size || S.src.has(i.src)) &&
+    (!q || [i.name, i.desc, i.lang, i.src, ...(i.topics||[])].join(" ").toLowerCase().includes(q))
+  );
+  return r.sort(S.sort==="new" ? (a,b)=>new Date(b.created||0)-new Date(a.created||0) : (a,b)=>b.score-a.score);
 }
 
-/* ══ RENDER ══ */
-function render(){
-  /* chips */
+function renderList(){
   const counts={};
   S.items.forEach(i=>counts[i.src]=(counts[i.src]||0)+1);
-  $("#chips").innerHTML=Object.keys(counts).map(s=>{
+  $('#chips').innerHTML=Object.keys(counts).map(s=>{
     const [c]=SRC[s]||["#888"];
-    return `<button class="chip" data-src="${esc(s)}" aria-pressed="${S.src.has(s)}"><span class="src-dot" style="background:${c}" aria-hidden="true"></span>${esc(s)}<em>${counts[s]}</em></button>`;
+    return `<button class="chip" data-src="${esc(s)}" aria-pressed="${S.src.has(s)}"><span class="src-dot" style="background:${c}"></span>${esc(s)}<em>${counts[s]}</em></button>`;
   }).join("");
 
-  document.querySelectorAll(".sort-seg button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.s===S.sort));
+  document.querySelectorAll('.sort-seg button').forEach(b=>b.setAttribute('aria-pressed', b.dataset.s===S.sort));
 
-  /* stats */
-  if(S.items.length){ $("#stat-count").textContent=S.items.length; }
-  if(S.at){ $("#stat-updated").textContent=ago(S.at)||"–"; }
+  const r = view();
+  $('#count-trending').textContent = S.items.length;
+  if(S.items.length) $('#meta').innerHTML = `Showing <strong>${r.length}</strong> of <strong>${S.items.length}</strong> tracked projects${S.at?` &middot; Updated ${ago(S.at)}`:''}`;
 
-  /* meta */
-  const r=view();
-  if(S.items.length) $("#meta").innerHTML=`<strong>${r.length}</strong> of <strong>${S.items.length}</strong> projects${S.at?` &middot; updated ${ago(S.at)}`:""}`;
+  const el = $('#list');
+  if(!S.items.length){
+    el.innerHTML = `<div class="state"><h3>No projects found</h3><p>The feed is currently empty.</p></div>`;
+    return;
+  }
+  if(!r.length){
+    el.innerHTML = `<div class="state"><h3>Nothing matches &ldquo;${esc(S.q)}&rdquo;</h3><button class="btn sm" onclick="clearFilters()">Clear filters</button></div>`;
+    return;
+  }
 
-  if(!S.items.length) return $("#list").innerHTML=`<div class="state"><div class="state-icon" aria-hidden="true"><svg width="28" height="28" fill="none" stroke="var(--ink3)" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg></div><h3>No data yet</h3><p>The first scan hasn't run. Check back soon.</p></div>`;
-  if(!r.length) return $("#list").innerHTML=`<div class="state"><div class="state-icon" aria-hidden="true"><svg width="28" height="28" fill="none" stroke="var(--ink3)" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></div><h3>Nothing matches</h3><p>No results for &ldquo;${esc(S.q)}&rdquo;.</p><button class="btn" id="clear-btn">Clear filters</button></div>`;
-
-  $("#list").innerHTML=r.map((i,n)=>{
-    const [org,...rest]=i.name.split("/"),repo=rest.join("/");
+  el.innerHTML = r.map((i,n) => {
+    const [org,...rest]=i.name.split("/"), repo=rest.join("/");
     const [dotCol,unit]=SRC[i.src]||["#888","points"];
-    const isOpen=S.open===i.id;
-    return `<article class="row${isOpen?" open":""}" id="r-${esc(i.id)}">
+    const isOpen = S.open === i.id;
+
+    return `<article class="row${isOpen?' open':''}" id="r-${esc(i.id)}">
       <button class="head" data-id="${esc(i.id)}" aria-expanded="${isOpen}">
         <span class="rank" aria-hidden="true">${n+1}</span>
         <span>
           <span class="nm">${repo?`<span>${esc(org)}/</span><b>${esc(repo)}</b>`:`<b>${esc(org)}</b>`}</span>
-          <span class="desc">${esc(i.desc||"No description available")}</span>
-          <span class="tags"><span><span class="src-dot" style="background:${dotCol}" aria-hidden="true"></span>${esc(i.src)}</span>${i.lang?`<span>${esc(i.lang)}</span>`:""}${i.created?`<span>${ago(i.created)}</span>`:""}</span>
+          <span class="desc">${esc(i.desc||'No description provided.')}</span>
+          <span class="tags">
+            <span><span class="src-dot" style="background:${dotCol}"></span>${esc(i.src)}</span>
+            ${i.lang?`<span>${esc(i.lang)}</span>`:''}
+            ${i.created?`<span>${ago(i.created)}</span>`:''}
+          </span>
         </span>
-        <span class="score" aria-label="${fmt(i.score)} ${unit}">${fmt(i.score)}<small>${unit}</small></span>
+        <span class="score">${fmt(i.score)}<small>${unit}</small></span>
       </button>
       <div class="more">
-        ${i.blurb?`<div class="why-box"><strong>Why it matters</strong><p>${esc(i.blurb)}</p></div>`:""}
-        ${(i.topics||[]).length?`<div class="topics">${i.topics.map(t=>`<span class="topic-tag">${esc(t)}</span>`).join("")}</div>`:""}
+        ${i.blurb?`<div class="why-box"><strong>Why it matters</strong><p>${esc(i.blurb)}</p></div>`:''}
+        ${(i.topics||[]).length?`<div class="topics">${i.topics.map(t=>`<span class="topic-tag">${esc(t)}</span>`).join('')}</div>`:''}
         <div class="acts">
-          <a class="btn p sm" href="${esc(i.url)}" target="_blank" rel="noopener noreferrer">
-            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            Open project
-          </a>
-          <button class="btn sm" data-act="copy" data-id="${esc(i.id)}">
-            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-            Copy link
-          </button>
-          <a class="btn sm" href="${shareUrl(i,"t")}" target="_blank" rel="noopener noreferrer">Telegram</a>
-          <a class="btn sm" href="${shareUrl(i,"x")}" target="_blank" rel="noopener noreferrer">X / Twitter</a>
-          <a class="btn sm" href="${shareUrl(i,"w")}" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-          ${navigator.share?`<button class="btn sm" data-act="native" data-id="${esc(i.id)}">More…</button>`:""}
+          <a class="btn p sm" href="${esc(i.url)}" target="_blank" rel="noopener noreferrer">Open project &rarr;</a>
+          <button class="btn sm" data-act="copy" data-id="${esc(i.id)}">Copy link</button>
+          <a class="btn sm" href="https://t.me/share/url?url=${encodeURIComponent(link(i))}&text=${encodeURIComponent(i.name)}" target="_blank" rel="noopener noreferrer">Share Telegram</a>
+          <a class="btn sm" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(i.name+': '+link(i))}" target="_blank" rel="noopener noreferrer">Share X</a>
         </div>
       </div>
     </article>`;
-  }).join("");
+  }).join('');
 }
 
-/* ══ EVENTS ══ */
-$("#list").addEventListener("click",e=>{
-  const h=e.target.closest(".head");
-  if(h){S.open=S.open===h.dataset.id?"":h.dataset.id;writeHash();render();return}
-  const a=e.target.closest("[data-act]");
-  if(a){
-    const item=S.items.find(x=>x.id===a.dataset.id);if(!item)return;
-    if(a.dataset.act==="copy") navigator.clipboard.writeText(link(item)).then(()=>toast("Link copied!")).catch(()=>{});
-    else if(a.dataset.act==="native") navigator.share({title:item.name,text:item.desc,url:link(item)}).catch(()=>{});
-  }
-  if(e.target.id==="clear-btn"){S.q="";S.src.clear();$("#q").value="";writeHash();render()}
-});
-$("#chips").addEventListener("click",e=>{const c=e.target.closest(".chip");if(!c)return;S.src.has(c.dataset.src)?S.src.delete(c.dataset.src):S.src.add(c.dataset.src);writeHash();render()});
-document.querySelector(".sort-seg").addEventListener("click",e=>{if(e.target.dataset.s){S.sort=e.target.dataset.s;writeHash();render()}});
-$("#q").addEventListener("input",e=>{S.q=e.target.value.trim();writeHash();render()});
-addEventListener("keydown",e=>{if(e.key==="/"&&document.activeElement.id!=="q"){e.preventDefault();$("#q").focus()}if(e.key==="Escape"&&document.activeElement.id==="q"){$("#q").value="";S.q="";writeHash();render();$("#q").blur()}});
-addEventListener("hashchange",()=>{readHash();render()});
-$("#theme-btn").onclick=()=>{const n=document.documentElement.dataset.theme==="dark"?"light":"dark";document.documentElement.dataset.theme=n;try{localStorage.setItem("pb-theme",n)}catch{}};
+function clearFilters(){
+  S.q = ''; S.src.clear();
+  $('#q').value = '';
+  renderList();
+}
 
-/* ══ TOAST ══ */
-let _tt;
-function toast(m){const el=$("#toast");el.textContent=m;el.classList.add("on");clearTimeout(_tt);_tt=setTimeout(()=>el.classList.remove("on"),2000)}
+/* ══ LISTENERS ══ */
+$('#list').addEventListener('click', e => {
+  const h = e.target.closest('.head');
+  if(h){ S.open = S.open===h.dataset.id ? '' : h.dataset.id; renderList(); return; }
+  const a = e.target.closest('[data-act="copy"]');
+  if(a){
+    const it = S.items.find(x=>x.id===a.dataset.id);
+    if(it) navigator.clipboard.writeText(link(it)).then(()=>toast('Link copied!'));
+  }
+});
+
+$('#chips').addEventListener('click', e => {
+  const c = e.target.closest('.chip'); if(!c) return;
+  S.src.has(c.dataset.src) ? S.src.delete(c.dataset.src) : S.src.add(c.dataset.src);
+  renderList();
+});
+
+document.querySelector('.sort-seg').addEventListener('click', e => {
+  if(e.target.dataset.s){ S.sort = e.target.dataset.s; renderList(); }
+});
+
+$('#q').addEventListener('input', e => { S.q = e.target.value.trim(); renderList(); });
+
+addEventListener('keydown', e => {
+  if(e.key === '/' && document.activeElement.id !== 'q'){ e.preventDefault(); $('#q').focus(); }
+  if(e.key === 'Escape'){ closeReader(); }
+});
+
+$('#theme-btn').onclick = () => {
+  const n = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+  document.documentElement.dataset.theme = n;
+  try{ localStorage.setItem('pb-theme', n); }catch{}
+};
+
+function toast(m){
+  const el = $('#toast'); el.textContent = m; el.classList.add('on');
+  setTimeout(()=>el.classList.remove('on'), 2000);
+}
 
 /* ══ BOOT ══ */
-function apply(d){
-  S.items=d.items||[]; S.at=d.updated_at||0;
-  buildCarousel(S.items);
-  render();
-  if(S.open){const el=document.getElementById("r-"+S.open);el?.scrollIntoView({block:"center",behavior:"smooth"})}
-}
-
 async function boot(){
-  readHash();
   buildSocial();
-  try{const c=JSON.parse(localStorage.getItem("pb-feed"));if(c?.items?.length)apply(c)}catch{}
-  if(!CFG.api) return $("#list").innerHTML=`<div class="state"><h3>Not configured</h3><p>Run <code>run.cmd</code> to set up.</p></div>`;
   try{
-    const res=await fetch(CFG.api+"?t="+Date.now());
-    if(!res.ok)throw 0;
-    const data=await res.json();
-    apply(data);
-    try{localStorage.setItem("pb-feed",JSON.stringify(data))}catch{}
-  }catch{
-    if(!S.items.length) $("#list").innerHTML=`<div class="state"><h3>Can't reach the feed</h3><p>Check your connection.</p><button class="btn" onclick="boot()">Retry</button></div>`;
-  }
+    const cached = JSON.parse(localStorage.getItem('pb-feed'));
+    if(cached?.items?.length){
+      S.items = cached.items; S.at = cached.updated_at;
+      buildCarousel(S.items); renderList();
+    }
+  }catch{}
+
+  await loadArticles();
+
+  if(!CFG.api) return;
+  try {
+    const res = await fetch(CFG.api + '?t=' + Date.now());
+    if(!res.ok) throw 0;
+    const data = await res.json();
+    S.items = data.items || [];
+    S.at    = data.updated_at || 0;
+    buildCarousel(S.items);
+    renderList();
+    try{ localStorage.setItem('pb-feed', JSON.stringify(data)); }catch{}
+  } catch(e){}
 }
 boot();
 </script>
