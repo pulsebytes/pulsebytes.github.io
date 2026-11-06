@@ -101,10 +101,10 @@ footer{border-top:1px solid var(--line);background:var(--panel);padding:32px 20p
 
   <div class="cta-box">
     <h3>Book a Sponsorship</h3>
-    <p>Get in touch with us to discuss dates, custom campaign requirements, or custom integrations.</p>
-    <a class="btn p" id="contact-sponsor" href="mailto:contact@pulsebytes.github.io?subject=Pulsebyte%20Sponsorship%20Inquiry">
+    <p>Get in touch directly at <strong id="sp-email-text"><a href="mailto:zeddev@duck.com" style="color:var(--acc)">zeddev@duck.com</a></strong> to discuss available dates, rates, or custom developer campaign integrations.</p>
+    <a class="btn p" id="contact-sponsor" href="mailto:zeddev@duck.com?subject=Pulsebyte%20Sponsorship%20Inquiry">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-      Contact Sponsorship Team
+      Email Sponsorship Team (zeddev@duck.com)
     </a>
   </div>
 </main>
@@ -130,6 +130,15 @@ document.getElementById('theme-btn').onclick = function(){
   document.documentElement.dataset.theme = cur;
   try{ localStorage.setItem('pb-theme', cur); }catch(e){}
 };
+</script>
+<script src="config.js"></script>
+<script>
+const CFG = window.PULSEBYTE || {};
+const email = CFG.sponsor_email || CFG.sponsor?.email || "zeddev@duck.com";
+const btn = document.getElementById("contact-sponsor");
+if(btn){ btn.href = "mailto:" + email + "?subject=Pulsebyte%20Sponsorship%20Inquiry"; btn.innerHTML = btn.innerHTML.replace("zeddev@duck.com", email); }
+const txt = document.getElementById("sp-email-text");
+if(txt){ txt.innerHTML = "<a href=\"mailto:" + email + "\" style=\"color:var(--acc)\">" + email + "</a>"; }
 </script>
 </body>
 </html>
