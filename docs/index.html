@@ -363,6 +363,9 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:none}
 .art-body{padding:18px;display:flex;flex-direction:column;flex:1}
 
 /* Reader project showcase banner */
+.reader-project-avatar{
+  width:48px;height:48px;border-radius:10px;border:1px solid var(--line);flex-shrink:0;background:#0d1117;
+}
 .reader-project-banner{
   background:var(--bg2);border:1px solid var(--line);border-radius:var(--r-lg);
   padding:16px;margin:16px 0 24px;display:flex;gap:16px;align-items:center;
@@ -455,9 +458,9 @@ footer{
 #toast.on{opacity:1;transform:translate(-50%,0)}
 
 /* ══ VIEW SWITCHING ══ */
-#view-trending, #view-articles { display: none; }
-#view-trending.active { display: block; }
-#view-articles.active { display: block; }
+#view-trending { display: block; }
+#view-articles { display: none; }
+#view-article  { display: none; }
 </style>
 </head>
 <body>
@@ -645,29 +648,90 @@ const ago = t => {
 };
 const link = i => location.origin+location.pathname+"#p="+encodeURIComponent(i.id);
 
+function escXml(s){
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&apos;');
+}
+
 function getProjectImage(item){
-  if(item.src === 'GitHub'){
-    return `https://opengraph.githubassets.com/1/${encodeURIComponent(item.name)}`;
-  }
-  // Branded fallback
-  return `https://api.dicebear.com/8.x/shapes/svg?seed=${encodeURIComponent(item.name)}&backgroundColor=0f172a,1e1b4b,172554`;
+  const name = item?.name || 'Project';
+  const parts = name.split('/');
+  const org = parts[0] || '';
+  const repo = parts.slice(1).join('/') || org;
+  const lang = item?.lang || item?.src || '';
+  const stars = item?.score ? fmt(item.score) : '';
+
+  const PALETTES = [
+    { bg1: '#1e1b4b', bg2: '#0f172a', acc: '#818cf8', sub: '#a5b4fc', orb: '#6366f1' },
+    { bg1: '#064e3b', bg2: '#0f172a', acc: '#34d399', sub: '#6ee7b7', orb: '#10b981' },
+    { bg1: '#581c87', bg2: '#0f172a', acc: '#c084fc', sub: '#e9d5ff', orb: '#a855f7' },
+    { bg1: '#7c2d12', bg2: '#0f172a', acc: '#fb923c', sub: '#fed7aa', orb: '#f97316' },
+    { bg1: '#0c4a6e', bg2: '#0f172a', acc: '#38bdf8', sub: '#bae6fd', orb: '#0ea5e9' },
+    { bg1: '#312e81', bg2: '#18181b', acc: '#a78bfa', sub: '#ddd6fe', orb: '#8b5cf6' }
+  ];
+  let h = 0;
+  for(let i=0; i<name.length; i++) h = ((h * 31) + name.charCodeAt(i)) >>> 0;
+  const p = PALETTES[h % PALETTES.length];
+  const gid = 'g' + (h % 9999);
+  const pid = 'p' + (h % 9999);
+
+  const starBadge = stars ? `<g transform="translate(48,252)"><rect width="84" height="28" rx="6" fill="rgba(255,255,255,0.08)"/><text x="42" y="19" font-family="-apple-system,sans-serif" font-size="12" font-weight="700" fill="#f59e0b" text-anchor="middle">&#x2605; ${escXml(stars)}</text></g>` : '';
+  const langBadge = lang ? `<g transform="translate(${stars ? 140 : 48},252)"><rect width="90" height="28" rx="6" fill="rgba(255,255,255,0.08)"/><text x="45" y="19" font-family="-apple-system,sans-serif" font-size="12" font-weight="600" fill="#cbd5e1" text-anchor="middle">${escXml(lang)}</text></g>` : '';
+  const ownerText = org && repo !== org ? `<text x="48" y="210" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif" font-size="17" font-weight="500" fill="${p.sub}">${escXml(org)}</text>` : '';
+
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360">
+    <defs>
+      <linearGradient id="${gid}" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="${p.bg1}"/>
+        <stop offset="100%" stop-color="${p.bg2}"/>
+      </linearGradient>
+      <pattern id="${pid}" width="32" height="32" patternUnits="userSpaceOnUse">
+        <path d="M 32 0 L 0 0 0 32" fill="none" stroke="rgba(255,255,255,0.035)" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="640" height="360" fill="url(#${gid})"/>
+    <rect width="640" height="360" fill="url(#${pid})"/>
+    <circle cx="560" cy="50" r="150" fill="${p.orb}" opacity="0.14"/>
+    <circle cx="100" cy="330" r="110" fill="${p.orb}" opacity="0.08"/>
+    <g transform="translate(48,64)">
+      <rect width="44" height="44" rx="10" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+      <path d="M12 22h6l4-10 6 18 4-8h6" fill="none" stroke="${p.acc}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <text x="48" y="174" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif" font-size="30" font-weight="800" fill="#ffffff" letter-spacing="-0.5">${escXml(repo)}</text>
+    ${ownerText}
+    ${starBadge}
+    ${langBadge}
+  </svg>`;
+
+  return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
 }
 
 /* ══ NAVIGATION VIEW SWITCHER ══ */
 function switchView(v){
   S.view = v;
-  // Nav tabs only light up for trending / articles
-  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.toggle('active', t.id === 'tab-'+v));
-  $('#view-trending').style.display  = v==='trending'  ? '' : 'none';
-  $('#view-articles').style.display  = v==='articles'  ? '' : 'none';
-  $('#view-article').style.display   = v==='article'   ? '' : 'none';
-  // Restore initial state: trending uses .active class, others use display
-  if(v==='trending')  { $('#view-trending').style.display=''; }
-  if(v==='articles')  { $('#view-articles').style.display=''; }
+  // Nav tabs
+  document.querySelectorAll('.nav-tab').forEach(t => {
+    const isAct = (t.id === 'tab-' + v);
+    t.classList.toggle('active', isAct);
+    t.setAttribute('aria-selected', isAct ? 'true' : 'false');
+  });
+
+  const vTrending = document.getElementById('view-trending');
+  const vArticles = document.getElementById('view-articles');
+  const vArticle  = document.getElementById('view-article');
+  const hero      = document.querySelector('.hero');
+  const follow    = document.getElementById('follow-bar');
+
+  if(vTrending) vTrending.style.display = (v === 'trending') ? 'block' : 'none';
+  if(vArticles) vArticles.style.display = (v === 'articles') ? 'block' : 'none';
+  if(vArticle)  vArticle.style.display  = (v === 'article')  ? 'block' : 'none';
+
+  // Hero carousel and follow bar are displayed on trending & articles views, hidden when reading single article
+  if(hero)   hero.style.display   = (v === 'article') ? 'none' : 'block';
+  if(follow) follow.style.display = (v === 'article') ? 'none' : 'flex';
 }
 
 function goBackToArticles(){
-  history.pushState(null, '', location.pathname);
+  history.pushState(null, '', location.pathname + '#articles');
   switchView('articles');
   window.scrollTo({top:0,behavior:'smooth'});
 }
@@ -758,23 +822,33 @@ function renderArticles(){
     </div>`;
     return;
   }
-  grid.innerHTML = S.articles.map((a, idx) => `
-    <article class="article-card" onclick="openReader(${idx})">
-      <div class="art-meta">
-        <span class="art-badge">Article</span>
-        <span>${esc(a.read_time || '4 min read')}</span>
-        <span>&middot;</span>
-        <span>${ago(a.published_at || a.created_at)}</span>
-      </div>
-      <h3 class="art-title">${esc(a.title)}</h3>
-      <p class="art-tldr">${esc(a.tldr || '')}</p>
-      ${(a.tags||[]).length ? `<div class="art-tags">${a.tags.map(t=>`<span class="art-tag">#${esc(t)}</span>`).join('')}</div>` : ''}
-      <div class="art-footer">
-        <span>Read full article &rarr;</span>
-        <span>${esc(a.item?.name || '')}</span>
-      </div>
-    </article>
-  `).join('');
+  grid.innerHTML = S.articles.map((a, idx) => {
+    const item = a.item || {};
+    const imgUrl = getProjectImage(item);
+    return `
+      <article class="article-card" onclick="openReader(${idx})">
+        <div class="art-thumb-wrap">
+          <img class="art-thumb" src="${imgUrl}" alt="${esc(item.name || a.title)}" loading="lazy">
+          <span class="art-badge-src">${esc(item.src || 'Article')}</span>
+        </div>
+        <div class="art-body">
+          <div class="art-meta">
+            <span class="art-badge">Article</span>
+            <span>${esc(a.read_time || '4 min read')}</span>
+            <span>&middot;</span>
+            <span>${ago(a.published_at || a.created_at)}</span>
+          </div>
+          <h3 class="art-title">${esc(a.title)}</h3>
+          <p class="art-tldr">${esc(a.tldr || '')}</p>
+          ${(a.tags||[]).length ? `<div class="art-tags">${a.tags.map(t=>`<span class="art-tag">#${esc(t)}</span>`).join('')}</div>` : ''}
+          <div class="art-footer">
+            <span>Read full article &rarr;</span>
+            <span>${esc(item.name || '')}</span>
+          </div>
+        </div>
+      </article>
+    `;
+  }).join('');
 }
 
 function openReader(idx){
@@ -782,7 +856,12 @@ function openReader(idx){
   if(!a) return;
   const item = a.item || {};
   const imgUrl = getProjectImage(item);
+  const owner = (item.name || '').split('/')[0] || '';
+  const avatarUrl = (item.src === 'GitHub' && owner)
+    ? `https://github.com/${encodeURIComponent(owner)}.png?size=100`
+    : `https://api.dicebear.com/8.x/identicon/svg?seed=${encodeURIComponent(item.name || 'pb')}`;
 
+  $('#r-badge').textContent = 'Article';
   $('#r-title').textContent = a.title;
   $('#r-tldr').textContent = a.tldr || '';
   $('#r-time').textContent = a.read_time || '4 min read';
@@ -790,15 +869,16 @@ function openReader(idx){
   $('#r-url').href = item.url || '#';
   $('#r-url').textContent = 'Explore ' + (item.name || 'Project') + ' on ' + (item.src || 'GitHub') + ' →';
 
-  // Inject project showcase box with image at top of reader
+  // Inject project showcase box with vector image and owner avatar
   const projectBox = `
-    <img class="reader-hero-img" src="${imgUrl}" alt="${esc(item.name||'')}" onerror="this.style.display='none'">
+    <img class="reader-hero-img" src="${imgUrl}" alt="${esc(item.name||'')}" loading="eager">
     <div class="reader-project-banner">
+      <img class="reader-project-avatar" src="${avatarUrl}" alt="${esc(item.name||'')}" onerror="this.style.display='none'">
       <div class="rpb-details">
         <div class="rpb-title">
           <span>📦 Featured Project: <strong>${esc(item.name || '')}</strong></span>
-          <span class="chip" style="font-size:11px;padding:2px 8px">${esc(item.src || '')}</span>
-          <span style="color:var(--hot);font-weight:700;font-size:12px">⭐ ${fmt(item.score || 0)}</span>
+          <span class="chip" style="font-size:11px;padding:2px 8px">${esc(item.src || 'Open Source')}</span>
+          <span style="color:var(--hot);font-weight:700;font-size:12px">&#x2B50; ${fmt(item.score || 0)}</span>
           ${item.lang ? `<span style="font-size:11px;color:var(--ink3)">(${esc(item.lang)})</span>` : ''}
         </div>
         <div class="rpb-desc">${esc(item.desc || '')}</div>
@@ -810,7 +890,6 @@ function openReader(idx){
   `;
 
   $('#r-content').innerHTML = projectBox + (a.content || '');
-  // Store current article index for hash routing
   S.openArticle = idx;
   const slug = a.slug || a.id || String(idx);
   history.pushState({articleIdx:idx}, '', location.pathname + '#article=' + encodeURIComponent(slug));
@@ -989,6 +1068,11 @@ async function boot(){
     renderList();
     try{ localStorage.setItem('pb-feed', JSON.stringify(data)); }catch{}
   } catch(e){}
+
+  // Initial hash routing
+  if(location.hash === '#articles'){
+    switchView('articles');
+  }
 }
 boot();
 
