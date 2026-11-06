@@ -1,0 +1,56 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pulsebyte</title>
+<style>
+:root{--bg:#eef2f3;--panel:#fff;--ink:#14202b;--mute:#5b6b78;--line:#d5dde2;--accent:#0f766e;--on:#fff;--star:#b45309}
+@media(prefers-color-scheme:dark){:root{--bg:#0e161c;--panel:#16222b;--ink:#e8eef2;--mute:#97a8b5;--line:#283844;--accent:#2dd4bf;--on:#06201d;--star:#fbbf24}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "Segoe UI Variable","Segoe UI",system-ui,sans-serif}
+header{display:flex;gap:12px;align-items:center;padding:16px 24px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--bg);z-index:2}
+h1{font-size:20px;margin:0;flex:1;letter-spacing:-.01em}h2{font-size:16px;margin:0 0 12px}
+main{display:grid;grid-template-columns:minmax(300px,1fr) minmax(360px,1.5fr);gap:24px;padding:24px;max-width:1400px;margin:auto}
+@media(max-width:900px){main{grid-template-columns:1fr}}
+button{font:inherit;border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:6px 12px;border-radius:6px;cursor:pointer}
+button.p{background:var(--accent);color:var(--on);border-color:var(--accent);font-weight:600}
+button:disabled{opacity:.55;cursor:wait}button:focus-visible,textarea:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.item{display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.item>div{flex:1;min-width:0}.item b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.item small{color:var(--mute);display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.src{font-size:12px;padding:2px 8px;border:1px solid var(--line);border-radius:10px;color:var(--mute)}.sc{color:var(--star);font-weight:600}
+.draft{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:18px}
+.draft img{width:100%;max-width:420px;border-radius:8px;display:block;margin-bottom:12px}video{max-width:240px;border-radius:8px;display:block;margin:12px 0}
+textarea,input{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:8px}
+textarea{min-height:130px}label{display:block;margin:10px 0 4px;color:var(--mute);font-size:13px}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.empty{color:var(--mute)}
+</style></head><body>
+<header><h1>Pulsebyte</h1><span id="upd" class="empty"></span><button onclick="busy(this,autopost)">Autopost to channel</button><button class="p" onclick="busy(this,scan)">Scan now</button></header>
+<main><section><h2>Trending now</h2><div id="trend" class="empty">Loading...</div></section>
+<section><h2>Drafts</h2><div id="drafts" class="empty">Pick a project on the left and press Create post.</div></section></main>
+<script>
+const $=s=>document.querySelector(s),esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const api=async(p,m="GET",b)=>{const r=await fetch("/api/"+p,{method:m,headers:{"content-type":"application/json"},body:b?JSON.stringify(b):undefined});if(!r.ok)throw new Error(await r.text());return r.json()};
+async function busy(btn,fn){btn.disabled=true;const t=btn.textContent;btn.textContent="Working...";try{await fn()}catch(e){alert("Something went wrong: "+e.message)}btn.disabled=false;btn.textContent=t}
+function showT(t){$("#upd").textContent=t.updated_at?"Updated "+new Date(t.updated_at).toLocaleString():"";
+$("#trend").innerHTML=t.items.length?t.items.map(i=>`<div class=item><div><b>${esc(i.name)}</b><small>${esc(i.desc)}</small></div><span class=src>${esc(i.src)}</span><span class=sc>${i.score}</span><button onclick="busy(this,()=>gen('${esc(i.id)}'))">Create post</button></div>`).join(""):"No data yet. Press Scan now."}
+async function load(){showT(await api("trending"));drafts()}
+async function autopost(){await api("autopost","POST");alert("Started on GitHub. New posts reach your channel in a minute or two.")}
+async function scan(){showT(await api("scan","POST"))}
+async function gen(id){await api("generate","POST",{id});await drafts()}
+async function drafts(){const ds=await api("drafts");if(!ds.length)return;$("#drafts").innerHTML=ds.map(d=>`<div class=draft>
+<img src="/files/${d.card}?t=${Date.now()}" alt="Card">
+${d.video?`<video controls src="/files/${d.video}?t=${Date.now()}"></video>`:""}
+<label>Facebook post</label><textarea id="fb${d.id}">${esc(d.facebook)}</textarea>
+<label>YouTube title</label><input id="yt${d.id}" value="${esc(d.yt_title)}">
+<label>YouTube description</label><textarea id="yd${d.id}">${esc(d.yt_description)}</textarea>
+<div class=row><button class=p onclick="cp('fb${d.id}','https://www.facebook.com/')">Copy and open Facebook</button>
+<button class=p onclick="cp2(${d.id})">Copy and open YouTube upload</button></div>
+<div class=row><button onclick="busy(this,()=>vid('${d.id}'))">${d.video?"Remake":"Make"} Shorts video</button>
+<button onclick="busy(this,()=>api('folder/${d.id}','POST'))">Open folder</button>
+<button onclick="busy(this,()=>api('telegram/${d.id}','POST'))">Send to Telegram</button>
+<button onclick="busy(this,()=>api('channel/${d.id}','POST'))">Post to channel</button></div>
+<label>Rewrite with an instruction</label><div class=row style="margin-top:0"><input id="ed${d.id}" placeholder="Make it funnier, shorter, more technical..." style="flex:1">
+<button onclick="busy(this,()=>edit('${d.id}'))">Rewrite</button></div></div>`).join("")}
+const cp=(id,url)=>{navigator.clipboard.writeText($("#"+id).value);window.open(url,"_blank")};
+const cp2=id=>{navigator.clipboard.writeText($("#yt"+id).value+"\n\n"+$("#yd"+id).value);window.open("https://www.youtube.com/upload","_blank")};
+async function vid(id){await api("video/"+id,"POST");await drafts()}
+async function edit(id){await api("edit","POST",{id,text:$("#ed"+id).value});await drafts()}
+load().catch(e=>$("#trend").textContent="Could not reach the worker: "+e.message);
+</script></body></html>
