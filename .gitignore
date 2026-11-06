@@ -1,6 +1,13 @@
 .env
+.env.example
 .venv/
 local/
 __pycache__/
 *.pyc
-.env.example
+
+# Local app files (stay locally on your computer, never pushed to GitHub)
+app/
+run.cmd
+setup_github.py
+requirements.txt
+README.txt

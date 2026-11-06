@@ -55,7 +55,7 @@ def notify(text):
         except Exception: pass
 
 def gemini(prompt):
-    model = os.getenv("GEMINI_MODEL") or "gemini-2.5-flash"
+    model = os.getenv("GEMINI_MODEL") or "gemini-3.5-flash"
     for i in range(3):
         r = requests.post(f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent", timeout=90,
             headers={"x-goog-api-key": os.getenv("GEMINI_API_KEY", "")},
