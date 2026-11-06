@@ -162,3 +162,40 @@ def to_channel(did: str):
 def folder(did: str):
     if os.name == "nt": os.startfile(str(OUT / did))
     return {"ok": True}
+
+# ── Social media settings (read/write docs/config.js) ────────────────────────
+CFG_JS = ROOT / "docs" / "config.js"
+SOCIAL_KEYS = ["telegram","youtube","twitter","facebook","instagram","tiktok","github","channel"]
+
+def _load_cfg():
+    if not CFG_JS.exists(): return {}
+    try:
+        txt = CFG_JS.read_text("utf-8")
+        start = txt.find("{"); end = txt.rfind("}") + 1
+        return json.loads(txt[start:end])
+    except Exception: return {}
+
+def _save_cfg(cfg: dict):
+    CFG_JS.write_text("window.PULSEBYTE = " + json.dumps(cfg, indent=2) + ";\n", "utf-8")
+
+@app.get("/api/social")
+def get_social():
+    return _load_cfg()
+
+@app.post("/api/social")
+def set_social(b: dict = Body(...)):
+    cfg = _load_cfg()
+    for k in SOCIAL_KEYS:
+        if k in b:
+            cfg[k] = str(b[k]).strip()
+    _save_cfg(cfg)
+    pushed = False
+    if b.get("push"):
+        try:
+            subprocess.run(["git", "add", "docs/config.js"], cwd=ROOT, check=False)
+            subprocess.run(["git", "commit", "-m", "update social links [gui]"], cwd=ROOT, check=False)
+            r = subprocess.run(["git", "push"], cwd=ROOT, capture_output=True)
+            pushed = (r.returncode == 0)
+        except Exception:
+            pass
+    return {"ok": True, "saved": {k: cfg.get(k,"") for k in SOCIAL_KEYS}, "pushed": pushed}
