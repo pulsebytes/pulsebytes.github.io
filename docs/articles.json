@@ -1,5 +1,39 @@
 [
   {
+    "title": "From Sentence to Spec: How caru-ini/stack-diagram Renders Instant Architecture Diagrams for AI Agents",
+    "slug": "from-sentence-to-spec-caru-ini-stack-diagram",
+    "tldr": "caru-ini/stack-diagram is a TypeScript-powered agent skill that turns plain English stack descriptions into crisp architecture diagrams complete with official logos. Built for AI coding tools like Claude Code, Cursor, and Codex, it eliminates manual diagramming overhead in developer workflows.",
+    "read_time": "3 min read",
+    "tags": [
+      "TypeScript",
+      "Agent Skills",
+      "Claude Code",
+      "Architecture Diagrams",
+      "DevTools"
+    ],
+    "content": "<h3>1. The Problem: The High Cost of Manual Architecture Diagrams</h3><p>Creating clear architecture diagrams is an essential task that few engineers actually enjoy. Drafting layouts in tools like Figma or Excalidraw requires manually tracking down SVG logos, arranging components, and routing arrows. Worse still, these static diagrams quickly drift out of date as codebases and dependencies evolve.</p><p>As developer workflows shift toward AI assistants like Claude Code, Cursor, and Codex, developers need a streamlined way to auto-generate high-quality visuals directly inside their agent interactions without leaving the terminal or prompt interface.</p><h3>2. Architecture & Key Features: How caru-ini/stack-diagram Works</h3><p><strong>caru-ini/stack-diagram</strong> addresses this documentation bottleneck by functioning as a lightweight agent skill written in TypeScript. It allows AI agents to interpret natural language stack descriptions and output clean system architectures populated with official brand iconography.</p><p>Key features of the project include:</p><ul><li><strong>Cross-Agent Skill Support:</strong> Seamlessly integrates with Claude Code, Codex, Cursor, and any platform compliant with the standard agent skills specification (including <code>skills.sh</code>).</li><li><strong>Official Logo Rendering:</strong> Automatically matches identified technologies to their official logos across cloud platforms, SaaS products, and open-source packages.</li><li><strong>Dev Tooling & Cloud Support:</strong> Handles full-stack cloud infrastructure (such as Next.js, Hono, Neon, Clerk, and Stripe on Vercel) as well as developer tooling pipelines (including monorepo setups with <code>pnpm</code>, <code>Turborepo</code>, <code>Biome</code>, <code>Vitest</code>, and <code>Lefthook</code>).</li></ul><h3>3. Quick Start & Practical Use Case</h3><p>Adding the skill to your agent setup requires just a single command using the skills CLI:</p><p><code>npx skills add caru-ini/stack-diagram</code></p><p>If you are using desktop or web Claude apps, you can download <code>stack-diagram.zip</code> directly from the latest release artifacts and upload it as a custom skill.</p><p>Once installed, simply prompt your agent in plain English:</p><blockquote>\"Diagram our stack: Next.js and a Hono API on Vercel. Postgres on Neon, auth with Clerk, payments with Stripe. GitHub Actions deploys.\"</blockquote><p>The skill processes the text prompt and outputs an accurate, ready-to-share diagram complete with directional data paths and accurate official icons.</p><h3>4. Why It Matters: Modular Capabilities for AI Workflows</h3><p>Amassing over <strong>1,900 points</strong> on GitHub, <code>caru-ini/stack-diagram</code> demonstrates the growing ecosystem of standardized tools designed specifically for autonomous AI agents. Rather than relying on generic text formatting, specialized agent skills allow coding assistants to produce rich visual artifacts on demand.</p><p>As software design becomes more declarative and AI-driven, modular skills like this bridge the gap between simple conversational interfaces and production-grade technical documentation.</p><p>To explore the source code or install the skill for your agent, visit <a href=\"https://github.com/caru-ini/stack-diagram\">https://github.com/caru-ini/stack-diagram</a>.</p>",
+    "id": "gh:1441517767",
+    "created_at": 1793973054471,
+    "item": {
+      "id": "gh:1441517767",
+      "src": "GitHub",
+      "name": "caru-ini/stack-diagram",
+      "desc": "Agent skill: describe your stack in a sentence, get an architecture diagram with official logos",
+      "url": "https://github.com/caru-ini/stack-diagram",
+      "score": 1900,
+      "lang": "TypeScript",
+      "topics": [
+        "agent-skills",
+        "architecture-diagram",
+        "claude-code",
+        "claude-skills",
+        "codex"
+      ],
+      "created": "2026-11-01T05:35:12Z"
+    },
+    "published_at": 1793973069605
+  },
+  {
     "title": "Programmatic Animation Over GenAI: Inside mromidev/claude-animated-shorts",
     "slug": "claude-animated-shorts-threejs-remotion",
     "tldr": "mromidev/claude-animated-shorts is a free Claude skill that builds viral 2D-in-3D vertical story shorts using Three.js and Remotion on your local PC without relying on AI video generators. By pairing agentic Claude workflows with deterministic code rendering and reference benchmarks, it produces high-quality, repeatable animations.",
