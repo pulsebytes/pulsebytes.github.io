@@ -1,5 +1,33 @@
 [
   {
+    "title": "Turnstone: The Open-Source, Self-Hosted Alternative to Grok Bot",
+    "slug": "turnstone-open-source-grok-bot-alternative",
+    "tldr": "Turnstone brings a completely free alternative to proprietary bots like Grok by allowing you to run interactive AI on your own backend. It eliminates subscription costs and vendor lock-in while giving developers full control over data privacy.",
+    "read_time": "3 min read",
+    "tags": [
+      "AI",
+      "Open Source",
+      "Self-Hosted",
+      "LLM",
+      "Developer Tools"
+    ],
+    "content": "<h3>The Problem: The Lock-In of Proprietary AI Bots</h3><p>Popular AI interactive bots like Grok provide engaging user experiences, but they come with significant drawbacks: mandatory subscription fees, closed ecosystems, and privacy concerns regarding user data. Developers and power users seeking an interactive bot experience are often trapped in proprietary environments without the ability to inspect the underlying system, choose their own LLM providers, or guarantee that sensitive prompts remain private.</p><h3>Architecture & Key Features: Decoupled AI Execution</h3><p><strong>Turnstone</strong> addresses these friction points by delivering a free, open alternative that operates directly on top of your own AI infrastructure. Key technical highlights include:</p><ul><li><strong>Bring Your Own AI (BYO-AI):</strong> Turnstone decouples the user interface and bot orchestration from the model layer. You can connect it to local model runtimes (such as Ollama or LocalAI) or cloud providers via standard API endpoints.</li><li><strong>Zero SaaS Fees:</strong> Because Turnstone relies on your own API keys or local models, there are no recurring subscription charges to use the bot interface.</li><li><strong>Privacy & Data Ownership:</strong> By running the platform locally or on self-hosted infrastructure, prompt logs and conversations remain entirely within your private network.</li></ul><h3>Quick Start & Practical Use Case: Running Turnstone Privately</h3><p>Setting up Turnstone requires pointing the engine to your preferred AI model endpoint. A standard deployment pattern involves running a local server alongside your LLM backend:</p><blockquote><p><code># Example conceptual workflow for launching Turnstone<br>git clone https://github.com/turnstone/turnstone<br>cd turnstone<br>export AI_ENDPOINT=\"http://localhost:11434\" # Point to local Ollama instance<br>npm install && npm start</code></p></blockquote><p>Once connected, developers can interact with their custom AI setups through a refined bot interface, whether for coding assistance, internal document querying, or personal automation without sending telemetry to third-party services.</p><h3>Why It Matters: The Push Toward User-Owned Infrastructure</h3><p>With a ProductHunt launch score of 98, Turnstone reflects a growing industry trend: developers want the polished UX of commercial AI tools combined with the data sovereignty of open-source software. By giving creators full ownership of the AI execution pipeline, Turnstone highlights a future where powerful conversational agents belong to the user, not the provider.</p>",
+    "id": "ph:1227308",
+    "created_at": 1793969732779,
+    "item": {
+      "id": "ph:1227308",
+      "src": "ProductHunt",
+      "name": "Turnstone",
+      "desc": "Grok Bot alternative that runs on your AI, completely free",
+      "url": "https://www.producthunt.com/products/turnstone?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+pulsebyte+%28ID%3A+318804%29",
+      "score": 98,
+      "lang": "",
+      "topics": [],
+      "created": "2026-11-06T08:01:00Z"
+    },
+    "published_at": 1793969747599
+  },
+  {
     "title": "Inside DeepSeek SuperAgent: Minimal Attention, Maximum Autonomous Value",
     "slug": "inside-deepseek-superagent-autonomous-agent",
     "tldr": "DeepSeek's dsh-superagent prototype presents a TypeScript-based coding agent that handles GitHub tasks autonomously while respecting team bandwidth. Operating under a minimal-attention philosophy, it manages isolated work sessions and alerts developers only when human judgment is strictly required.",
