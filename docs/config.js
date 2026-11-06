@@ -10,7 +10,8 @@ window.PULSEBYTE = {
   "instagram": "",
   "tiktok": "",
   "sponsor": {
-    "enabled": true,
+    "enabled": false,
+    "email": "zeddev@duck.com",
     "badge": "Featured Partner",
     "title": "Deploy Full-Stack Apps in Seconds",
     "desc": "Instant databases, Docker previews, and automatic scaling for modern developers.",
