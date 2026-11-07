@@ -10,18 +10,43 @@ window.PULSEBYTE = {
   "instagram": "",
   "tiktok": "",
   "sponsor": {
+    "id": "sp_default",
     "enabled": true,
     "email": "zeddev@duck.com",
     "badge": "Featured Partner",
     "title": "Deploy Full-Stack Apps in Seconds",
     "desc": "Instant databases, Docker previews, and automatic scaling for modern developers.",
-    "cta": "Learn More \u2192",
+    "cta": "Learn More →",
     "url": "https://pulsebytes.github.io/sponsor.html",
     "slots": {
       "home_top": true,
+      "feed_native": true,
       "article_top": true,
-      "article_bottom": true
+      "article_mid": true,
+      "article_bottom": true,
+      "sidebar": true
     },
     "custom_code": ""
-  }
+  },
+  "sponsors": [
+    {
+      "id": "sp_default",
+      "enabled": true,
+      "email": "zeddev@duck.com",
+      "badge": "Featured Partner",
+      "title": "Deploy Full-Stack Apps in Seconds",
+      "desc": "Instant databases, Docker previews, and automatic scaling for modern developers.",
+      "cta": "Learn More →",
+      "url": "https://pulsebytes.github.io/sponsor.html",
+      "slots": {
+        "home_top": true,
+        "feed_native": true,
+        "article_top": true,
+        "article_mid": true,
+        "article_bottom": true,
+        "sidebar": true
+      },
+      "custom_code": ""
+    }
+  ]
 };
