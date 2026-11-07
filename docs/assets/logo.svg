@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="45%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+  <!-- Background Shield -->
+  <rect x="32" y="32" width="448" height="448" rx="112" fill="url(#bg)" filter="url(#shadow)"/>
+  <rect x="32" y="32" width="448" height="448" rx="112" fill="url(#glow)"/>
+  
+  <!-- Subtle border highlight -->
+  <rect x="33" y="33" width="446" height="446" rx="112" fill="none" stroke="#ffffff" stroke-opacity="0.2" stroke-width="2"/>
+  
+  <!-- Signature Pulse Wave -->
+  <path d="M 96,256 L 160,256 L 192,296 L 232,128 L 280,368 L 320,216 L 352,256 L 416,256"
+        fill="none"
+        stroke="#ffffff"
+        stroke-width="32"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+</svg>

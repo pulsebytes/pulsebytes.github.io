@@ -90,6 +90,12 @@ def pick(items, posted, n):
     return out
 
 def main(post=False):
+    try:
+        from . import publish_scheduled
+        publish_scheduled.check_and_publish()
+    except Exception as e:
+        print(f"Scheduled check notice: {e}")
+
     items = collect()
     if not items: print("Nothing fetched, keeping the old feed"); return
     posted = jload(STATE, {"posted": {}}).get("posted", {}); done = []
