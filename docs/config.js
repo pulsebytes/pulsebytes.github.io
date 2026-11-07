@@ -11,8 +11,7 @@ window.PULSEBYTE = {
   "tiktok": "",
   "sponsor": {
     "id": "sp_default",
-    "enabled": true,
-    "email": "zeddev@duck.com",
+    "enabled": false,
     "badge": "Featured Partner",
     "title": "Deploy Full-Stack Apps in Seconds",
     "desc": "Instant databases, Docker previews, and automatic scaling for modern developers.",
@@ -31,8 +30,7 @@ window.PULSEBYTE = {
   "sponsors": [
     {
       "id": "sp_default",
-      "enabled": true,
-      "email": "zeddev@duck.com",
+      "enabled": false,
       "badge": "Featured Partner",
       "title": "Deploy Full-Stack Apps in Seconds",
       "desc": "Instant databases, Docker previews, and automatic scaling for modern developers.",
