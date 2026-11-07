@@ -1,5 +1,38 @@
 [
   {
+    "title": "Beyond Babysitting: Why Agent Autoloop is the Missing Link for CLI Agents",
+    "slug": "agent-autoloop-autonomous-cli-orchestration",
+    "tldr": "Agent Autoloop transforms high-maintenance CLI agents into efficient background workers that only interrupt you for critical decisions. By decoupling execution from the terminal, it allows tools like Claude Code and Codex to run autonomously without constant supervision.",
+    "read_time": "5 min read",
+    "tags": [
+      "AI Agents",
+      "Automation",
+      "DevOps",
+      "TypeScript"
+    ],
+    "content": "<h3>1. The Problem: The 'Babysitting' Bottleneck</h3><p>Current-gen CLI agents like <strong>Claude Code</strong> and <strong>Codex</strong> are incredibly powerful, but they suffer from a fundamental usability flaw: they are synchronous and high-maintenance. To get anything done, a developer must keep the terminal window open, watch the output line-by-line, and wait to provide input. If you close your laptop or switch tasks, the process often dies or stalls. This 'babysitting' requirement negates the productivity gains of using an autonomous agent in the first place.</p><blockquote>The industry has moved from manual coding to assisted coding, but we are still stuck in a paradigm where the human is the bottleneck for the agent's persistence.</blockquote><h3>2. Architecture & Key Features: Orchestration Without the Overhead</h3><p><strong>KKKKhazix/agent-autoloop</strong> solves this by acting as a lightweight, zero-dependency automation hub. Instead of forcing you to stay in the terminal, it moves the agent's execution to the background and manages the lifecycle of the task.</p><ul><li><strong>Pluggable Kernel:</strong> The core handles task scheduling and event routing, while event sources, agents, and notification channels are treated as swappable plugins.</li><li><strong>Human-in-the-Loop (HITL) Cards:</strong> When the agent hits a critical junction—like deleting data or incurring costs—it sends a structured 'decision card' to <strong>Lark (Feishu), Slack, Discord, or DingTalk</strong>.</li><li><strong>Stateless Waiting:</strong> While waiting for your approval, the agent process exits. It consumes <strong>zero tokens</strong> and zero CPU cycles until you provide the go-ahead.</li><li><strong>Local-First:</strong> It runs on your local Windows, Mac, or Linux machine. There’s no need for a cloud server or public IP exposure, keeping your codebase secure.</li></ul><h3>3. Quick Start & Practical Use Case</h3><p>Getting started with <code>agent-autoloop</code> is designed to be as frictionless as the agents it manages. You can install it via a single command string:</p><p>For macOS/Linux:</p><code>curl -fsSL https://raw.githubusercontent.com/KKKKhazix/agent-autoloop/main/install.sh | sh</code><p>For Windows PowerShell:</p><code>irm https://raw.githubusercontent.com/KKKKhazix/agent-autoloop/main/install.ps1 | iex</code><p>Once installed, you can trigger a trial run using <code>agent-autoloop try</code>. The workflow follows a clean cycle: <strong>Event Ingest → Rule Matching → Agent Execution → Background Exit/Wait → Notification → Human Approval → Resume</strong>. For example, you can set a rule that triggers a code audit every time a new GitHub Issue is labeled 'bug'. The agent works in the background and only pings your phone when it has a proposed fix ready for your 'LGTM'.</p><h3>4. Why It Matters: The Future of Autonomous Workflows</h3><p>With a GitHub score of <strong>3764</strong>, the developer community is clearly signaling a need for better agent orchestration. <strong>KKKKhazix/agent-autoloop</strong> represents a shift from agents as 'chatbots' to agents as 'background services.' By decoupling the agent's logic from the user's active session, it allows for truly asynchronous development workflows.</p><p>As AI agents become more integrated into our CI/CD pipelines and daily coding tasks, tools that minimize 'interruption fatigue' while maintaining human oversight will become the gold standard. <strong>Agent Autoloop</strong> is currently leading that charge for the CLI ecosystem.</p><p>Explore the project and contribute at: <a href=\"https://github.com/KKKKhazix/agent-autoloop\">https://github.com/KKKKhazix/agent-autoloop</a></p>",
+    "id": "gh:1443985070",
+    "created_at": 1794033360362,
+    "item": {
+      "id": "gh:1443985070",
+      "src": "GitHub",
+      "name": "KKKKhazix/agent-autoloop",
+      "desc": "让你的命令行 Agent 在后台自己接活、自己跟进到底；平时不烦你，遇到拿不准的事才发卡片找你拍板。",
+      "url": "https://github.com/KKKKhazix/agent-autoloop",
+      "score": 3764,
+      "lang": "TypeScript",
+      "topics": [
+        "ai-agents",
+        "automation",
+        "claude-code",
+        "cli",
+        "codex"
+      ],
+      "created": "2026-11-03T08:02:11Z"
+    },
+    "published_at": 1794033438175
+  },
+  {
     "title": "From Sentence to Spec: How caru-ini/stack-diagram Renders Instant Architecture Diagrams for AI Agents",
     "slug": "from-sentence-to-spec-caru-ini-stack-diagram",
     "tldr": "caru-ini/stack-diagram is a TypeScript-powered agent skill that turns plain English stack descriptions into crisp architecture diagrams complete with official logos. Built for AI coding tools like Claude Code, Cursor, and Codex, it eliminates manual diagramming overhead in developer workflows.",
