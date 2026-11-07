@@ -11,7 +11,7 @@ window.PULSEBYTE = {
   "tiktok": "",
   "sponsor": {
     "id": "sp_default",
-    "enabled": true,
+    "enabled": false,
     "email": "zeddev@duck.com",
     "badge": "Featured Partner",
     "title": "Deploy Full-Stack Apps in Seconds",
@@ -31,7 +31,7 @@ window.PULSEBYTE = {
   "sponsors": [
     {
       "id": "sp_default",
-      "enabled": true,
+      "enabled": false,
       "email": "zeddev@duck.com",
       "badge": "Featured Partner",
       "title": "Deploy Full-Stack Apps in Seconds",
