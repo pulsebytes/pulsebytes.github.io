@@ -27,6 +27,49 @@ def producthunt(token):
         return [x["node"] for x in r.json()["data"]["posts"]["edges"]]
     except Exception: return []
 
+def hackernews():
+    try:
+        r = requests.get("https://hn.algolia.com/api/v1/search_by_date", params={"tags": "show_hn", "hitsPerPage": 12}, headers=UA, timeout=15)
+        if not r.ok: return []
+        out = []
+        for h in r.json().get("hits", []):
+            title = (h.get("title") or "").replace("Show HN: ", "").replace("Show HN - ", "").strip()
+            if not title: continue
+            oid = h.get("objectID")
+            url = h.get("url") or f"https://news.ycombinator.com/item?id={oid}"
+            score = int(h.get("points") or 0)
+            author = h.get("author") or "hn"
+            out.append(dict(id=f"hn:{oid}", src="HackerNews", name=title[:80], desc=(h.get("story_text") or title)[:220], url=url, score=score, lang="Show HN", topics=["show-hn", "launch", author], created=h.get("created_at")))
+        return out
+    except Exception as e:
+        print(f"HN scan notice: {e}"); return []
+
+def devto():
+    try:
+        r = requests.get("https://dev.to/api/articles", params={"tag": "opensource", "per_page": 10}, headers=UA, timeout=15)
+        if not r.ok: return []
+        out = []
+        for it in r.json():
+            out.append(dict(id=f"dev:{it['id']}", src="Dev.to", name=it.get("title", "")[:80], desc=(it.get("description") or it.get("title") or "")[:220], url=it.get("url", ""), score=int(it.get("positive_reactions_count") or it.get("comments_count") or 0), lang="Article", topics=(it.get("tag_list") or ["opensource"])[:5], created=it.get("published_at")))
+        return out
+    except Exception as e:
+        print(f"Dev.to scan notice: {e}"); return []
+
+def npm():
+    try:
+        r = requests.get("https://registry.npmjs.org/-/v1/search", params={"text": "boost-exact:false", "popularity": "1.0", "quality": "0.8", "size": 8}, headers=UA, timeout=15)
+        if not r.ok: return []
+        out = []
+        for it in r.json().get("objects", []):
+            pkg = it.get("package", {})
+            score = int((it.get("score", {}).get("detail", {}).get("popularity", 0)) * 1000)
+            links = pkg.get("links", {})
+            url = links.get("repository") or links.get("npm") or f"https://www.npmjs.com/package/{pkg.get('name')}"
+            out.append(dict(id=f"npm:{pkg.get('name')}", src="npm", name=pkg.get("name"), desc=pkg.get("description") or "", url=url, score=score, lang="JavaScript", topics=pkg.get("keywords", [])[:5], created=pkg.get("date")))
+        return out
+    except Exception as e:
+        print(f"npm scan notice: {e}"); return []
+
 def collect():
     tok = os.getenv("GITHUB_TOKEN"); gh = {"Authorization": "Bearer " + tok} if tok else {}
     a = get("https://api.github.com/search/repositories", {"q": f"created:>{iso(7)}", "sort": "stars", "order": "desc", "per_page": 10}, gh) or {}
@@ -34,17 +77,45 @@ def collect():
     c = get("https://codeberg.org/api/v1/repos/search", {"sort": "stars", "order": "desc", "limit": 50}) or {}
     d = get("https://huggingface.co/api/models", {"sort": "trendingScore", "limit": 8}) or get("https://huggingface.co/api/models", {"sort": "likes7d", "limit": 8}) or []
     items = []
+    seen_ids = set()
+
     for r in a.get("items", []):
-        items.append(dict(id=f"gh:{r['id']}", src="GitHub", name=r["full_name"], desc=r.get("description") or "", url=r["html_url"], score=r["stargazers_count"], lang=r.get("language") or "", topics=(r.get("topics") or [])[:5], created=r.get("created_at")))
+        iid = f"gh:{r['id']}"
+        seen_ids.add(iid)
+        items.append(dict(id=iid, src="GitHub", name=r["full_name"], desc=r.get("description") or "", url=r["html_url"], score=r["stargazers_count"], lang=r.get("language") or "", topics=(r.get("topics") or [])[:5], created=r.get("created_at")))
     for r in (b if isinstance(b, list) else []):
         if (r.get("created_at") or "") > iso(30):
-            items.append(dict(id=f"gl:{r['id']}", src="GitLab", name=r["path_with_namespace"], desc=r.get("description") or "", url=r["web_url"], score=r.get("star_count", 0), lang="", topics=(r.get("topics") or [])[:5], created=r.get("created_at")))
+            iid = f"gl:{r['id']}"
+            if iid not in seen_ids:
+                seen_ids.add(iid)
+                items.append(dict(id=iid, src="GitLab", name=r["path_with_namespace"], desc=r.get("description") or "", url=r["web_url"], score=r.get("star_count", 0), lang="", topics=(r.get("topics") or [])[:5], created=r.get("created_at")))
     for r in [x for x in (c.get("data") or []) if (x.get("created_at") or "") > iso(60)][:8]:
-        items.append(dict(id=f"cb:{r['id']}", src="Codeberg", name=r["full_name"], desc=r.get("description") or "", url=r["html_url"], score=r.get("stars_count", 0), lang=r.get("language") or "", topics=[], created=r.get("created_at")))
+        iid = f"cb:{r['id']}"
+        if iid not in seen_ids:
+            seen_ids.add(iid)
+            items.append(dict(id=iid, src="Codeberg", name=r["full_name"], desc=r.get("description") or "", url=r["html_url"], score=r.get("stars_count", 0), lang=r.get("language") or "", topics=[], created=r.get("created_at")))
     for r in (d if isinstance(d, list) else []):
-        items.append(dict(id=f"hf:{r['id']}", src="HuggingFace", name=r["id"], desc=r.get("pipeline_tag") or "model", url="https://huggingface.co/" + r["id"], score=r.get("likes", 0), lang="", topics=(r.get("tags") or [])[:5], created=r.get("createdAt")))
+        iid = f"hf:{r['id']}"
+        if iid not in seen_ids:
+            seen_ids.add(iid)
+            items.append(dict(id=iid, src="HuggingFace", name=r["id"], desc=r.get("pipeline_tag") or "model", url="https://huggingface.co/" + r["id"], score=r.get("likes", 0), lang="", topics=(r.get("tags") or [])[:5], created=r.get("createdAt")))
+    for r in hackernews():
+        if r["id"] not in seen_ids:
+            seen_ids.add(r["id"])
+            items.append(r)
+    for r in devto():
+        if r["id"] not in seen_ids:
+            seen_ids.add(r["id"])
+            items.append(r)
+    for r in npm():
+        if r["id"] not in seen_ids:
+            seen_ids.add(r["id"])
+            items.append(r)
     for r in producthunt(os.getenv("PRODUCTHUNT_TOKEN")):
-        items.append(dict(id=f"ph:{r['id']}", src="ProductHunt", name=r["name"], desc=r.get("tagline") or "", url=r["url"], score=r.get("votesCount", 0), lang="", topics=[], created=r.get("createdAt")))
+        iid = f"ph:{r['id']}"
+        if iid not in seen_ids:
+            seen_ids.add(iid)
+            items.append(dict(id=iid, src="ProductHunt", name=r["name"], desc=r.get("tagline") or "", url=r["url"], score=r.get("votesCount", 0), lang="", topics=[], created=r.get("createdAt")))
     return items
 
 def tg(method, body):
@@ -91,10 +162,22 @@ def pick(items, posted, n):
 
 def main(post=False):
     try:
-        from . import publish_scheduled
+        try:
+            from . import publish_scheduled
+        except (ImportError, ValueError):
+            import publish_scheduled
         publish_scheduled.check_and_publish()
     except Exception as e:
         print(f"Scheduled check notice: {e}")
+
+    try:
+        try:
+            from . import generate_feed
+        except (ImportError, ValueError):
+            import generate_feed
+        generate_feed.build_all()
+    except Exception as e:
+        print(f"Feed rebuild notice: {e}")
 
     items = collect()
     if not items: print("Nothing fetched, keeping the old feed"); return

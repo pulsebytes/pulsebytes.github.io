@@ -32,6 +32,9 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="alternate" type="application/rss+xml" title="Pulsebyte &middot; RSS Feed" href="https://pulsebytes.github.io/feed.xml">
+<link rel="alternate" type="application/rss+xml" title="Pulsebyte &middot; RSS Feed (rss.xml)" href="https://pulsebytes.github.io/rss.xml">
+<link rel="alternate" type="application/atom+xml" title="Pulsebyte &middot; Atom Feed" href="https://pulsebytes.github.io/atom.xml">
 <meta property="og:image" content="https://pulsebytes.github.io/assets/og-image.png">
 <meta name="twitter:image" content="https://pulsebytes.github.io/assets/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -761,6 +764,8 @@ footer{
   <div class="footer-links" style="display:flex;justify-content:center;gap:18px;flex-wrap:wrap;padding:16px 20px 8px;border-top:1px solid var(--line);font-size:13px;margin-bottom:8px">
     <a href="./" style="color:var(--ink2)">Home</a>
     <span style="color:var(--ink3)">&middot;</span>
+    <a href="feed.xml" target="_blank" style="color:var(--ink2)">RSS Feed</a>
+    <span style="color:var(--ink3)">&middot;</span>
     <a href="privacy.html" style="color:var(--ink2)">Privacy Policy</a>
     <span style="color:var(--ink3)">&middot;</span>
     <a href="terms.html" style="color:var(--ink2)">Terms of Service</a>
@@ -786,7 +791,10 @@ const SRC = {
   GitLab:      ["#fc6d26","stars"],
   Codeberg:    ["#2185d0","stars"],
   HuggingFace: ["#f5b400","likes"],
-  ProductHunt: ["#da552f","votes"]
+  ProductHunt: ["#da552f","votes"],
+  HackerNews:  ["#ff6600","points"],
+  "Dev.to":    ["#3b49df","reactions"],
+  npm:         ["#cb3837","score"]
 };
 
 let S = {items:[], articles:[], at:0, q:"", src:new Set(), sort:"top", open:"", view:"trending"};
