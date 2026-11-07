@@ -6,7 +6,7 @@ window.PULSEBYTE = {
   "telegram": "",
   "youtube": "",
   "twitter": "",
-  "facebook": "https://web.facebook.com/z3dd3v/",
+  "facebook": "https://web.facebook.com/pulsebytetech",
   "instagram": "",
   "tiktok": "",
   "sponsor": {

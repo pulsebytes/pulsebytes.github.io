@@ -268,7 +268,76 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:none}
 [data-theme=dark] .fb-twitter{background:#ffffff;color:#000}
 
 /* ══ MAIN LAYOUT ══ */
-.main-wrap{max-width:1160px;margin:0 auto;padding:24px 20px 48px}
+.main-wrap{max-width:1280px;margin:0 auto;padding:24px 20px 48px}
+.site-layout{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:28px;
+  align-items:start;
+}
+@media(min-width:1024px){
+  .site-layout{
+    grid-template-columns:minmax(0, 1fr) 330px;
+  }
+}
+.site-main{min-width:0}
+.site-sidebar{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+@media(min-width:1024px){
+  .site-sidebar{
+    position:sticky;
+    top:80px;
+  }
+}
+.sidebar-card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:var(--r);
+  padding:16px 18px;
+  box-shadow:var(--sh-sm);
+}
+.sidebar-title{
+  font-family:"Bricolage Grotesque",sans-serif;
+  font-size:12.5px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  color:var(--ink2);
+  margin-bottom:12px;
+  display:flex;align-items:center;gap:6px;
+}
+.topic-tag{
+  display:inline-block;
+  background:var(--bg2);
+  border:1px solid var(--line);
+  color:var(--ink2);
+  padding:3px 9px;
+  border-radius:var(--r-sm);
+  font-size:12px;
+  font-weight:600;
+  cursor:pointer;
+  transition:all .15s;
+  user-select:none;
+}
+.topic-tag:hover{
+  border-color:var(--acc);
+  color:var(--acc);
+  background:var(--acc-soft);
+}
+.sidebar-art-item{
+  display:block;
+  text-decoration:none;
+  padding:8px 0;
+  border-bottom:1px solid var(--line);
+  transition:all .15s;
+}
+.sidebar-art-item:last-child{border-bottom:none;padding-bottom:0}
+.sidebar-art-item:hover .sidebar-art-title{color:var(--acc)}
+.sidebar-art-title{font-size:13px;font-weight:700;color:var(--ink);line-height:1.35;margin-bottom:3px}
+.sidebar-art-meta{font-size:11.5px;color:var(--ink3)}
 
 /* ══ SEARCH & FILTER BAR ══ */
 .toolbar{
@@ -544,47 +613,105 @@ footer{
 
 <!-- ══ MAIN WRAP ══ -->
 <div class="main-wrap">
+  <div class="site-layout">
+    <div class="site-main">
+      <!-- ── VIEW 1: TRENDING PROJECTS ── -->
+      <section id="view-trending" class="trending-view active" aria-label="Trending feed">
+        <div class="toolbar">
+          <div class="search">
+            <span class="search-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            </span>
+            <input id="q" type="search" placeholder="Search by name, language, keyword…" autocomplete="off" spellcheck="false" aria-label="Search">
+            <span class="search-kbd" aria-hidden="true">/</span>
+          </div>
+          <div class="chips" id="chips" role="group" aria-label="Filter sources"></div>
+          <div class="sort-seg" role="group" aria-label="Sort">
+            <button data-s="top" aria-pressed="true">Top</button>
+            <button data-s="new" aria-pressed="false">Newest</button>
+          </div>
+        </div>
 
-  <!-- ── VIEW 1: TRENDING PROJECTS ── -->
-  <section id="view-trending" class="trending-view active" aria-label="Trending feed">
-    <div class="toolbar">
-      <div class="search">
-        <span class="search-icon" aria-hidden="true">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-        </span>
-        <input id="q" type="search" placeholder="Search by name, language, keyword…" autocomplete="off" spellcheck="false" aria-label="Search">
-        <span class="search-kbd" aria-hidden="true">/</span>
-      </div>
-      <div class="chips" id="chips" role="group" aria-label="Filter sources"></div>
-      <div class="sort-seg" role="group" aria-label="Sort">
-        <button data-s="top" aria-pressed="true">Top</button>
-        <button data-s="new" aria-pressed="false">Newest</button>
-      </div>
+        <div style="font-size:13px;color:var(--ink3);margin-bottom:12px" id="meta" aria-live="polite"></div>
+
+        <div id="home-sponsor-slot"></div>
+        <main id="list" aria-label="Projects list">
+          <div class="skel"><div class="skel-b" style="width:36px;height:36px;border-radius:50%"></div><div style="flex:1"><div class="skel-b" style="height:16px;width:45%;margin-bottom:6px"></div><div class="skel-b" style="height:12px;width:75%"></div></div></div>
+          <div class="skel"><div class="skel-b" style="width:36px;height:36px;border-radius:50%"></div><div style="flex:1"><div class="skel-b" style="height:16px;width:40%;margin-bottom:6px"></div><div class="skel-b" style="height:12px;width:65%"></div></div></div>
+          <div class="skel"><div class="skel-b" style="width:36px;height:36px;border-radius:50%"></div><div style="flex:1"><div class="skel-b" style="height:16px;width:55%;margin-bottom:6px"></div><div class="skel-b" style="height:12px;width:80%"></div></div></div>
+        </main>
+      </section>
+
+      <!-- ── VIEW 2: ARTICLES ── -->
+      <section id="view-articles" class="articles-view" aria-label="Articles section">
+        <div style="margin-bottom:20px;display:flex;align-items:center;justify-content:space-between">
+          <div>
+            <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.4rem;font-weight:800;letter-spacing:-.02em">Technical Articles</h2>
+            <p style="font-size:14px;color:var(--ink2)">Comprehensive breakdowns of breakthrough trending projects, generated and published from Pulsebyte.</p>
+          </div>
+        </div>
+        <div class="articles-grid" id="articles-grid">
+          <div class="state"><h3>No articles published yet</h3><p>Generate articles inside the Pulsebyte app to publish them here.</p></div>
+        </div>
+      </section>
     </div>
 
-    <div style="font-size:13px;color:var(--ink3);margin-bottom:12px" id="meta" aria-live="polite"></div>
+    <!-- ── RESPONSIVE SIDEBAR ── -->
+    <aside class="site-sidebar" id="site-sidebar" aria-label="Sidebar navigation & sponsors">
+      <!-- 1. Sponsor / Partner Slot -->
+      <div id="sidebar-sponsor-slot"></div>
 
-    <div id="home-sponsor-slot"></div>
-    <main id="list" aria-label="Projects list">
-      <div class="skel"><div class="skel-b" style="width:36px;height:36px;border-radius:50%"></div><div style="flex:1"><div class="skel-b" style="height:16px;width:45%;margin-bottom:6px"></div><div class="skel-b" style="height:12px;width:75%"></div></div></div>
-      <div class="skel"><div class="skel-b" style="width:36px;height:36px;border-radius:50%"></div><div style="flex:1"><div class="skel-b" style="height:16px;width:40%;margin-bottom:6px"></div><div class="skel-b" style="height:12px;width:65%"></div></div></div>
-      <div class="skel"><div class="skel-b" style="width:36px;height:36px;border-radius:50%"></div><div style="flex:1"><div class="skel-b" style="height:16px;width:55%;margin-bottom:6px"></div><div class="skel-b" style="height:12px;width:80%"></div></div></div>
-    </main>
-  </section>
-
-  <!-- ── VIEW 2: ARTICLES ── -->
-  <section id="view-articles" class="articles-view" aria-label="Articles section">
-    <div style="margin-bottom:20px;display:flex;align-items:center;justify-content:space-between">
-      <div>
-        <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.4rem;font-weight:800;letter-spacing:-.02em">Technical Articles</h2>
-        <p style="font-size:14px;color:var(--ink2)">Comprehensive breakdowns of breakthrough trending projects, generated and published from Pulsebyte.</p>
+      <!-- 2. Trending Topics Chips (Clickable to Filter) -->
+      <div class="sidebar-card">
+        <div class="sidebar-title">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          Trending Topics
+        </div>
+        <div id="sidebar-topics" style="display:flex;flex-wrap:wrap;gap:4px">
+          <span class="topic-tag" onclick="filterByTopic('ai')">#ai</span>
+          <span class="topic-tag" onclick="filterByTopic('agent')">#agent</span>
+          <span class="topic-tag" onclick="filterByTopic('llm')">#llm</span>
+          <span class="topic-tag" onclick="filterByTopic('rust')">#rust</span>
+          <span class="topic-tag" onclick="filterByTopic('python')">#python</span>
+          <span class="topic-tag" onclick="filterByTopic('typescript')">#typescript</span>
+          <span class="topic-tag" onclick="filterByTopic('devops')">#devops</span>
+          <span class="topic-tag" onclick="filterByTopic('database')">#database</span>
+        </div>
       </div>
-    </div>
-    <div class="articles-grid" id="articles-grid">
-      <div class="state"><h3>No articles published yet</h3><p>Generate articles inside the Pulsebyte app to publish them here.</p></div>
-    </div>
-  </section>
 
+      <!-- 3. Latest In-Depth Breakdowns -->
+      <div class="sidebar-card" id="sidebar-articles-box">
+        <div class="sidebar-title">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Latest Breakdowns
+        </div>
+        <div id="sidebar-articles-list">
+          <div style="font-size:12px;color:var(--ink3)">Loading latest articles…</div>
+        </div>
+      </div>
+
+      <!-- 4. Developer Community Card -->
+      <div class="sidebar-card" style="background:linear-gradient(135deg,rgba(42,171,238,.07),var(--panel));border-color:color-mix(in srgb,#2AABEE 30%,var(--line))">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+          <span style="font-size:18px">📢</span>
+          <strong style="font-size:13.5px;color:var(--ink)">Developer Community</strong>
+        </div>
+        <p style="font-size:12px;color:var(--ink2);line-height:1.45;margin-bottom:12px">
+          Instant alerts on breakthrough GitHub repositories, LLMs, and dev tools.
+        </p>
+        <a class="btn sm" id="sidebar-tg-btn" href="https://t.me/techinfosec" target="_blank" rel="noopener noreferrer" style="background:#2AABEE;color:#fff;border-color:#2AABEE;font-weight:600;width:100%;justify-content:center">
+          Join on Telegram &rarr;
+        </a>
+      </div>
+
+      <!-- 5. Sponsor CTA Link -->
+      <div style="text-align:center;padding:4px">
+        <a href="sponsor.html" style="font-size:11.5px;color:var(--ink3);text-decoration:none">
+          Want to showcase your dev tool? <strong style="color:var(--acc)">Sponsor Pulsebyte &rarr;</strong>
+        </a>
+      </div>
+    </aside>
+  </div>
 </div>
 
 <!-- ══ ARTICLE FULL PAGE ══ -->
@@ -1074,11 +1201,15 @@ async function boot(){
     if(cached?.items?.length){
       S.items = cached.items; S.at = cached.updated_at;
       buildCarousel(S.items);
-    renderHomeSponsor(); renderList(); checkHashRouting();
+      renderHomeSponsor();
+      renderSidebarSponsor();
+      renderList();
+      checkHashRouting();
     }
   }catch{}
 
   await loadArticles();
+  renderSidebarArticles();
 
   if(!CFG.api) return;
   try {
@@ -1088,11 +1219,12 @@ async function boot(){
     S.items = data.items || [];
     S.at    = data.updated_at || 0;
     buildCarousel(S.items);
+    renderHomeSponsor();
+    renderSidebarSponsor();
     renderList();
     try{ localStorage.setItem('pb-feed', JSON.stringify(data)); }catch{}
   } catch(e){}
 
-  // Initial hash routing
   checkHashRouting();
 }
 
@@ -1125,11 +1257,23 @@ function checkHashRouting(){
   }
 }
 
+/* ══ SPONSOR CAMPAIGNS & SIDEBAR LOGIC ══ */
+function getSponsorsList(){
+  if(Array.isArray(CFG.sponsors) && CFG.sponsors.length) return CFG.sponsors;
+  if(CFG.sponsor && CFG.sponsor.enabled) return [CFG.sponsor];
+  return [];
+}
+
+function getSponsorForSlot(slotName){
+  const list = getSponsorsList();
+  return list.find(s => s.enabled && (!s.slots || s.slots[slotName] !== false));
+}
+
 function renderHomeSponsor(){
-  const s = CFG.sponsor;
+  const s = getSponsorForSlot('home_top');
   const slot = document.getElementById('home-sponsor-slot');
   if(!slot) return;
-  if(!s || !s.enabled || s.slots?.home_top === false){
+  if(!s){
     slot.innerHTML = '';
     return;
   }
@@ -1145,6 +1289,63 @@ function renderHomeSponsor(){
       <a class="btn p sm" href="${esc(s.url || '#')}" target="_blank" rel="noopener noreferrer nofollow">${esc(s.cta || 'Learn More →')}</a>
     </div>
   `;
+}
+
+function renderSidebarSponsor(){
+  const slot = document.getElementById('sidebar-sponsor-slot');
+  if(!slot) return;
+  const s = getSponsorForSlot('sidebar');
+  if(s){
+    slot.innerHTML = s.custom_code || `
+      <div class="sidebar-card" style="background:linear-gradient(135deg,color-mix(in srgb,var(--acc) 10%,var(--panel)),var(--panel));border:1px solid color-mix(in srgb,var(--acc) 30%,var(--line))">
+        <span style="font-size:10.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;background:var(--acc-soft);color:var(--acc);padding:2px 6px;border-radius:4px;display:inline-block;margin-bottom:6px">${esc(s.badge || 'Featured Partner')}</span>
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:13.5px;font-weight:700;color:var(--ink);margin-bottom:4px">${esc(s.title || '')}</div>
+        <p style="font-size:12px;color:var(--ink2);line-height:1.45;margin-bottom:12px">${esc(s.desc || '')}</p>
+        <a class="btn p sm" href="${esc(s.url || '#')}" target="_blank" rel="noopener noreferrer nofollow" style="width:100%;justify-content:center">${esc(s.cta || 'Learn More →')}</a>
+      </div>
+    `;
+  } else {
+    slot.innerHTML = `
+      <div class="sidebar-card" style="background:linear-gradient(135deg,var(--acc-soft),var(--panel));border:1px solid color-mix(in srgb,var(--acc) 30%,var(--line))">
+        <span style="font-size:10px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;background:var(--acc);color:var(--acc-ink);padding:2px 6px;border-radius:4px;display:inline-block;margin-bottom:6px">Advertise</span>
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:13.5px;font-weight:700;color:var(--ink);margin-bottom:4px">Reach 50,000+ Software Engineers</div>
+        <p style="font-size:12px;color:var(--ink2);line-height:1.4;margin-bottom:10px">Showcase your API, developer tool, or cloud service directly to builders.</p>
+        <a class="btn p sm" href="sponsor.html" style="width:100%;justify-content:center">Sponsor Pulsebyte &rarr;</a>
+      </div>
+    `;
+  }
+}
+
+function renderSidebarArticles(){
+  const el = document.getElementById('sidebar-articles-list');
+  if(!el) return;
+  if(!S.articles || !S.articles.length){
+    el.innerHTML = `<div style="font-size:12px;color:var(--ink3)">No articles published yet.</div>`;
+    return;
+  }
+  const topArticles = S.articles.slice(0, 3);
+  el.innerHTML = topArticles.map(a => {
+    const linkUrl = 'article.html?slug=' + encodeURIComponent(a.slug || a.id);
+    return `
+      <a class="sidebar-art-item" href="${linkUrl}">
+        <div class="sidebar-art-title">${esc(a.title)}</div>
+        <div class="sidebar-art-meta">
+          <span>${esc(a.read_time || '4 min read')}</span>
+          <span>&middot;</span>
+          <span>${ago(a.published_at || a.created_at)}</span>
+        </div>
+      </a>
+    `;
+  }).join('');
+}
+
+function filterByTopic(topic){
+  S.q = topic;
+  const qEl = $('#q');
+  if(qEl) qEl.value = topic;
+  switchView('trending');
+  renderList();
+  window.scrollTo({top: $('#view-trending').offsetTop - 60, behavior:'smooth'});
 }
 
 boot();
