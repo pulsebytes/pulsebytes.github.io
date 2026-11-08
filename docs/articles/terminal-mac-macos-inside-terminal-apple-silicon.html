@@ -16,8 +16,8 @@
 <meta property="og:title" content="MacOS in Your Terminal: Is terminal-mac the Ultimate Sandbox for AI Agents?">
 <meta property="og:description" content="Experience a full, isolated macOS guest running directly inside your terminal window using Apple Silicon virtualization. Designed specifically for computer-use agents, it provides a sandboxed environment with high-performance graphical streaming.">
 <meta property="og:url" content="https://pulsebytes.github.io/articles/terminal-mac-macos-inside-terminal-apple-silicon.html">
-<meta property="og:image" content="https://pulsebytes.github.io/assets/og-image.png">
-<meta property="og:image:secure_url" content="https://pulsebytes.github.io/assets/og-image.png">
+<meta property="og:image" content="https://pulsebytes.github.io/assets/cards/terminal-mac-macos-inside-terminal-apple-silicon.png">
+<meta property="og:image:secure_url" content="https://pulsebytes.github.io/assets/cards/terminal-mac-macos-inside-terminal-apple-silicon.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -36,7 +36,8 @@
 <meta name="twitter:site" content="@Pulsebyte">
 <meta name="twitter:title" content="MacOS in Your Terminal: Is terminal-mac the Ultimate Sandbox for AI Agents?">
 <meta name="twitter:description" content="Experience a full, isolated macOS guest running directly inside your terminal window using Apple Silicon virtualization. Designed specifically for computer-use agents, it provides a sandboxed environment with high-performance graphical streaming.">
-<meta name="twitter:image" content="https://pulsebytes.github.io/assets/og-image.png">
+<meta name="twitter:image" content="https://pulsebytes.github.io/assets/cards/terminal-mac-macos-inside-terminal-apple-silicon.png">
+<meta name="twitter:image:alt" content="MacOS in Your Terminal: Is terminal-mac the Ultimate Sandbox for AI Agents?">
 
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
@@ -44,8 +45,9 @@
 <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
 <link rel="alternate" type="application/rss+xml" title="Pulsebyte · RSS Feed" href="../feed.xml">
 <link rel="alternate" type="application/atom+xml" title="Pulsebyte · Atom Feed" href="../atom.xml">
+<link rel="stylesheet" href="../article.css">
 
-<!-- Structured Data for Medium Importer and Google Search -->
+<!-- Structured Data for Search Engines & Medium Story Importer -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -57,7 +59,7 @@
   "headline": "MacOS in Your Terminal: Is terminal-mac the Ultimate Sandbox for AI Agents?",
   "description": "Experience a full, isolated macOS guest running directly inside your terminal window using Apple Silicon virtualization. Designed specifically for computer-use agents, it provides a sandboxed environment with high-performance graphical streaming.",
   "articleBody": " The Problem: The Messy Reality of Computer-Use Agents  As we move toward a world of autonomous  computer-use agents \u2014LLMs that can click, type, and navigate like humans\u2014we face a significant infrastructure hurdle. Running these agents directly on your host machine is a recipe for disaster: they can accidentally delete files, mess with your clipboard, or hijack your mouse pointer while you are trying to work. Furthermore, providing a GUI for an agent usually requires a heavy VNC setup or a separate physical monitor.  Developers have long needed a way to provide a  clean-room macOS environment  that is fully isolated from the host, yet easily accessible via the command line tools they already use. Existing virtualization solutions are often too heavy or lack the specific hooks needed for programmatic input and screen capture without interfering with the user's primary desktop.  Architecture & Key Features: Virtualization via Swift  The project  govijr/terminal-mac  solves this by levera",
-  "image": "https://pulsebytes.github.io/assets/og-image.png",
+  "image": "https://pulsebytes.github.io/assets/cards/terminal-mac-macos-inside-terminal-apple-silicon.png",
   "datePublished": "2026-11-08T07:01:05Z",
   "dateModified": "2026-11-08T07:01:05Z",
   "author": {
@@ -83,9 +85,14 @@
 <script>(function(){var t=localStorage.getItem("pb-theme")||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");document.documentElement.dataset.theme=t})();</script>
 
 <style>
+/* ══════════════════════════════════════════════════════════════════════════════
+   PULSEBYTE — ARTICLE STYLESHEET (article.css)
+   Dedicated responsive styles for Pulsebyte technical breakdown articles.
+   Compatible with standalone articles, static generated pages, and embedded feeds.
+   ══════════════════════════════════════════════════════════════════════════════ */
 
-/* ══ DESIGN TOKENS ══ */
-:root{
+/* ══ 1. DESIGN TOKENS ══ */
+:root {
   --bg: #f8fafc;
   --bg2: #f1f5f9;
   --panel: #ffffff;
@@ -99,15 +106,17 @@
   --acc-soft: #eef2ff;
   --acc-ink: #ffffff;
   --hot: #f59e0b;
-  --sh-sm: 0 1px 3px rgba(0,0,0,.05), 0 1px 2px rgba(0,0,0,.03);
-  --sh: 0 4px 14px rgba(0,0,0,.06), 0 1px 3px rgba(0,0,0,.04);
-  --sh-lg: 0 12px 32px rgba(0,0,0,.1), 0 4px 10px rgba(0,0,0,.05);
+  --sh-sm: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+  --sh: 0 4px 14px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
+  --sh-lg: 0 12px 32px rgba(0, 0, 0, 0.1), 0 4px 10px rgba(0, 0, 0, 0.05);
+  --r-sm: 6px;
   --r: 10px;
   --r-lg: 16px;
   --r-xl: 20px;
   --hdr: 64px;
 }
-[data-theme=dark]{
+
+[data-theme="dark"] {
   --bg: #090d16;
   --bg2: #0f172a;
   --panel: #111827;
@@ -121,241 +130,755 @@
   --acc-soft: #1e1b4b;
   --acc-ink: #090d16;
   --hot: #fbbf24;
-  --sh-sm: 0 1px 3px rgba(0,0,0,.3);
-  --sh: 0 4px 16px rgba(0,0,0,.45);
-  --sh-lg: 0 14px 40px rgba(0,0,0,.6);
+  --sh-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --sh: 0 4px 16px rgba(0, 0, 0, 0.45);
+  --sh-lg: 0 14px 40px rgba(0, 0, 0, 0.6);
 }
 
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-padding-top:calc(var(--hdr) + 16px);scroll-behavior:smooth}
-body{
-  background:var(--bg);color:var(--ink);
-  font:15.5px/1.7 Inter,system-ui,-apple-system,sans-serif;
-  -webkit-font-smoothing:antialiased;min-height:100vh;
-  display:flex;flex-direction:column;
+/* ══ 2. BASE RESETS ══ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
-img{display:block;max-width:100%}
-a{color:var(--acc);text-decoration:none}
-a:hover{text-decoration:underline}
 
-/* ══ HEADER ══ */
-header{
-  position:sticky;top:0;z-index:100;height:var(--hdr);
-  background:color-mix(in srgb, var(--bg) 85%, transparent);
-  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--line);
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 max(20px, calc(50vw - 580px));
+html {
+  scroll-padding-top: calc(var(--hdr) + 16px);
+  scroll-behavior: smooth;
 }
-.logo{
-  display:inline-flex;align-items:center;gap:10px;
-  font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:1.25rem;
-  color:var(--ink);text-decoration:none;letter-spacing:-.02em;
-}
-.logo-mark{
-  width:30px;height:30px;border-radius:9px;
-  background:linear-gradient(135deg, var(--acc), #a855f7);
-  display:grid;place-items:center;box-shadow:var(--sh-sm);
-}
-.hdr-right{display:flex;align-items:center;gap:10px}
-.btn{
-  display:inline-flex;align-items:center;gap:7px;
-  padding:8px 14px;border-radius:var(--r);font-size:13.5px;font-weight:600;
-  border:1px solid var(--line);background:var(--panel);color:var(--ink);
-  cursor:pointer;transition:all .15s;text-decoration:none;
-}
-.btn:hover{background:var(--bg2);border-color:var(--line-strong);text-decoration:none}
-.btn.p{background:var(--acc);color:var(--acc-ink);border-color:var(--acc)}
-.btn.p:hover{background:var(--acc-h);border-color:var(--acc-h);color:var(--acc-ink)}
-.btn.sm{padding:5px 11px;font-size:12.5px}
 
-/* ══ ARTICLE LAYOUT ══ */
-.article-wrap{max-width:1240px;margin:0 auto;padding:36px 20px 80px;flex:1;width:100%}
-.article-layout{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:36px;
-  align-items:start;
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font: 15.5px/1.7 "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
-@media(min-width:1024px){
-  .article-layout{
-    grid-template-columns:minmax(0, 1fr) 320px;
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: var(--acc);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ══ 3. HEADER ══ */
+header,
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--hdr);
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 max(20px, calc(50vw - 620px));
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Bricolage Grotesque", -apple-system, sans-serif;
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--ink);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+}
+
+.logo:hover {
+  text-decoration: none;
+}
+
+.logo-mark {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: linear-gradient(135deg, var(--acc), #a855f7);
+  display: grid;
+  place-items: center;
+  box-shadow: var(--sh-sm);
+  flex-shrink: 0;
+}
+
+.hdr-right,
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  border-radius: var(--r);
+  font-size: 13.5px;
+  font-weight: 600;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-decoration: none;
+  line-height: 1.2;
+}
+
+.btn:hover {
+  background: var(--bg2);
+  border-color: var(--line-strong);
+  text-decoration: none;
+}
+
+.btn.p {
+  background: var(--acc);
+  color: var(--acc-ink);
+  border-color: var(--acc);
+}
+
+.btn.p:hover {
+  background: var(--acc-h);
+  border-color: var(--acc-h);
+  color: var(--acc-ink);
+}
+
+.btn.sm {
+  padding: 6px 12px;
+  font-size: 12.5px;
+}
+
+.theme-toggle {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 7px 11px;
+  cursor: pointer;
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  transition: all 0.15s;
+}
+
+.theme-toggle:hover {
+  background: var(--bg2);
+  border-color: var(--line-strong);
+}
+
+/* ══ 4. ARTICLE LAYOUT (Supports both .article-wrap and .page-body) ══ */
+.article-wrap,
+.page-body {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 36px 20px 80px;
+  flex: 1;
+  width: 100%;
+}
+
+.article-layout,
+.layout-2col {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 36px;
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .article-layout,
+  .layout-2col {
+    grid-template-columns: minmax(0, 1fr) 340px;
   }
 }
-.article-main-col{min-width:0}
-.article-sidebar-col{
-  display:flex;
-  flex-direction:column;
-  gap:20px;
+
+.article-main-col {
+  min-width: 0;
 }
-@media(min-width:1024px){
-  .article-sidebar-col{
-    position:sticky;
-    top:84px;
+
+.article-sidebar-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media (min-width: 1024px) {
+  .article-sidebar-col {
+    position: sticky;
+    top: 84px;
   }
 }
-.sidebar-box{
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:var(--r-lg);
-  padding:18px 20px;
-  box-shadow:var(--sh-sm);
+
+/* ══ 5. NAVIGATION & HEADER ROW ══ */
+.art-back-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  gap: 12px;
+  flex-wrap: wrap;
 }
-.sidebar-box-title{
-  font-family:"Bricolage Grotesque",sans-serif;
-  font-size:12.5px;
-  font-weight:700;
-  text-transform:uppercase;
-  letter-spacing:.05em;
-  color:var(--ink2);
-  margin-bottom:12px;
-  display:flex;align-items:center;gap:6px;
+
+.art-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink2);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  padding: 7px 14px;
+  border-radius: var(--r);
+  text-decoration: none;
+  transition: all 0.15s ease;
+  box-shadow: var(--sh-sm);
 }
-.art-back-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
-.art-back-btn{
-  display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;
-  color:var(--ink2);background:var(--bg2);border:1px solid var(--line);
-  padding:7px 14px;border-radius:var(--r);text-decoration:none;transition:all .15s;
+
+.art-back-btn:hover {
+  background: var(--bg2);
+  border-color: var(--line-strong);
+  color: var(--ink);
+  text-decoration: none;
 }
-.art-back-btn:hover{background:var(--line);color:var(--ink);text-decoration:none}
 
 /* Meta */
-.art-meta-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px;font-size:13px;color:var(--ink3)}
-.art-badge{
-  font-size:11.5px;font-weight:700;background:var(--acc-soft);color:var(--acc);
-  padding:2px 8px;border-radius:6px;text-transform:uppercase;letter-spacing:.04em;
-}
-.reader-title{
-  font-family:"Bricolage Grotesque",sans-serif;font-size:2.2rem;font-weight:800;
-  letter-spacing:-.03em;line-height:1.2;margin:12px 0 20px;color:var(--ink);
-}
-.reader-tldr{
-  background:var(--acc-soft);border-left:4px solid var(--acc);
-  padding:16px 20px;border-radius:var(--r);font-size:15.5px;line-height:1.65;
-  margin-bottom:30px;color:var(--ink);
-}
-.reader-tags{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:28px}
-.reader-tag{
-  font-size:12px;background:var(--bg2);border:1px solid var(--line);
-  padding:2px 10px;border-radius:999px;color:var(--ink2);
+.art-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: var(--ink3);
 }
 
-/* Featured Project Card */
-.reader-hero-img{
-  width:100%;max-height:360px;aspect-ratio:16/9;object-fit:cover;
-  border-radius:var(--r-xl);border:1px solid var(--line);margin-bottom:16px;
-  box-shadow:var(--sh);
-}
-.reader-project-banner{
-  background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);
-  padding:18px 20px;margin:20px 0 32px;display:flex;gap:16px;align-items:center;
-  box-shadow:var(--sh-sm);flex-wrap:wrap;
-}
-.reader-project-avatar{
-  width:52px;height:52px;border-radius:12px;border:1px solid var(--line);
-  flex-shrink:0;background:#0d1117;
-}
-.rpb-details{flex:1;min-width:240px}
-.rpb-title{font-weight:700;font-size:15px;color:var(--ink);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.rpb-desc{font-size:13px;color:var(--ink2);margin-top:4px;line-height:1.5}
-.chip{
-  display:inline-flex;align-items:center;gap:5px;background:var(--bg2);
-  border:1px solid var(--line);border-radius:999px;padding:2px 8px;font-size:11.5px;color:var(--ink2);
+.art-badge {
+  font-size: 11.5px;
+  font-weight: 700;
+  background: var(--acc-soft);
+  color: var(--acc);
+  padding: 2px 8px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  display: inline-block;
 }
 
-/* ══ SOCIAL SHARING BAR ══ */
-.share-bar{
-  background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);
-  padding:14px 18px;margin:24px 0 32px;display:flex;align-items:center;gap:10px;
-  flex-wrap:wrap;box-shadow:var(--sh-sm);
-}
-.share-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--ink3);margin-right:4px}
-.share-btn{
-  display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;
-  font-size:12.5px;font-weight:600;color:#fff;text-decoration:none;transition:transform .12s,opacity .12s;cursor:pointer;border:none;
-}
-.share-btn:hover{transform:translateY(-1px);opacity:.9;text-decoration:none;color:#fff}
-.sb-x{background:#000000}
-[data-theme=dark] .sb-x{background:#ffffff;color:#000}
-[data-theme=dark] .sb-x:hover{color:#000}
-.sb-linkedin{background:#0A66C2}
-.sb-telegram{background:#2AABEE}
-.sb-reddit{background:#FF4500}
-.sb-facebook{background:#1877F2}
-.sb-facebook{background:#1877F2}
-.sb-copy{background:var(--bg2);color:var(--ink);border:1px solid var(--line)}
-.sb-copy:hover{background:var(--line);color:var(--ink)}
-
-/* ══ SPONSOR / AD BOX ══ */
-.sponsor-slot{
-  background:linear-gradient(135deg, color-mix(in srgb, var(--acc) 8%, var(--panel)), var(--panel));
-  border:1px solid color-mix(in srgb, var(--acc) 30%, var(--line));
-  border-radius:var(--r-lg);padding:20px 24px;margin:32px 0;position:relative;
-  box-shadow:var(--sh-sm);
-}
-.sponsor-badge{
-  display:inline-block;background:var(--acc-soft);color:var(--acc);font-size:11px;
-  font-weight:800;padding:2px 8px;border-radius:5px;letter-spacing:.05em;text-transform:uppercase;margin-bottom:8px;
-}
-.sponsor-content{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
-.sponsor-info{flex:1;min-width:260px}
-.sponsor-title{font-family:"Bricolage Grotesque",sans-serif;font-size:1.15rem;font-weight:700;color:var(--ink);margin-bottom:4px}
-.sponsor-desc{font-size:13.5px;color:var(--ink2);line-height:1.5}
-
-/* ══ ARTICLE CONTENT TYPOGRAPHY ══ */
-.reader-content{line-height:1.8;color:var(--ink);font-size:16px}
-.reader-content h2, .reader-content h3{
-  font-family:"Bricolage Grotesque",sans-serif;font-size:1.4rem;font-weight:800;
-  letter-spacing:-.02em;margin:36px 0 14px;color:var(--ink);
-}
-.reader-content p{margin-bottom:18px;color:var(--ink2);font-size:15.5px}
-.reader-content ul, .reader-content ol{padding-left:24px;margin-bottom:20px;color:var(--ink2)}
-.reader-content li{margin-bottom:8px}
-.reader-content code{
-  background:var(--bg2);padding:2px 7px;border-radius:5px;
-  font-family:'JetBrains Mono',monospace;font-size:13.5px;color:var(--acc);
-}
-.reader-content blockquote{
-  background:var(--bg2);border-left:4px solid var(--line-strong);padding:14px 18px;
-  border-radius:var(--r);margin:20px 0;font-style:italic;color:var(--ink2);
+.reader-title {
+  font-family: "Bricolage Grotesque", -apple-system, sans-serif;
+  font-size: 2.3rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.22;
+  margin: 12px 0 20px;
+  color: var(--ink);
 }
 
-/* ══ MORE ARTICLES SECTION ══ */
-.more-sec{margin-top:60px;padding-top:40px;border-top:1px solid var(--line)}
-.more-title{font-family:"Bricolage Grotesque",sans-serif;font-size:1.4rem;font-weight:800;margin-bottom:20px}
-.more-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
-.more-card{
-  background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);
-  padding:18px;display:flex;flex-direction:column;text-decoration:none;transition:all .15s;
+@media (max-width: 640px) {
+  .reader-title {
+    font-size: 1.8rem;
+    margin: 10px 0 16px;
+  }
 }
-.more-card:hover{border-color:var(--acc);transform:translateY(-2px);box-shadow:var(--sh);text-decoration:none}
-.more-card h4{font-family:"Bricolage Grotesque",sans-serif;font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:6px}
-.more-card p{font-size:13px;color:var(--ink2);margin-bottom:12px;flex:1;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;display:-webkit-box}
-.more-card span{font-size:12px;color:var(--acc);font-weight:600}
 
-/* ══ FOOTER ══ */
-footer{
-  border-top:1px solid var(--line);background:var(--panel);
-  padding:36px 20px;text-align:center;font-size:13px;color:var(--ink3);margin-top:auto;
+.reader-tldr {
+  background: var(--acc-soft);
+  border-left: 4px solid var(--acc);
+  padding: 16px 20px;
+  border-radius: var(--r);
+  font-size: 15.5px;
+  line-height: 1.65;
+  margin-bottom: 24px;
+  color: var(--ink);
 }
-.footer-links{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-bottom:14px}
-.footer-links a{color:var(--ink2);font-weight:500}
-.footer-social{display:flex;justify-content:center;gap:12px;margin-bottom:16px}
-.footer-social a{color:var(--ink2);display:inline-flex;align-items:center;gap:5px;font-size:13px}
 
-/* Toast */
-#toast{
-  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);
-  background:var(--ink);color:var(--bg);padding:10px 20px;border-radius:999px;
-  font-size:13px;font-weight:600;box-shadow:var(--sh-lg);transition:transform .2s ease;
-  z-index:9999;pointer-events:none;
+.reader-tags {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
 }
-#toast.on{transform:translateX(-50%) translateY(0)}
 
-@media(max-width:640px){
-  .reader-title{font-size:1.75rem}
-  .share-bar{gap:8px}
-  .share-btn{font-size:11.5px;padding:5px 9px}
+.reader-tag {
+  font-size: 12px;
+  font-weight: 500;
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  padding: 2px 10px;
+  border-radius: 999px;
+  color: var(--ink2);
+}
+
+/* ══ 6. FEATURED PROJECT CARD ══ */
+.reader-hero-img {
+  width: 100%;
+  max-height: 380px;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  border-radius: var(--r-xl);
+  border: 1px solid var(--line);
+  margin-bottom: 20px;
+  box-shadow: var(--sh);
+}
+
+.reader-project-banner {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 16px 20px;
+  margin: 16px 0 28px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  box-shadow: var(--sh-sm);
+  flex-wrap: wrap;
+}
+
+.reader-project-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  flex-shrink: 0;
+  background: #0d1117;
+  object-fit: cover;
+}
+
+.rpb-details {
+  flex: 1;
+  min-width: 240px;
+}
+
+.rpb-title {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.rpb-desc {
+  font-size: 13px;
+  color: var(--ink2);
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+/* ══ 7. SOCIAL SHARING BAR ══ */
+.share-bar {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 14px 18px;
+  margin: 24px 0 32px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  box-shadow: var(--sh-sm);
+}
+
+.share-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink3);
+  margin-right: 4px;
+}
+
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 13px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #ffffff;
+  text-decoration: none;
+  transition: transform 0.12s ease, opacity 0.12s ease;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  line-height: 1.3;
+}
+
+.share-btn:hover {
+  transform: translateY(-1px);
+  opacity: 0.92;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.sb-x { background: #000000; }
+[data-theme="dark"] .sb-x { background: #ffffff; color: #000000; }
+[data-theme="dark"] .sb-x:hover { color: #000000; }
+
+.sb-linkedin { background: #0a66c2; }
+.sb-telegram { background: #2aabee; }
+.sb-reddit { background: #ff4500; }
+.sb-facebook { background: #1877f2; }
+.sb-copy {
+  background: var(--bg2);
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+.sb-copy:hover {
+  background: var(--line);
+  color: var(--ink);
+}
+
+@media (max-width: 640px) {
+  .share-bar { gap: 8px; padding: 12px 14px; }
+  .share-btn { font-size: 11.5px; padding: 5px 10px; }
+}
+
+/* ══ 8. SPONSOR / ADVERTISEMENT BOXES ══ */
+.sponsor-slot {
+  background: linear-gradient(135deg, color-mix(in srgb, var(--acc) 8%, var(--panel)), var(--panel));
+  border: 1px solid color-mix(in srgb, var(--acc) 30%, var(--line));
+  border-radius: var(--r-lg);
+  padding: 20px 24px;
+  margin: 32px 0;
+  position: relative;
+  box-shadow: var(--sh-sm);
+}
+
+.sponsor-badge {
+  display: inline-block;
+  background: var(--acc-soft);
+  color: var(--acc);
+  font-size: 11px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 5px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.sponsor-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.sponsor-info {
+  flex: 1;
+  min-width: 260px;
+}
+
+.sponsor-title {
+  font-family: "Bricolage Grotesque", -apple-system, sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.sponsor-desc {
+  font-size: 13.5px;
+  color: var(--ink2);
+  line-height: 1.5;
+}
+
+.in-article-ad {
+  margin: 28px 0;
+}
+
+/* ══ 9. ARTICLE CONTENT TYPOGRAPHY ══ */
+.reader-content {
+  line-height: 1.8;
+  color: var(--ink);
+  font-size: 16px;
+}
+
+.reader-content h2,
+.reader-content h3 {
+  font-family: "Bricolage Grotesque", -apple-system, sans-serif;
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 38px 0 14px;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+.reader-content h4 {
+  font-family: "Bricolage Grotesque", -apple-system, sans-serif;
+  font-size: 1.18rem;
+  font-weight: 700;
+  margin: 28px 0 10px;
+  color: var(--ink);
+}
+
+.reader-content p {
+  margin-bottom: 18px;
+  color: var(--ink2);
+  font-size: 15.5px;
+  line-height: 1.8;
+}
+
+.reader-content ul,
+.reader-content ol {
+  padding-left: 24px;
+  margin-bottom: 22px;
+  color: var(--ink2);
+}
+
+.reader-content li {
+  margin-bottom: 9px;
+  line-height: 1.7;
+}
+
+.reader-content strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.reader-content a {
+  color: var(--acc);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 500;
+}
+
+.reader-content a:hover {
+  color: var(--acc-h);
+}
+
+.reader-content code {
+  background: var(--bg2);
+  padding: 2px 7px;
+  border-radius: 5px;
+  font-family: "JetBrains Mono", Consolas, Menlo, monospace;
+  font-size: 13.5px;
+  color: var(--acc);
+  border: 1px solid var(--line);
+}
+
+.reader-content pre {
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 18px 20px;
+  margin: 24px 0;
+  overflow-x: auto;
+  font-family: "JetBrains Mono", Consolas, Menlo, monospace;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--ink);
+  box-shadow: var(--sh-sm);
+}
+
+.reader-content pre code {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  border: none;
+  color: inherit;
+  font-size: inherit;
+}
+
+.reader-content blockquote {
+  background: var(--bg2);
+  border-left: 4px solid var(--line-strong);
+  padding: 16px 20px;
+  border-radius: var(--r);
+  margin: 24px 0;
+  font-style: italic;
+  color: var(--ink2);
+  line-height: 1.65;
+}
+
+.reader-content hr {
+  border: 0;
+  border-top: 1px solid var(--line);
+  margin: 36px 0;
+}
+
+.reader-content img {
+  border-radius: var(--r-lg);
+  border: 1px solid var(--line);
+  margin: 24px 0;
+  box-shadow: var(--sh-sm);
+}
+
+/* ══ 10. SIDEBAR CARDS & WIDGETS ══ */
+.sidebar-box {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 18px 20px;
+  box-shadow: var(--sh-sm);
+}
+
+.sidebar-box-title {
+  font-family: "Bricolage Grotesque", -apple-system, sans-serif;
+  font-size: 12.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink2);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ══ 11. MORE ARTICLES SECTION ══ */
+.more-sec {
+  margin-top: 56px;
+  padding-top: 36px;
+  border-top: 1px solid var(--line);
+}
+
+.more-title {
+  font-family: "Bricolage Grotesque", -apple-system, sans-serif;
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+  color: var(--ink);
+}
+
+.more-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.more-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  box-shadow: var(--sh-sm);
+}
+
+.more-card:hover {
+  border-color: var(--acc);
+  transform: translateY(-2px);
+  box-shadow: var(--sh);
+  text-decoration: none;
+}
+
+.more-card h4 {
+  font-family: "Bricolage Grotesque", -apple-system, sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 6px;
+  line-height: 1.35;
+}
+
+.more-card p {
+  font-size: 13px;
+  color: var(--ink2);
+  margin-bottom: 12px;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.5;
+}
+
+.more-card span {
+  font-size: 12px;
+  color: var(--acc);
+  font-weight: 600;
+}
+
+/* ══ 12. FOOTER ══ */
+footer {
+  border-top: 1px solid var(--line);
+  background: var(--panel);
+  padding: 36px 20px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--ink3);
+  margin-top: auto;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.footer-links a {
+  color: var(--ink2);
+  font-weight: 500;
+}
+
+.footer-links a:hover {
+  color: var(--acc);
+}
+
+.footer-social {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.footer-social a {
+  color: var(--ink2);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+}
+
+/* ══ 13. TOAST NOTIFICATION ══ */
+#toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--ink);
+  color: var(--bg);
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: var(--sh-lg);
+  transition: transform 0.2s ease;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+#toast.on {
+  transform: translateX(-50%) translateY(0);
 }
 
 </style>
@@ -372,19 +895,17 @@ footer{
     </div>
     Pulsebyte
   </a>
-  <div class="header-actions">
+  <div class="hdr-right">
     <a class="btn sm" href="../">Trending Projects</a>
     <a class="btn sm" href="../#articles">All Articles</a>
     <a class="btn sm" href="../sponsor.html">Sponsor</a>
-    <button class="theme-toggle" id="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">
-      <svg id="theme-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-    </button>
+    <button class="btn sm" id="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">🌓</button>
   </div>
 </header>
 
-<!-- ══ MAIN LAYOUT (2-COLUMN) ══ -->
-<main class="page-body">
-  <div class="layout-2col">
+<!-- ══ ARTICLE MAIN WRAP ══ -->
+<main class="article-wrap">
+  <div class="article-layout">
     <!-- Left / Center Column -->
     <div class="article-main-col">
       <div class="art-back-nav">
@@ -398,12 +919,13 @@ footer{
       <!-- Featured Project Showcase -->
       
       <div class="reader-project-banner">
-        <div style="flex:1;min-width:240px">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+        <img src="https://github.com/govijr.png?size=100" class="reader-project-avatar" alt="govijr/terminal-mac" onerror="this.style.display='none'">
+        <div class="rpb-details">
+          <div class="rpb-title">
             <span class="art-badge">GitHub</span>
-            <strong style="color:var(--ink);font-size:14px">govijr/terminal-mac</strong>
+            <strong>govijr/terminal-mac</strong>
           </div>
-          <div style="font-size:12.5px;color:var(--ink2)">★ 2164 &middot; Swift</div>
+          <div class="rpb-desc">Entire MacOS running in your terminal. &middot; <span style="color:var(--hot)">★ 2164</span> &middot; Swift</div>
         </div>
         <a class="btn p sm" href="https://github.com/govijr/terminal-mac" target="_blank" rel="noopener noreferrer">View Repository &rarr;</a>
       </div>
@@ -480,21 +1002,24 @@ footer{
         <div class="more-grid">
           
           <a class="more-card" href="deepseek-v4-pro-qwen3-5-uncensored-heretic-review.html">
-            <div class="art-badge" style="width:fit-content;margin-bottom:8px">Article</div>
-            <h4 style="font-size:14px;font-weight:700;color:var(--ink);margin-bottom:6px;line-height:1.3">Unshackled Intelligence: Deep-Diving into the DeepSeek-V4-Pro-Qwen3.5 &#x27;Heretic&#x27;</h4>
-            <div style="font-size:11.5px;color:var(--ink3)">5 min read</div>
+            <div style="font-size:11.5px;color:var(--ink3);margin-bottom:6px">5 min read</div>
+            <h4 style="font-size:14px;font-weight:700;color:var(--ink);margin-bottom:6px;line-height:1.35">Unshackled Intelligence: Deep-Diving into the DeepSeek-V4-Pro-Qwen3.5 &#x27;Heretic&#x27;</h4>
+            <p style="font-size:12.5px;color:var(--ink2);margin-bottom:10px">Discover a powerful 9B parameter model that combines the architectural prowess of Qwen and DeepSeek without the restrictive guardrails of corporate AI. This multimodal &#x27;Heretic&#x27; variant offers raw, unfiltered text and image processing for developers who demand creative freedom.</p>
+            <span>Read breakdown &rarr;</span>
           </a>
 
           <a class="more-card" href="mastering-observability-with-boost-log.html">
-            <div class="art-badge" style="width:fit-content;margin-bottom:8px">Article</div>
-            <h4 style="font-size:14px;font-weight:700;color:var(--ink);margin-bottom:6px;line-height:1.3">Lightweight, Level-Based, and Lean: Mastering Node.js Observability with @boost/log</h4>
-            <div style="font-size:11.5px;color:var(--ink3)">5 min read</div>
+            <div style="font-size:11.5px;color:var(--ink3);margin-bottom:6px">5 min read</div>
+            <h4 style="font-size:14px;font-weight:700;color:var(--ink);margin-bottom:6px;line-height:1.35">Lightweight, Level-Based, and Lean: Mastering Node.js Observability with @boost/log</h4>
+            <p style="font-size:12.5px;color:var(--ink2);margin-bottom:10px">@boost/log is a high-performance, level-based logging system designed to provide granular observability without the overhead of heavy-duty frameworks. Part of the robust Boost ecosystem, it offers developers a streamlined approach to managing application telemetry in JavaScript environments.</p>
+            <span>Read breakdown &rarr;</span>
           </a>
 
           <a class="more-card" href="agent-autoloop-autonomous-cli-orchestration.html">
-            <div class="art-badge" style="width:fit-content;margin-bottom:8px">Article</div>
-            <h4 style="font-size:14px;font-weight:700;color:var(--ink);margin-bottom:6px;line-height:1.3">Beyond Babysitting: Why Agent Autoloop is the Missing Link for CLI Agents</h4>
-            <div style="font-size:11.5px;color:var(--ink3)">5 min read</div>
+            <div style="font-size:11.5px;color:var(--ink3);margin-bottom:6px">5 min read</div>
+            <h4 style="font-size:14px;font-weight:700;color:var(--ink);margin-bottom:6px;line-height:1.35">Beyond Babysitting: Why Agent Autoloop is the Missing Link for CLI Agents</h4>
+            <p style="font-size:12.5px;color:var(--ink2);margin-bottom:10px">Agent Autoloop transforms high-maintenance CLI agents into efficient background workers that only interrupt you for critical decisions. By decoupling execution from the terminal, it allows tools like Claude Code and Codex to run autonomously without constant supervision.</p>
+            <span>Read breakdown &rarr;</span>
           </a>
 
         </div>
@@ -504,6 +1029,23 @@ footer{
     <!-- ── ARTICLE SIDEBAR ── -->
     <aside class="article-sidebar-col">
       <div id="sponsor-slot-sidebar"></div>
+
+      
+      <div class="sidebar-box" id="sidebar-project-box">
+        <div class="sidebar-box-title">Featured Repository</div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+          <img src="https://github.com/govijr.png?size=100" style="width:34px;height:34px;border-radius:8px;border:1px solid var(--line)" alt="" onerror="this.style.display='none'">
+          <div>
+            <strong style="font-size:13.5px;color:var(--ink);display:block">govijr/terminal-mac</strong>
+            <span style="font-size:11.5px;color:var(--ink3)">★ 2164 stars &middot; Swift</span>
+          </div>
+        </div>
+        <p style="font-size:12px;color:var(--ink2);line-height:1.45;margin-bottom:12px">Entire MacOS running in your terminal.</p>
+        <a class="btn p sm" href="https://github.com/govijr/terminal-mac" target="_blank" rel="noopener noreferrer" style="width:100%;justify-content:center">
+          Open Repository &rarr;
+        </a>
+      </div>
+
 
       <div class="sidebar-box">
         <div class="sidebar-box-title">About Pulsebyte</div>

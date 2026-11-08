@@ -63,11 +63,8 @@ def generate_rss(articles, site_url=SITE_URL):
                 continue
 
         art_id = art.get("id") or ""
-        slug = art.get("slug")
-        if slug:
-            link = f"{site_url}/articles/{urllib.parse.quote(str(slug))}.html"
-        else:
-            link = f"{site_url}/article.html?id={urllib.parse.quote(str(art_id))}"
+        slug = art.get("slug") or art_id or "article"
+        link = f"{site_url}/articles/{urllib.parse.quote(str(slug))}.html"
 
         pub_dt = parse_date(art.get("published_at") or art.get("date") or art.get("created_at"))
         pub_rfc = email.utils.format_datetime(pub_dt)
@@ -133,11 +130,8 @@ def generate_atom(articles, site_url=SITE_URL):
                 continue
 
         art_id = art.get("id") or ""
-        slug = art.get("slug")
-        if slug:
-            link = f"{site_url}/articles/{urllib.parse.quote(str(slug))}.html"
-        else:
-            link = f"{site_url}/article.html?id={urllib.parse.quote(str(art_id))}"
+        slug = art.get("slug") or art_id or "article"
+        link = f"{site_url}/articles/{urllib.parse.quote(str(slug))}.html"
 
         pub_dt = parse_date(art.get("published_at") or art.get("date") or art.get("created_at"))
         pub_iso = pub_dt.strftime("%Y-%m-%dT%H:%M:%SZ")
