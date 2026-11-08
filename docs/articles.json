@@ -1,5 +1,40 @@
 [
   {
+    "title": "Unshackled Intelligence: Deep-Diving into the DeepSeek-V4-Pro-Qwen3.5 'Heretic'",
+    "slug": "deepseek-v4-pro-qwen3-5-uncensored-heretic-review",
+    "tldr": "Discover a powerful 9B parameter model that combines the architectural prowess of Qwen and DeepSeek without the restrictive guardrails of corporate AI. This multimodal 'Heretic' variant offers raw, unfiltered text and image processing for developers who demand creative freedom.",
+    "read_time": "5 min read",
+    "tags": [
+      "LLM",
+      "OpenSource",
+      "Qwen",
+      "DeepSeek",
+      "Uncensored"
+    ],
+    "content": "<h3>1. The Problem: The Barrier of AI 'Refusal-itis'</h3><p>In the current landscape of Large Language Models (LLMs), developers and researchers often hit a common wall: alignment-induced refusal. While safety guardrails are designed with good intentions, they frequently result in 'refusal-itis,' where models decline to generate creative fiction, analyze controversial historical data, or engage in roleplay. For developers building edge-case applications or researchers studying unfiltered linguistic patterns, these restrictions are a bottleneck to innovation. There is a growing demand for compact, high-performance models that prioritize instruction-following over moralizing, especially in the 9B parameter range where local deployment is feasible.</p><h3>2. Architecture & Key Features: The Anatomy of a Heretic</h3><p>The <strong>xtools-at/DeepSeek-V4-Pro-Qwen3.5-9B-UNCENSORED-heretic</strong> is a specialized fine-tune that leverages the robust <code>qwen3_5</code> architecture and incorporates insights from the DeepSeek-V4 lineage. Unlike standard releases, this 'Heretic' version is explicitly stripped of common censorship layers, allowing for raw output generation. Under the hood, it utilizes <code>safetensors</code> for secure and efficient weight distribution and is fully compatible with <code>text-generation-inference</code> (TGI).</p><ul><li><strong>9B Parameters:</strong> Optimized for consumer-grade GPUs, providing a sweet spot between reasoning capability and VRAM efficiency.</li><li><strong>Multimodal Capability:</strong> Supporting <code>image-text-to-text</code>, this model can describe and analyze visual inputs alongside complex text prompts.</li><li><strong>Uncensored Nature:</strong> Fine-tuned to follow instructions without the typical 'I cannot fulfill this request' responses.</li><li><strong>Transformer-based:</strong> Built on the latest transformer optimizations for faster token throughput and better context handling.</li></ul><h3>3. Quick Start & Practical Use Case: Running the Heretic</h3><p>To get started with <strong>xtools-at/DeepSeek-V4-Pro-Qwen3.5-9B-UNCENSORED-heretic</strong>, you can use the Hugging Face <code>transformers</code> library. This model is particularly effective for creative writing pipelines or private research assistants where unfiltered brainstorming is required.</p><code>from transformers import AutoModelForCausalLM, AutoTokenizer<br><br>model_id = \"xtools-at/DeepSeek-V4-Pro-Qwen3.5-9B-UNCENSORED-heretic\"<br>tokenizer = AutoTokenizer.from_pretrained(model_id)<br>model = AutoModelForCausalLM.from_pretrained(model_id, device_map=\"auto\", torch_dtype=\"auto\")<br><br>prompt = \"Write a gritty noir detective scene involving a complex heist.\"<br>inputs = tokenizer(prompt, return_tensors=\"pt\").to(\"cuda\")<br>outputs = model.generate(**inputs, max_new_tokens=200)<br>print(tokenizer.decode(outputs[0]))</code><p>For those looking for high-throughput production environments, it is recommended to deploy via the <code>text-generation-inference</code> container to take full advantage of its architecture.</p><h3>4. Why It Matters: Community Impact and Future Outlook</h3><p>With a community score of <strong>503</strong>, it is clear that the developer community is hungry for models that offer high autonomy. The 'Heretic' moniker isn't just branding; it represents a shift toward local, sovereign AI where the user—not the provider—determines the boundaries of conversation. By merging the multimodal strengths of Qwen with the reasoning depth associated with DeepSeek, this project provides a versatile tool for the next generation of unfiltered AI applications.</p><blockquote>Check out the model weights and documentation here: <a href=\"https://huggingface.co/xtools-at/DeepSeek-V4-Pro-Qwen3.5-9B-UNCENSORED-heretic\">xtools-at/DeepSeek-V4-Pro-Qwen3.5-9B-UNCENSORED-heretic on Hugging Face</a></blockquote>",
+    "id": "hf:xtools-at/DeepSeek-V4-Pro-Qwen3.5-9B-UNCENSORED-heretic",
+    "status": "published",
+    "created_at": 1794121402993,
+    "item": {
+      "id": "hf:xtools-at/DeepSeek-V4-Pro-Qwen3.5-9B-UNCENSORED-heretic",
+      "src": "HuggingFace",
+      "name": "xtools-at/DeepSeek-V4-Pro-Qwen3.5-9B-UNCENSORED-heretic",
+      "desc": "text-generation",
+      "url": "https://huggingface.co/xtools-at/DeepSeek-V4-Pro-Qwen3.5-9B-UNCENSORED-heretic",
+      "score": 503,
+      "lang": "",
+      "topics": [
+        "transformers",
+        "safetensors",
+        "qwen3_5",
+        "image-text-to-text",
+        "text-generation-inference"
+      ],
+      "created": "2026-10-30T10:21:29.000Z"
+    },
+    "published_at": 1794121453394
+  },
+  {
     "title": "MacOS in Your Terminal: Is terminal-mac the Ultimate Sandbox for AI Agents?",
     "slug": "terminal-mac-macos-inside-terminal-apple-silicon",
     "tldr": "Experience a full, isolated macOS guest running directly inside your terminal window using Apple Silicon virtualization. Designed specifically for computer-use agents, it provides a sandboxed environment with high-performance graphical streaming.",
@@ -33,7 +68,7 @@
       "created": "2026-11-03T03:22:56Z"
     },
     "scheduled_for": 1794041220000,
-    "published_at": 1794060915029
+    "published_at": 1794121265549
   },
   {
     "title": "Lightweight, Level-Based, and Lean: Mastering Node.js Observability with @boost/log",

@@ -65,7 +65,7 @@ def generate_rss(articles, site_url=SITE_URL):
         art_id = art.get("id") or ""
         slug = art.get("slug")
         if slug:
-            link = f"{site_url}/article.html?slug={urllib.parse.quote(str(slug))}"
+            link = f"{site_url}/articles/{urllib.parse.quote(str(slug))}.html"
         else:
             link = f"{site_url}/article.html?id={urllib.parse.quote(str(art_id))}"
 
@@ -135,7 +135,7 @@ def generate_atom(articles, site_url=SITE_URL):
         art_id = art.get("id") or ""
         slug = art.get("slug")
         if slug:
-            link = f"{site_url}/article.html?slug={urllib.parse.quote(str(slug))}"
+            link = f"{site_url}/articles/{urllib.parse.quote(str(slug))}.html"
         else:
             link = f"{site_url}/article.html?id={urllib.parse.quote(str(art_id))}"
 

@@ -92,15 +92,16 @@ def check_and_publish():
     DOCS_ARTICLES.parent.mkdir(parents=True, exist_ok=True)
     DOCS_ARTICLES.write_text(json.dumps(articles, ensure_ascii=False, indent=2), "utf-8")
 
-    # Rebuild RSS & Atom feeds for Substack and aggregators
+    # Rebuild static HTML article pages and feeds
     try:
         try:
-            from . import generate_feed
-        except ImportError:
-            import generate_feed
+            from . import generate_articles, generate_feed
+        except (ImportError, ValueError):
+            import generate_articles, generate_feed
+        generate_articles.build_all()
         generate_feed.build_all()
     except Exception as e:
-        print(f"Feed rebuild notice: {e}")
+        print(f"Article/feed rebuild notice: {e}")
 
     # Save remaining scheduled
     SCHEDULED_FILE.write_text(json.dumps(remaining, ensure_ascii=False, indent=2), "utf-8")

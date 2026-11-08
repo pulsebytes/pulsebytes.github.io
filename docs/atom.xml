@@ -5,13 +5,25 @@
   <link href="https://pulsebytes.github.io/atom.xml" rel="self"/>
   <link href="https://pulsebytes.github.io/"/>
   <id>https://pulsebytes.github.io/</id>
-  <updated>2026-11-08T01:42:04Z</updated>
+  <updated>2026-11-08T07:19:39Z</updated>
+  <entry>
+    <title>Unshackled Intelligence: Deep-Diving into the DeepSeek-V4-Pro-Qwen3.5 &#x27;Heretic&#x27;</title>
+    <link rel="alternate" type="text/html" href="https://pulsebytes.github.io/articles/deepseek-v4-pro-qwen3-5-uncensored-heretic-review.html"/>
+    <id>https://pulsebytes.github.io/articles/deepseek-v4-pro-qwen3-5-uncensored-heretic-review.html</id>
+    <updated>2026-11-08T07:04:13Z</updated>
+    <published>2026-11-08T07:04:13Z</published>
+    <author>
+      <name>Pulsebyte Editorial</name>
+    </author>
+    <summary type="html"><![CDATA[Discover a powerful 9B parameter model that combines the architectural prowess of Qwen and DeepSeek without the restrictive guardrails of corporate AI. This multimodal 'Heretic' variant offers raw, unfiltered text and image processing for developers who demand creative freedom.]]></summary>
+    <content type="html"><![CDATA[<h3>1. The Problem: The Barrier of AI 'Refusal-itis'</h3><p>In the current landscape of Large Language Models (LLMs), developers and researchers often hit a common wall: alignment-induced refusal. While safety guardrails are designed with good intentions, they frequently result in 'refusal-itis,' where models decline to generate creative fiction, analyze controversial historical data, or engage in roleplay. For developers building edge-case applications or researchers studying unfiltered linguistic patterns, these restrictions are a bottleneck to innovation. There is a growing demand for compact, high-performance models that prioritize instruction-following over moralizing, especially in the 9B parameter range where local deployment is feasible.</p><h3>2. Architecture & Key Features: The Anatomy of a Heretic</h3><p>The <strong>xtools-at/DeepSeek-V4-Pro-Qwen3.5-9B-UNCENSORED-heretic</strong> is a specialized fine-tune that leverages the robust <code>qwen3_5</code> architecture and incorporates insights from the DeepSeek-V4 lineage. Unlike standard releases, this 'Heretic' version is explicitly stripped of common censorship layers, allowing for raw output generation. Under the hood, it utilizes <code>safetensors</code> for secure and efficient weight distribution and is fully compatible with <code>text-generation-inference</code> (TGI).</p><ul><li><strong>9B Parameters:</strong> Optimized for consumer-grade GPUs, providing a sweet spot between reasoning capability and VRAM efficiency.</li><li><strong>Multimodal Capability:</strong> Supporting <code>image-text-to-text</code>, this model can describe and analyze visual inputs alongside complex text prompts.</li><li><strong>Uncensored Nature:</strong> Fine-tuned to follow instructions without the typical 'I cannot fulfill this request' responses.</li><li><strong>Transformer-based:</strong> Built on the latest transformer optimizations for faster token throughput and better context handling.</li></ul><h3>3. Quick Start & Practical Use Case: Running the Heretic</h3><p>To get started with <strong>xtools-at/DeepSeek-V4-Pro-Qwen3.5-9B-UNCENSORED-heretic</strong>, you can use the Hugging Face <code>transformers</code> library. This model is particularly effective for creative writing pipelines or private research assistants where unfiltered brainstorming is required.</p><code>from transformers import AutoModelForCausalLM, AutoTokenizer<br><br>model_id = "xtools-at/DeepSeek-V4-Pro-Qwen3.5-9B-UNCENSORED-heretic"<br>tokenizer = AutoTokenizer.from_pretrained(model_id)<br>model = AutoModelForCausalLM.from_pretrained(model_id, device_map="auto", torch_dtype="auto")<br><br>prompt = "Write a gritty noir detective scene involving a complex heist."<br>inputs = tokenizer(prompt, return_tensors="pt").to("cuda")<br>outputs = model.generate(**inputs, max_new_tokens=200)<br>print(tokenizer.decode(outputs[0]))</code><p>For those looking for high-throughput production environments, it is recommended to deploy via the <code>text-generation-inference</code> container to take full advantage of its architecture.</p><h3>4. Why It Matters: Community Impact and Future Outlook</h3><p>With a community score of <strong>503</strong>, it is clear that the developer community is hungry for models that offer high autonomy. The 'Heretic' moniker isn't just branding; it represents a shift toward local, sovereign AI where the user—not the provider—determines the boundaries of conversation. By merging the multimodal strengths of Qwen with the reasoning depth associated with DeepSeek, this project provides a versatile tool for the next generation of unfiltered AI applications.</p><blockquote>Check out the model weights and documentation here: <a href="https://huggingface.co/xtools-at/DeepSeek-V4-Pro-Qwen3.5-9B-UNCENSORED-heretic">xtools-at/DeepSeek-V4-Pro-Qwen3.5-9B-UNCENSORED-heretic on Hugging Face</a></blockquote>]]></content>
+  </entry>
   <entry>
     <title>MacOS in Your Terminal: Is terminal-mac the Ultimate Sandbox for AI Agents?</title>
-    <link rel="alternate" type="text/html" href="https://pulsebytes.github.io/article.html?slug=terminal-mac-macos-inside-terminal-apple-silicon"/>
-    <id>https://pulsebytes.github.io/article.html?slug=terminal-mac-macos-inside-terminal-apple-silicon</id>
-    <updated>2026-11-07T14:15:15Z</updated>
-    <published>2026-11-07T14:15:15Z</published>
+    <link rel="alternate" type="text/html" href="https://pulsebytes.github.io/articles/terminal-mac-macos-inside-terminal-apple-silicon.html"/>
+    <id>https://pulsebytes.github.io/articles/terminal-mac-macos-inside-terminal-apple-silicon.html</id>
+    <updated>2026-11-08T07:01:05Z</updated>
+    <published>2026-11-08T07:01:05Z</published>
     <author>
       <name>Pulsebyte Editorial</name>
     </author>
@@ -20,8 +32,8 @@
   </entry>
   <entry>
     <title>Lightweight, Level-Based, and Lean: Mastering Node.js Observability with @boost/log</title>
-    <link rel="alternate" type="text/html" href="https://pulsebytes.github.io/article.html?slug=mastering-observability-with-boost-log"/>
-    <id>https://pulsebytes.github.io/article.html?slug=mastering-observability-with-boost-log</id>
+    <link rel="alternate" type="text/html" href="https://pulsebytes.github.io/articles/mastering-observability-with-boost-log.html"/>
+    <id>https://pulsebytes.github.io/articles/mastering-observability-with-boost-log.html</id>
     <updated>2026-11-07T07:30:33Z</updated>
     <published>2026-11-07T07:30:33Z</published>
     <author>
@@ -39,8 +51,8 @@ logger.error('Failed to fetch user data', new Error('Timeout'));</code></pre><p>
   </entry>
   <entry>
     <title>Beyond Babysitting: Why Agent Autoloop is the Missing Link for CLI Agents</title>
-    <link rel="alternate" type="text/html" href="https://pulsebytes.github.io/article.html?slug=agent-autoloop-autonomous-cli-orchestration"/>
-    <id>https://pulsebytes.github.io/article.html?slug=agent-autoloop-autonomous-cli-orchestration</id>
+    <link rel="alternate" type="text/html" href="https://pulsebytes.github.io/articles/agent-autoloop-autonomous-cli-orchestration.html"/>
+    <id>https://pulsebytes.github.io/articles/agent-autoloop-autonomous-cli-orchestration.html</id>
     <updated>2026-11-07T06:37:18Z</updated>
     <published>2026-11-07T06:37:18Z</published>
     <author>
@@ -51,8 +63,8 @@ logger.error('Failed to fetch user data', new Error('Timeout'));</code></pre><p>
   </entry>
   <entry>
     <title>From Sentence to Spec: How caru-ini/stack-diagram Renders Instant Architecture Diagrams for AI Agents</title>
-    <link rel="alternate" type="text/html" href="https://pulsebytes.github.io/article.html?slug=from-sentence-to-spec-caru-ini-stack-diagram"/>
-    <id>https://pulsebytes.github.io/article.html?slug=from-sentence-to-spec-caru-ini-stack-diagram</id>
+    <link rel="alternate" type="text/html" href="https://pulsebytes.github.io/articles/from-sentence-to-spec-caru-ini-stack-diagram.html"/>
+    <id>https://pulsebytes.github.io/articles/from-sentence-to-spec-caru-ini-stack-diagram.html</id>
     <updated>2026-11-06T14:11:41Z</updated>
     <published>2026-11-06T14:11:41Z</published>
     <author>
@@ -63,8 +75,8 @@ logger.error('Failed to fetch user data', new Error('Timeout'));</code></pre><p>
   </entry>
   <entry>
     <title>Programmatic Animation Over GenAI: Inside mromidev/claude-animated-shorts</title>
-    <link rel="alternate" type="text/html" href="https://pulsebytes.github.io/article.html?slug=claude-animated-shorts-threejs-remotion"/>
-    <id>https://pulsebytes.github.io/article.html?slug=claude-animated-shorts-threejs-remotion</id>
+    <link rel="alternate" type="text/html" href="https://pulsebytes.github.io/articles/claude-animated-shorts-threejs-remotion.html"/>
+    <id>https://pulsebytes.github.io/articles/claude-animated-shorts-threejs-remotion.html</id>
     <updated>2026-11-06T13:36:12Z</updated>
     <published>2026-11-06T13:36:12Z</published>
     <author>
@@ -75,8 +87,8 @@ logger.error('Failed to fetch user data', new Error('Timeout'));</code></pre><p>
   </entry>
   <entry>
     <title>Inside NOIR: The Desktop Privacy Audit Tool Decoding Android Data Leaks Over ADB</title>
-    <link rel="alternate" type="text/html" href="https://pulsebytes.github.io/article.html?slug=inside-noir-android-privacy-audit-adb"/>
-    <id>https://pulsebytes.github.io/article.html?slug=inside-noir-android-privacy-audit-adb</id>
+    <link rel="alternate" type="text/html" href="https://pulsebytes.github.io/articles/inside-noir-android-privacy-audit-adb.html"/>
+    <id>https://pulsebytes.github.io/articles/inside-noir-android-privacy-audit-adb.html</id>
     <updated>2026-11-06T13:20:55Z</updated>
     <published>2026-11-06T13:20:55Z</published>
     <author>
@@ -88,8 +100,8 @@ noir</code></pre><p>If standard ADB binaries are missing, NOIR offers to downloa
   </entry>
   <entry>
     <title>Turnstone: The Open-Source, Self-Hosted Alternative to Grok Bot</title>
-    <link rel="alternate" type="text/html" href="https://pulsebytes.github.io/article.html?slug=turnstone-open-source-grok-bot-alternative"/>
-    <id>https://pulsebytes.github.io/article.html?slug=turnstone-open-source-grok-bot-alternative</id>
+    <link rel="alternate" type="text/html" href="https://pulsebytes.github.io/articles/turnstone-open-source-grok-bot-alternative.html"/>
+    <id>https://pulsebytes.github.io/articles/turnstone-open-source-grok-bot-alternative.html</id>
     <updated>2026-11-06T12:55:47Z</updated>
     <published>2026-11-06T12:55:47Z</published>
     <author>
@@ -100,8 +112,8 @@ noir</code></pre><p>If standard ADB binaries are missing, NOIR offers to downloa
   </entry>
   <entry>
     <title>Inside DeepSeek SuperAgent: Minimal Attention, Maximum Autonomous Value</title>
-    <link rel="alternate" type="text/html" href="https://pulsebytes.github.io/article.html?slug=inside-deepseek-superagent-autonomous-agent"/>
-    <id>https://pulsebytes.github.io/article.html?slug=inside-deepseek-superagent-autonomous-agent</id>
+    <link rel="alternate" type="text/html" href="https://pulsebytes.github.io/articles/inside-deepseek-superagent-autonomous-agent.html"/>
+    <id>https://pulsebytes.github.io/articles/inside-deepseek-superagent-autonomous-agent.html</id>
     <updated>2026-11-06T12:02:55Z</updated>
     <published>2026-11-06T12:02:55Z</published>
     <author>

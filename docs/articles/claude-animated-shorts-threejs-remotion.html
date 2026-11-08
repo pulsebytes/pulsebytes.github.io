@@ -1,0 +1,634 @@
+<!doctype html>
+<html lang="en" data-theme="dark" prefix="og: https://ogp.me/ns# fb: https://ogp.me/ns/fb#">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Programmatic Animation Over GenAI: Inside mromidev/claude-animated-shorts – Pulsebyte</title>
+<meta name="description" content="mromidev/claude-animated-shorts is a free Claude skill that builds viral 2D-in-3D vertical story shorts using Three.js and Remotion on your local PC without relying on AI video generators. By pairing agentic Claude workflows with deterministic code rendering and reference benchmarks, it produces high-quality, repeatable animations.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Pulsebyte Editorial">
+<link rel="canonical" href="https://pulsebytes.github.io/articles/claude-animated-shorts-threejs-remotion.html">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Pulsebyte">
+<meta property="og:title" content="Programmatic Animation Over GenAI: Inside mromidev/claude-animated-shorts">
+<meta property="og:description" content="mromidev/claude-animated-shorts is a free Claude skill that builds viral 2D-in-3D vertical story shorts using Three.js and Remotion on your local PC without relying on AI video generators. By pairing agentic Claude workflows with deterministic code rendering and reference benchmarks, it produces high-quality, repeatable animations.">
+<meta property="og:url" content="https://pulsebytes.github.io/articles/claude-animated-shorts-threejs-remotion.html">
+<meta property="og:image" content="https://pulsebytes.github.io/assets/og-image.png">
+<meta property="og:image:secure_url" content="https://pulsebytes.github.io/assets/og-image.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Programmatic Animation Over GenAI: Inside mromidev/claude-animated-shorts">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-11-06T13:36:12Z">
+<meta property="article:author" content="Pulsebyte Editorial">
+  <meta property="article:tag" content="TypeScript">
+  <meta property="article:tag" content="Three.js">
+  <meta property="article:tag" content="Remotion">
+  <meta property="article:tag" content="Claude">
+  <meta property="article:tag" content="Animation">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@Pulsebyte">
+<meta name="twitter:title" content="Programmatic Animation Over GenAI: Inside mromidev/claude-animated-shorts">
+<meta name="twitter:description" content="mromidev/claude-animated-shorts is a free Claude skill that builds viral 2D-in-3D vertical story shorts using Three.js and Remotion on your local PC without relying on AI video generators. By pairing agentic Claude workflows with deterministic code rendering and reference benchmarks, it produces high-quality, repeatable animations.">
+<meta name="twitter:image" content="https://pulsebytes.github.io/assets/og-image.png">
+
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="alternate" type="application/rss+xml" title="Pulsebyte · RSS Feed" href="../feed.xml">
+<link rel="alternate" type="application/atom+xml" title="Pulsebyte · Atom Feed" href="../atom.xml">
+
+<!-- Structured Data for Medium Importer and Google Search -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://pulsebytes.github.io/articles/claude-animated-shorts-threejs-remotion.html"
+  },
+  "headline": "Programmatic Animation Over GenAI: Inside mromidev/claude-animated-shorts",
+  "description": "mromidev/claude-animated-shorts is a free Claude skill that builds viral 2D-in-3D vertical story shorts using Three.js and Remotion on your local PC without relying on AI video generators. By pairing agentic Claude workflows with deterministic code rendering and reference benchmarks, it produces high-quality, repeatable animations.",
+  "articleBody": " The Problem: The Flicker and Cost of Generative Video  Creating short-form animated visual stories usually forces creators to choose between two painful trade-offs: tedious manual 3D modeling and keyframing, or generative AI video tools. While AI video generators have advanced rapidly, they remain notoriously difficult to control. They suffer from temporal inconsistency, flickering characters, unpredictable camera movements, and heavy cloud rendering costs.  For developers and content creators wanting stylized, deterministic control over camera paths, lighting, character art, and audio ducking, generative video models often fall short. There has been a distinct lack of automated pipelines that can take a script and deterministically render stylized 2D-in-3D short animations locally without cloud credits or frame hallucinations.  Architecture & Key Features: Code-Driven Storytelling  The open-source project  mromidev/claude-animated-shorts  addresses this bottleneck by orchestrating pr",
+  "image": "https://pulsebytes.github.io/assets/og-image.png",
+  "datePublished": "2026-11-06T13:36:12Z",
+  "dateModified": "2026-11-06T13:36:12Z",
+  "author": {
+    "@type": "Organization",
+    "name": "Pulsebyte Editorial",
+    "url": "https://pulsebytes.github.io"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Pulsebyte",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://pulsebytes.github.io/assets/logo.png"
+    }
+  }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script>(function(){var t=localStorage.getItem("pb-theme")||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");document.documentElement.dataset.theme=t})();</script>
+
+<style>
+
+/* ══ DESIGN TOKENS ══ */
+:root{
+  --bg: #f8fafc;
+  --bg2: #f1f5f9;
+  --panel: #ffffff;
+  --ink: #0f172a;
+  --ink2: #475569;
+  --ink3: #94a3b8;
+  --line: #e2e8f0;
+  --line-strong: #cbd5e1;
+  --acc: #6366f1;
+  --acc-h: #4f46e5;
+  --acc-soft: #eef2ff;
+  --acc-ink: #ffffff;
+  --hot: #f59e0b;
+  --sh-sm: 0 1px 3px rgba(0,0,0,.05), 0 1px 2px rgba(0,0,0,.03);
+  --sh: 0 4px 14px rgba(0,0,0,.06), 0 1px 3px rgba(0,0,0,.04);
+  --sh-lg: 0 12px 32px rgba(0,0,0,.1), 0 4px 10px rgba(0,0,0,.05);
+  --r: 10px;
+  --r-lg: 16px;
+  --r-xl: 20px;
+  --hdr: 64px;
+}
+[data-theme=dark]{
+  --bg: #090d16;
+  --bg2: #0f172a;
+  --panel: #111827;
+  --ink: #f8fafc;
+  --ink2: #94a3b8;
+  --ink3: #64748b;
+  --line: #1e293b;
+  --line-strong: #334155;
+  --acc: #818cf8;
+  --acc-h: #a5b4fc;
+  --acc-soft: #1e1b4b;
+  --acc-ink: #090d16;
+  --hot: #fbbf24;
+  --sh-sm: 0 1px 3px rgba(0,0,0,.3);
+  --sh: 0 4px 16px rgba(0,0,0,.45);
+  --sh-lg: 0 14px 40px rgba(0,0,0,.6);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-padding-top:calc(var(--hdr) + 16px);scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--ink);
+  font:15.5px/1.7 Inter,system-ui,-apple-system,sans-serif;
+  -webkit-font-smoothing:antialiased;min-height:100vh;
+  display:flex;flex-direction:column;
+}
+img{display:block;max-width:100%}
+a{color:var(--acc);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ══ HEADER ══ */
+header{
+  position:sticky;top:0;z-index:100;height:var(--hdr);
+  background:color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 max(20px, calc(50vw - 580px));
+}
+.logo{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:1.25rem;
+  color:var(--ink);text-decoration:none;letter-spacing:-.02em;
+}
+.logo-mark{
+  width:30px;height:30px;border-radius:9px;
+  background:linear-gradient(135deg, var(--acc), #a855f7);
+  display:grid;place-items:center;box-shadow:var(--sh-sm);
+}
+.hdr-right{display:flex;align-items:center;gap:10px}
+.btn{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:8px 14px;border-radius:var(--r);font-size:13.5px;font-weight:600;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);
+  cursor:pointer;transition:all .15s;text-decoration:none;
+}
+.btn:hover{background:var(--bg2);border-color:var(--line-strong);text-decoration:none}
+.btn.p{background:var(--acc);color:var(--acc-ink);border-color:var(--acc)}
+.btn.p:hover{background:var(--acc-h);border-color:var(--acc-h);color:var(--acc-ink)}
+.btn.sm{padding:5px 11px;font-size:12.5px}
+
+/* ══ ARTICLE LAYOUT ══ */
+.article-wrap{max-width:1240px;margin:0 auto;padding:36px 20px 80px;flex:1;width:100%}
+.article-layout{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:36px;
+  align-items:start;
+}
+@media(min-width:1024px){
+  .article-layout{
+    grid-template-columns:minmax(0, 1fr) 320px;
+  }
+}
+.article-main-col{min-width:0}
+.article-sidebar-col{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+@media(min-width:1024px){
+  .article-sidebar-col{
+    position:sticky;
+    top:84px;
+  }
+}
+.sidebar-box{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:var(--r-lg);
+  padding:18px 20px;
+  box-shadow:var(--sh-sm);
+}
+.sidebar-box-title{
+  font-family:"Bricolage Grotesque",sans-serif;
+  font-size:12.5px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  color:var(--ink2);
+  margin-bottom:12px;
+  display:flex;align-items:center;gap:6px;
+}
+.art-back-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
+.art-back-btn{
+  display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;
+  color:var(--ink2);background:var(--bg2);border:1px solid var(--line);
+  padding:7px 14px;border-radius:var(--r);text-decoration:none;transition:all .15s;
+}
+.art-back-btn:hover{background:var(--line);color:var(--ink);text-decoration:none}
+
+/* Meta */
+.art-meta-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px;font-size:13px;color:var(--ink3)}
+.art-badge{
+  font-size:11.5px;font-weight:700;background:var(--acc-soft);color:var(--acc);
+  padding:2px 8px;border-radius:6px;text-transform:uppercase;letter-spacing:.04em;
+}
+.reader-title{
+  font-family:"Bricolage Grotesque",sans-serif;font-size:2.2rem;font-weight:800;
+  letter-spacing:-.03em;line-height:1.2;margin:12px 0 20px;color:var(--ink);
+}
+.reader-tldr{
+  background:var(--acc-soft);border-left:4px solid var(--acc);
+  padding:16px 20px;border-radius:var(--r);font-size:15.5px;line-height:1.65;
+  margin-bottom:30px;color:var(--ink);
+}
+.reader-tags{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:28px}
+.reader-tag{
+  font-size:12px;background:var(--bg2);border:1px solid var(--line);
+  padding:2px 10px;border-radius:999px;color:var(--ink2);
+}
+
+/* Featured Project Card */
+.reader-hero-img{
+  width:100%;max-height:360px;aspect-ratio:16/9;object-fit:cover;
+  border-radius:var(--r-xl);border:1px solid var(--line);margin-bottom:16px;
+  box-shadow:var(--sh);
+}
+.reader-project-banner{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:18px 20px;margin:20px 0 32px;display:flex;gap:16px;align-items:center;
+  box-shadow:var(--sh-sm);flex-wrap:wrap;
+}
+.reader-project-avatar{
+  width:52px;height:52px;border-radius:12px;border:1px solid var(--line);
+  flex-shrink:0;background:#0d1117;
+}
+.rpb-details{flex:1;min-width:240px}
+.rpb-title{font-weight:700;font-size:15px;color:var(--ink);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.rpb-desc{font-size:13px;color:var(--ink2);margin-top:4px;line-height:1.5}
+.chip{
+  display:inline-flex;align-items:center;gap:5px;background:var(--bg2);
+  border:1px solid var(--line);border-radius:999px;padding:2px 8px;font-size:11.5px;color:var(--ink2);
+}
+
+/* ══ SOCIAL SHARING BAR ══ */
+.share-bar{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:14px 18px;margin:24px 0 32px;display:flex;align-items:center;gap:10px;
+  flex-wrap:wrap;box-shadow:var(--sh-sm);
+}
+.share-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--ink3);margin-right:4px}
+.share-btn{
+  display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;
+  font-size:12.5px;font-weight:600;color:#fff;text-decoration:none;transition:transform .12s,opacity .12s;cursor:pointer;border:none;
+}
+.share-btn:hover{transform:translateY(-1px);opacity:.9;text-decoration:none;color:#fff}
+.sb-x{background:#000000}
+[data-theme=dark] .sb-x{background:#ffffff;color:#000}
+[data-theme=dark] .sb-x:hover{color:#000}
+.sb-linkedin{background:#0A66C2}
+.sb-telegram{background:#2AABEE}
+.sb-reddit{background:#FF4500}
+.sb-facebook{background:#1877F2}
+.sb-facebook{background:#1877F2}
+.sb-copy{background:var(--bg2);color:var(--ink);border:1px solid var(--line)}
+.sb-copy:hover{background:var(--line);color:var(--ink)}
+
+/* ══ SPONSOR / AD BOX ══ */
+.sponsor-slot{
+  background:linear-gradient(135deg, color-mix(in srgb, var(--acc) 8%, var(--panel)), var(--panel));
+  border:1px solid color-mix(in srgb, var(--acc) 30%, var(--line));
+  border-radius:var(--r-lg);padding:20px 24px;margin:32px 0;position:relative;
+  box-shadow:var(--sh-sm);
+}
+.sponsor-badge{
+  display:inline-block;background:var(--acc-soft);color:var(--acc);font-size:11px;
+  font-weight:800;padding:2px 8px;border-radius:5px;letter-spacing:.05em;text-transform:uppercase;margin-bottom:8px;
+}
+.sponsor-content{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.sponsor-info{flex:1;min-width:260px}
+.sponsor-title{font-family:"Bricolage Grotesque",sans-serif;font-size:1.15rem;font-weight:700;color:var(--ink);margin-bottom:4px}
+.sponsor-desc{font-size:13.5px;color:var(--ink2);line-height:1.5}
+
+/* ══ ARTICLE CONTENT TYPOGRAPHY ══ */
+.reader-content{line-height:1.8;color:var(--ink);font-size:16px}
+.reader-content h2, .reader-content h3{
+  font-family:"Bricolage Grotesque",sans-serif;font-size:1.4rem;font-weight:800;
+  letter-spacing:-.02em;margin:36px 0 14px;color:var(--ink);
+}
+.reader-content p{margin-bottom:18px;color:var(--ink2);font-size:15.5px}
+.reader-content ul, .reader-content ol{padding-left:24px;margin-bottom:20px;color:var(--ink2)}
+.reader-content li{margin-bottom:8px}
+.reader-content code{
+  background:var(--bg2);padding:2px 7px;border-radius:5px;
+  font-family:'JetBrains Mono',monospace;font-size:13.5px;color:var(--acc);
+}
+.reader-content blockquote{
+  background:var(--bg2);border-left:4px solid var(--line-strong);padding:14px 18px;
+  border-radius:var(--r);margin:20px 0;font-style:italic;color:var(--ink2);
+}
+
+/* ══ MORE ARTICLES SECTION ══ */
+.more-sec{margin-top:60px;padding-top:40px;border-top:1px solid var(--line)}
+.more-title{font-family:"Bricolage Grotesque",sans-serif;font-size:1.4rem;font-weight:800;margin-bottom:20px}
+.more-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.more-card{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:18px;display:flex;flex-direction:column;text-decoration:none;transition:all .15s;
+}
+.more-card:hover{border-color:var(--acc);transform:translateY(-2px);box-shadow:var(--sh);text-decoration:none}
+.more-card h4{font-family:"Bricolage Grotesque",sans-serif;font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:6px}
+.more-card p{font-size:13px;color:var(--ink2);margin-bottom:12px;flex:1;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;display:-webkit-box}
+.more-card span{font-size:12px;color:var(--acc);font-weight:600}
+
+/* ══ FOOTER ══ */
+footer{
+  border-top:1px solid var(--line);background:var(--panel);
+  padding:36px 20px;text-align:center;font-size:13px;color:var(--ink3);margin-top:auto;
+}
+.footer-links{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-bottom:14px}
+.footer-links a{color:var(--ink2);font-weight:500}
+.footer-social{display:flex;justify-content:center;gap:12px;margin-bottom:16px}
+.footer-social a{color:var(--ink2);display:inline-flex;align-items:center;gap:5px;font-size:13px}
+
+/* Toast */
+#toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);
+  background:var(--ink);color:var(--bg);padding:10px 20px;border-radius:999px;
+  font-size:13px;font-weight:600;box-shadow:var(--sh-lg);transition:transform .2s ease;
+  z-index:9999;pointer-events:none;
+}
+#toast.on{transform:translateX(-50%) translateY(0)}
+
+@media(max-width:640px){
+  .reader-title{font-size:1.75rem}
+  .share-bar{gap:8px}
+  .share-btn{font-size:11.5px;padding:5px 9px}
+}
+
+</style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<header role="banner">
+  <a class="logo" href="../">
+    <div class="logo-mark">
+      <svg width="16" height="16" viewBox="0 0 32 32" fill="none">
+        <path d="M4 17h6l3-9 6 16 3-7h6" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    Pulsebyte
+  </a>
+  <div class="header-actions">
+    <a class="btn sm" href="../">Trending Projects</a>
+    <a class="btn sm" href="../#articles">All Articles</a>
+    <a class="btn sm" href="../sponsor.html">Sponsor</a>
+    <button class="theme-toggle" id="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">
+      <svg id="theme-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- ══ MAIN LAYOUT (2-COLUMN) ══ -->
+<main class="page-body">
+  <div class="layout-2col">
+    <!-- Left / Center Column -->
+    <div class="article-main-col">
+      <div class="art-back-nav">
+        <a class="art-back-btn" href="../#articles">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+          Back to Articles Feed
+        </a>
+        <span style="font-size:12px;color:var(--ink3)">Technical Deep Dive</span>
+      </div>
+
+      <!-- Featured Project Showcase -->
+      
+      <div class="reader-project-banner">
+        <div style="flex:1;min-width:240px">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+            <span class="art-badge">GitHub</span>
+            <strong style="color:var(--ink);font-size:14px">mromidev/claude-animated-shorts</strong>
+          </div>
+          <div style="font-size:12.5px;color:var(--ink2)">★ 1928 &middot; TypeScript</div>
+        </div>
+        <a class="btn p sm" href="https://github.com/mromidev/claude-animated-shorts" target="_blank" rel="noopener noreferrer">View Repository &rarr;</a>
+      </div>
+
+
+      <!-- Meta & Title -->
+      <div class="art-meta-row">
+        <span class="art-badge">Deep Dive</span>
+        <span>4 min read</span>
+        <span>&middot;</span>
+        <span>Nov 06, 2026</span>
+      </div>
+
+      <h1 class="reader-title">Programmatic Animation Over GenAI: Inside mromidev/claude-animated-shorts</h1>
+      <div class="reader-tldr">mromidev/claude-animated-shorts is a free Claude skill that builds viral 2D-in-3D vertical story shorts using Three.js and Remotion on your local PC without relying on AI video generators. By pairing agentic Claude workflows with deterministic code rendering and reference benchmarks, it produces high-quality, repeatable animations.</div>
+      <div class="reader-tags"><span class="reader-tag">#TypeScript</span><span class="reader-tag">#Three.js</span><span class="reader-tag">#Remotion</span><span class="reader-tag">#Claude</span><span class="reader-tag">#Animation</span></div>
+
+      <!-- Top Social Sharing Bar -->
+      <div class="share-bar">
+        <span class="share-label">Share:</span>
+        <button class="share-btn sb-x" onclick="shareArticle('x')" aria-label="Share on X">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          X / Twitter
+        </button>
+        <button class="share-btn sb-linkedin" onclick="shareArticle('linkedin')" aria-label="Share on LinkedIn">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+          LinkedIn
+        </button>
+        <button class="share-btn sb-telegram" onclick="shareArticle('telegram')" aria-label="Share on Telegram">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-2.04 9.61c-.152.678-.554.843-1.124.524l-3.1-2.284-1.497 1.44c-.165.165-.305.305-.625.305l.223-3.17 5.77-5.213c.25-.224-.055-.348-.39-.124L7.08 14.57l-3.03-.947c-.658-.206-.673-.658.138-.977l11.843-4.566c.548-.199 1.028.134.531.168z"/></svg>
+          Telegram
+        </button>
+        <button class="share-btn sb-reddit" onclick="shareArticle('reddit')" aria-label="Share on Reddit">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.702z"/></svg>
+          Reddit
+        </button>
+        <button class="share-btn sb-facebook" onclick="shareArticle('facebook')" aria-label="Share on Facebook">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          Facebook
+        </button>
+        <button class="share-btn sb-copy" onclick="copyArticleLink()">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+          Copy Link
+        </button>
+      </div>
+
+      <!-- Sponsor Slot: Top -->
+      <div id="sponsor-slot-top"></div>
+
+      <!-- Article HTML Content (Semantic <article> for Medium and SEO) -->
+      <article class="reader-content" id="r-content">
+        <h3>The Problem: The Flicker and Cost of Generative Video</h3><p>Creating short-form animated visual stories usually forces creators to choose between two painful trade-offs: tedious manual 3D modeling and keyframing, or generative AI video tools. While AI video generators have advanced rapidly, they remain notoriously difficult to control. They suffer from temporal inconsistency, flickering characters, unpredictable camera movements, and heavy cloud rendering costs.</p><p>For developers and content creators wanting stylized, deterministic control over camera paths, lighting, character art, and audio ducking, generative video models often fall short. There has been a distinct lack of automated pipelines that can take a script and deterministically render stylized 2D-in-3D short animations locally without cloud credits or frame hallucinations.</p><h3>Architecture & Key Features: Code-Driven Storytelling</h3><p>The open-source project <strong>mromidev/claude-animated-shorts</strong> addresses this bottleneck by orchestrating programmatic rendering engines through a Claude skill. Instead of generating raw video pixels with diffusion models, Claude writes code that renders 2D characters inside a 3D environment using <code>three.js</code> and <code>Remotion</code> on your local machine.</p><p>Under the hood, the project relies on several structured components to maintain aesthetic quality and workflow rigor:</p><ul><li><strong><code>SKILL.md</code>:</strong> The central operational ruleset for Claude, dictating the step-by-step creation pipeline from facts to script, shot composition in <code>story.ts</code>, render fixes, and visual tuning.</li><li><strong>Three.js + Remotion Integration:</strong> Utilizing <code>@remotion/three</code>, the pipeline constructs vertical (55–70s) shorts featuring ink-outlined 2D characters, custom camera glides, depth-of-field lens blur, and painted world textures.</li><li><strong>Reference Reports &amp; QA Benchmark Assets:</strong> Includes 7 measured style reports (covering motion, depth, lighting, textures, and outlines) alongside 38 full-size reference frames and 20 contact sheets (1,200 total reference frames) so Claude agents can inspect and verify visual consistency during frame-by-frame QA.</li><li><strong>Synthesized Audio Pipeline:</strong> Located in <code>templates/audio/</code>, this subsystem handles march music, sound effects, loudness normalization, and audio ducking behind voiceover tracks.</li></ul><h3>Quick Start & Practical Use Case</h3><p>To start creating shorts—such as the proof-of-concept short <em>The Bridge That Fell for a Song</em> about the 1831 Broughton suspension bridge collapse—you can integrate the repository into your local Claude environment.</p><p>Ensure your system has <strong>Node</strong>, <strong>Python 3</strong>, <strong>ffmpeg</strong>, and <strong>Remotion</strong> (with <code>@remotion/three</code> installed).</p><p>1. Install the skill by placing the project inside your local Claude skills directory:</p><p><code>git clone https://github.com/mromidev/claude-animated-shorts ~/.claude/skills/cartoon-3d-short/</code></p><p>2. Set up your environment (recommended to point <code>REMOTION_TMP</code> to a drive with plenty of storage space).</p><p>3. In Claude Code, trigger the pipeline with a prompt such as:</p><blockquote><p><em>"Use the cartoon short skill and make a short about the history of the London Underground."</em></p></blockquote><p>Claude will execute the entire workflow: researching facts, generating the narrative script, setting sound cues, composing the shot plan in <code>story.ts</code>, rendering stills for agentic visual inspection against reference standards, and finally assembling the 2K render with full audio mixing.</p><h3>Why It Matters: Reclaiming Control in AI Workflows</h3><p>With over <strong>1,928 GitHub stars</strong>, <a href="https://github.com/mromidev/claude-animated-shorts">mromidev/claude-animated-shorts</a> highlights a growing trend in developer tooling: using Large Language Models not as raw asset generators, but as orchestrators of traditional, high-precision rendering engines.</p><p>By swapping unpredictable generative video models for programmatic Three.js code inside Remotion, developers retain full control over frame rate, camera coordinates, lighting parameters, and audio levels. It demonstrates that the future of automated video creation may be written in TypeScript, rendered locally, and guided intelligently by AI skills.</p><p>Check out the full source code, reference reports, and template packages on the <a href="https://github.com/mromidev/claude-animated-shorts">mromidev/claude-animated-shorts GitHub repository</a>.</p>
+      </article>
+
+      <!-- Sponsor Slot: Bottom -->
+      <div id="sponsor-slot-bottom"></div>
+
+      <!-- Bottom Share Bar -->
+      <div class="share-bar" style="margin-top:40px">
+        <span class="share-label">Enjoyed this breakdown? Share with other developers:</span>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="share-btn sb-x" onclick="shareArticle('x')">X / Twitter</button>
+          <button class="share-btn sb-linkedin" onclick="shareArticle('linkedin')">LinkedIn</button>
+          <button class="share-btn sb-telegram" onclick="shareArticle('telegram')">Telegram</button>
+          <button class="share-btn sb-reddit" onclick="shareArticle('reddit')">Reddit</button>
+          <button class="share-btn sb-facebook" onclick="shareArticle('facebook')">Facebook</button>
+          <button class="share-btn sb-copy" onclick="copyArticleLink()">📋 Copy Link</button>
+        </div>
+      </div>
+
+      <!-- More Articles Section -->
+      <section class="more-sec">
+        <h3 class="more-title">More Breakdowns from Pulsebyte</h3>
+        <div class="more-grid">
+          
+          <a class="more-card" href="deepseek-v4-pro-qwen3-5-uncensored-heretic-review.html">
+            <div class="art-badge" style="width:fit-content;margin-bottom:8px">Article</div>
+            <h4 style="font-size:14px;font-weight:700;color:var(--ink);margin-bottom:6px;line-height:1.3">Unshackled Intelligence: Deep-Diving into the DeepSeek-V4-Pro-Qwen3.5 &#x27;Heretic&#x27;</h4>
+            <div style="font-size:11.5px;color:var(--ink3)">5 min read</div>
+          </a>
+
+          <a class="more-card" href="terminal-mac-macos-inside-terminal-apple-silicon.html">
+            <div class="art-badge" style="width:fit-content;margin-bottom:8px">Article</div>
+            <h4 style="font-size:14px;font-weight:700;color:var(--ink);margin-bottom:6px;line-height:1.3">MacOS in Your Terminal: Is terminal-mac the Ultimate Sandbox for AI Agents?</h4>
+            <div style="font-size:11.5px;color:var(--ink3)">5 min read</div>
+          </a>
+
+          <a class="more-card" href="mastering-observability-with-boost-log.html">
+            <div class="art-badge" style="width:fit-content;margin-bottom:8px">Article</div>
+            <h4 style="font-size:14px;font-weight:700;color:var(--ink);margin-bottom:6px;line-height:1.3">Lightweight, Level-Based, and Lean: Mastering Node.js Observability with @boost/log</h4>
+            <div style="font-size:11.5px;color:var(--ink3)">5 min read</div>
+          </a>
+
+        </div>
+      </section>
+    </div>
+
+    <!-- ── ARTICLE SIDEBAR ── -->
+    <aside class="article-sidebar-col">
+      <div id="sponsor-slot-sidebar"></div>
+
+      <div class="sidebar-box">
+        <div class="sidebar-box-title">About Pulsebyte</div>
+        <div style="font-size:12.5px;color:var(--ink2);line-height:1.5">
+          Pulsebyte tracks breakthrough open-source projects across GitHub, Hacker News, Hugging Face, Dev.to and npm, publishing in-depth architectural breakdowns for developers.
+        </div>
+      </div>
+
+      <div class="sidebar-box" style="background:linear-gradient(135deg,rgba(42,171,238,.07),var(--panel));border-color:color-mix(in srgb,#2AABEE 30%,var(--line))">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+          <span style="font-size:18px">📢</span>
+          <strong style="font-size:13.5px;color:var(--ink)">Developer Community</strong>
+        </div>
+        <p style="font-size:12px;color:var(--ink2);line-height:1.45;margin-bottom:12px">
+          Zero-noise daily alerts on breakthrough GitHub repositories, LLMs, and open source tools.
+        </p>
+        <a class="btn sm" href="https://t.me/techinfosec" target="_blank" rel="noopener noreferrer" style="background:#2AABEE;color:#fff;border-color:#2AABEE;font-weight:600;width:100%;justify-content:center">
+          Join 5,000+ Builders &rarr;
+        </a>
+      </div>
+
+      <div style="text-align:center;padding:4px">
+        <a href="../sponsor.html" style="font-size:11.5px;color:var(--ink3);text-decoration:none">
+          Want to feature your product? <strong style="color:var(--acc)">Sponsor Pulsebyte &rarr;</strong>
+        </a>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-links">
+    <a href="../">Home</a>
+    <span>&middot;</span>
+    <a href="../#articles">Articles</a>
+    <span>&middot;</span>
+    <a href="../feed.xml" target="_blank">RSS Feed</a>
+    <span>&middot;</span>
+    <a href="../privacy.html">Privacy Policy</a>
+    <span>&middot;</span>
+    <a href="../terms.html">Terms of Service</a>
+    <span>&middot;</span>
+    <a href="../disclaimer.html">Disclaimer</a>
+    <span>&middot;</span>
+    <a href="../sponsor.html">Advertise / Sponsor</a>
+  </div>
+  <div>&copy; 2026 Pulsebyte &middot; Auto-scanned &amp; published via GitHub Actions</div>
+</footer>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script src="../config.js"></script>
+<script>
+const CFG = window.PULSEBYTE || {};
+const ARTICLE_URL = "https://pulsebytes.github.io/articles/claude-animated-shorts-threejs-remotion.html";
+const ARTICLE_TITLE = "Programmatic Animation Over GenAI: Inside mromidev/claude-animated-shorts";
+
+function toggleTheme(){
+  var cur = document.documentElement.dataset.theme;
+  var next = cur === 'dark' ? 'light' : 'dark';
+  document.documentElement.dataset.theme = next;
+  try { localStorage.setItem('pb-theme', next); } catch(e){}
+}
+
+function toast(msg){
+  var el = document.getElementById('toast');
+  if(!el) return;
+  el.textContent = msg;
+  el.style.transform = 'translateX(-50%) translateY(0)';
+  setTimeout(function(){
+    el.style.transform = 'translateX(-50%) translateY(100px)';
+  }, 2400);
+}
+
+function copyArticleLink(){
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(ARTICLE_URL).then(function(){
+      toast('✓ Link copied to clipboard!');
+    }).catch(function(){
+      toast('Could not copy link');
+    });
+  } else {
+    toast('✓ Link copied: ' + ARTICLE_URL);
+  }
+}
+
+function shareArticle(net){
+  var u = encodeURIComponent(ARTICLE_URL);
+  var t = encodeURIComponent(ARTICLE_TITLE);
+  var map = {
+    x: 'https://twitter.com/intent/tweet?text=' + t + '&url=' + u + '&via=Pulsebyte',
+    linkedin: 'https://www.linkedin.com/sharing/share-offsite/?url=' + u,
+    telegram: 'https://t.me/share/url?url=' + u + '&text=' + t,
+    reddit: 'https://reddit.com/submit?url=' + u + '&title=' + t,
+    facebook: 'https://www.facebook.com/sharer/sharer.php?u=' + u
+  };
+  var target = map[net];
+  if(target){
+    window.open(target, '_blank', 'width=600,height=500,noopener,noreferrer');
+  }
+}
+
+// Dynamic sponsors from config.js
+(function(){
+  var sponsors = Array.isArray(CFG.sponsors) && CFG.sponsors.length ? CFG.sponsors : (CFG.sponsor && CFG.sponsor.enabled ? [CFG.sponsor] : []);
+  function getSponsor(slot){
+    return sponsors.find(function(s){ return s.enabled && (!s.slots || s.slots[slot] !== false); });
+  }
+  var topSp = getSponsor('article_top');
+  if(topSp){
+    var el = document.getElementById('sponsor-slot-top');
+    if(el) el.innerHTML = topSp.custom_code || '<div style="background:linear-gradient(135deg,color-mix(in srgb,var(--acc) 10%,var(--panel)),var(--panel));border:1px solid color-mix(in srgb,var(--acc) 30%,var(--line));border-radius:var(--r);padding:14px 18px;margin:20px 0;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap"><div><strong style="font-size:13.5px;color:var(--ink)">' + (topSp.title||'') + '</strong><span style="font-size:13px;color:var(--ink2);margin-left:8px">' + (topSp.desc||'') + '</span></div><a class="btn p sm" href="' + (topSp.url||'#') + '" target="_blank" rel="noopener noreferrer nofollow">' + (topSp.cta||'Learn More →') + '</a></div>';
+  }
+  var botSp = getSponsor('article_bottom');
+  if(botSp){
+    var el = document.getElementById('sponsor-slot-bottom');
+    if(el) el.innerHTML = botSp.custom_code || '<div style="background:linear-gradient(135deg,color-mix(in srgb,var(--acc) 10%,var(--panel)),var(--panel));border:1px solid color-mix(in srgb,var(--acc) 30%,var(--line));border-radius:var(--r);padding:14px 18px;margin:24px 0;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap"><div><strong style="font-size:13.5px;color:var(--ink)">' + (botSp.title||'') + '</strong><span style="font-size:13px;color:var(--ink2);margin-left:8px">' + (botSp.desc||'') + '</span></div><a class="btn p sm" href="' + (botSp.url||'#') + '" target="_blank" rel="noopener noreferrer nofollow">' + (botSp.cta||'Learn More →') + '</a></div>';
+  }
+  var sbSp = getSponsor('sidebar');
+  if(sbSp){
+    var el = document.getElementById('sponsor-slot-sidebar');
+    if(el) el.innerHTML = sbSp.custom_code || '<div class="sidebar-box" style="background:linear-gradient(135deg,color-mix(in srgb,var(--acc) 10%,var(--panel)),var(--panel));border:1px solid color-mix(in srgb,var(--acc) 30%,var(--line))"><span style="font-size:10px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;background:var(--acc-soft);color:var(--acc);padding:2px 6px;border-radius:4px;display:inline-block;margin-bottom:6px">' + (sbSp.badge||'Sponsor') + '</span><div style="font-size:13.5px;font-weight:700;color:var(--ink);margin-bottom:4px">' + (sbSp.title||'') + '</div><p style="font-size:12px;color:var(--ink2);line-height:1.45;margin-bottom:12px">' + (sbSp.desc||'') + '</p><a class="btn p sm" href="' + (sbSp.url||'#') + '" target="_blank" rel="noopener noreferrer nofollow" style="width:100%;justify-content:center">' + (sbSp.cta||'Learn More →') + '</a></div>';
+  }
+})();
+</script>
+</body>
+</html>

@@ -172,12 +172,13 @@ def main(post=False):
 
     try:
         try:
-            from . import generate_feed
+            from . import generate_articles, generate_feed
         except (ImportError, ValueError):
-            import generate_feed
+            import generate_articles, generate_feed
+        generate_articles.build_all()
         generate_feed.build_all()
     except Exception as e:
-        print(f"Feed rebuild notice: {e}")
+        print(f"Article/feed rebuild notice: {e}")
 
     items = collect()
     if not items: print("Nothing fetched, keeping the old feed"); return
