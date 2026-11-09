@@ -1,5 +1,34 @@
 [
   {
+    "title": "Cinecode: Rendering Full Short Films and Ads Entirely from Agentic Code",
+    "slug": "cinecode-rendering-films-from-agentic-code",
+    "tldr": "Cinecode takes a radical new approach to AI video generation by letting coding agents write scripts, render visual frames programmatically using Three.js and headless Chrome, and compile final MP4s with sound. With over 1,700 stars on GitHub, this Python-driven framework turns video production into a deterministic software workflow.",
+    "read_time": "4 min read",
+    "tags": [
+      "Python",
+      "AI Agents",
+      "Three.js",
+      "FFmpeg",
+      "Generative AI"
+    ],
+    "content": "<h3>1. The Problem: The High Cost and Hallucinations of Traditional AI Video</h3><p>Traditional AI video generation relies heavily on diffusion models that synthesize pixels directly from prompts. While impressive, these black-box video generators present major engineering bottlenecks for developers and creators: visual temporal instability, lack of camera precision, difficulty editing single elements within a scene, and massive compute costs. On the flip side, programmatic video generation using visual frame frameworks guarantees pixel-perfect precision and control, but manually coding dynamic 3D elements, camera trajectories, and temporal triggers scene-by-scene requires excessive time and effort.</p><p>Creators who want code-level control over explainers, music videos, or short films needed a modern mechanism to let autonomous agents handle the tedious orchestration of code-driven animation without forfeiting deterministic execution.</p><h3>2. Architecture & Key Features: How sarpstar/cinecode Works</h3><p>The <strong>sarpstar/cinecode</strong> repository introduces a hybrid creative workflow where an autonomous AI coding agent—such as <strong>Claude Code</strong> or <strong>Cursor</strong>—acts as the director, animator, and audio engineer. Instead of outputting raw video frames via diffusion, Cinecode leverage code as the intermediate representation of the film.</p><p>Under the hood, the pipeline follows a clear architectural sequence:</p><ul><li><strong>Script & Scene Generation:</strong> The coding agent processes your prompt or idea and writes out the script, timing cues, and asset blueprints.</li><li><strong>Frame Construction with Web Graphics:</strong> Every visual scene is created programmatically using modern web standards—such as <strong>Three.js</strong> for 3D environments or HTML/Canvas layouts.</li><li><strong>Headless Chrome Rendering:</strong> Cinecode executes the agent's code inside a headless Chrome browser, rendering every scene frame-by-frame with pixel accuracy.</li><li><strong>Sound & Media Assembly via FFmpeg:</strong> The system designs audio cues and feeds the rendered frames along with sound tracks into <strong>FFmpeg</strong> to assemble the final, export-ready MP4 file.</li></ul><blockquote>By shifting video creation from neural video diffusion to agentic web rendering, Cinecode delivers reproducible, lightweight, and cleanly customizable visual output.</blockquote><h3>3. Quick Start & Practical Use Case</h3><p>Getting started with <strong>sarpstar/cinecode</strong> requires Python on your machine along with an supported agent setup like Claude Code or Cursor.</p><p>Here is how you can set up the environment and kick off a project:</p><p><strong>Step 1: Clone the repository</strong></p><pre><code>git clone https://github.com/sarpstar/cinecode.git\ncd cinecode</code></pre><p><strong>Step 2: Configure your environment</strong></p><p>Ensure your Python dependencies, headless Chrome instance, and FFmpeg installations are accessible on your path. Launch your preferred coding agent (e.g., Claude Code or Cursor) within the project directory.</p><p><strong>Step 3: Prompt your agent to build a scene</strong></p><p>Pass a creative concept to your agent, such as: <em>\"Build a 15-second tech product explainer with dynamic Three.js lighting and clean vector typography.\"</em> The agent will script the scene, write the Three.js code, render the frames via headless Chrome, handle sound timing, and trigger FFmpeg to deliver the final MP4.</p><h3>4. Why It Matters: Deterministic Media Creation</h3><p>With a GitHub score of <strong>1,766 points</strong> and rapid community adoption, <code>sarpstar/cinecode</code> highlights a major shift in how developers think about automated media generation. By combining language models capable of writing complex UI/3D graphics code with renderers like Three.js and FFmpeg, Cinecode avoids common generative AI visual artifacts while granting creators direct code access to tune any frame.</p><p>Whether you are producing short explainers, educational content, YouTube long-form videos, or experimental music videos, Cinecode offers a robust, code-first platform for programmatic cinematic creation.</p><blockquote>Explore the codebase, read multi-language documentation, and contribute to the project on GitHub: <a href=\"https://github.com/sarpstar/cinecode\">sarpstar/cinecode Repository</a>.</blockquote>",
+    "id": "gh:1444112593",
+    "status": "published",
+    "created_at": 1794219580688,
+    "item": {
+      "id": "gh:1444112593",
+      "src": "GitHub",
+      "name": "sarpstar/cinecode",
+      "desc": "Films made with code. Short films, long YouTube videos, ads, explainers and music videos: an AI coding agent writes the script, builds every frame in code, designs the sound and hands you an MP4.",
+      "url": "https://github.com/sarpstar/cinecode",
+      "score": 1766,
+      "lang": "Python",
+      "topics": [],
+      "created": "2026-11-03T10:08:16Z"
+    },
+    "published_at": 1794219648076
+  },
+  {
     "title": "Beyond Emulation: How Hookshot Statically Recompiles the 'Switch 2' Zelda for PC Native Performance",
     "slug": "hookshot-native-recompilation-zelda-pc",
     "tldr": "Hookshot bypasses traditional emulation by statically recompiling The Legend of Zelda: Ocarina of Time (Switch 2) into native C++ for Windows and Linux. This project achieves massive performance gains by rebuilding the console's system software and graphics pipeline on Vulkan.",
