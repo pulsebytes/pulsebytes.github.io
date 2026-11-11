@@ -1,5 +1,40 @@
 [
   {
+    "title": "Quantifying 'Quite Terrible' DRAM Allocation: Inside the ram-altman Script",
+    "slug": "quantifying-dram-allocation-ram-altman",
+    "tldr": "Spurred by comments lamenting the underutilization of DRAM in consumer PCs, developer IainKay created a satire script that monitors local RAM and emails Sam Altman daily reports of unused capacity. Built entirely in lightweight Bash, the tool brings real-time system metrics to tech's global resource allocation debate.",
+    "read_time": "3 min read",
+    "tags": [
+      "bash",
+      "dram",
+      "system-monitoring",
+      "cron",
+      "humor"
+    ],
+    "content": "<h3>1. The Problem</h3><p>In a tech landscape dominated by massive AI cluster demands and global hardware shortages, consumer hardware utilization has become an unexpected talking point. During a recent public appearance, OpenAI CEO Sam Altman remarked that having consumer DRAM sit in personal computers utilized 'maybe 5% of the time' is 'quite terrible' from a global resource allocation perspective.</p><p>This observation raised an obvious question for software engineers: if your machine's idle RAM is an affront to global hardware efficiency, how do you report this missing capacity back to the people who want it? Developer Iain Kay answered that question with <strong>IainKay/ram-altman</strong>, an automated monitoring tool designed to keep key tech figures informed about your unused gigabytes.</p><h3>2. Architecture & Key Features</h3><p>The <code>IainKay/ram-altman</code> project takes a minimalist, dependency-free approach to system auditing. Built entirely in pure Bash rather than a heavy Electron wrapper, it inspects system metrics while avoiding the exact resource inflation it parodies.</p><p>Key technical aspects and features of the project include:</p><ul><li><strong>Accurate Cache Accounting:</strong> Unlike basic memory checkers that incorrectly classify page cache as used application memory, the script handles Unix page cache correctly to deliver true available RAM metrics.</li><li><strong>Threshold Detection:</strong> Monitors overall capacity and triggers reporting when available RAM on your personal computer exceeds 10%.</li><li><strong>Rate-Limited Notifications:</strong> Incorporates a strict rate limiter that sends at most one status update email per day to keep Sam Altman updated without spamming.</li><li><strong>Global Allocation Metrics:</strong> Tracks total, used, and available RAM while evaluating your personal system's standing with theoretical global DRAM authorities.</li></ul><h3>3. Quick Start & Practical Use Case</h3><p>Integrating the script into your local system administration or scheduled jobs requires only standard system tools like <code>cron</code> and standard mail transport utilities.</p><p>To inspect your machine's DRAM waste, start by cloning the repository:</p><pre><code>git clone https://github.com/IainKay/ram-altman.git\ncd ram-altman</code></pre><p>From there, you can inspect the script logic or configure execution via a daily <code>cron</code> entry. If your machine currently has more than 10% of its memory sitting unutilized, the script handles the calculations and prepares a daily email report detailing the exact DRAM capacity your desktop machine is currently keeping out of server racks.</p><h3>4. Why It Matters</h3><p>With over <strong>1,821 GitHub stars</strong>, the project highlights how developers use clever automation and open-source software to respond satirically to industry trends and hot takes. Beyond the humor, the codebase serves as a simple, effective example of lightweight system memory parsing in plain Shell.</p><blockquote><p>Check out sample generated emails at <a href=\"https://ram-altman.lol\">ram-altman.lol</a> or explore the source directly on the <a href=\"https://github.com/IainKay/ram-altman\">IainKay/ram-altman GitHub Repository</a>.</p></blockquote>",
+    "id": "gh:1447227957",
+    "status": "published",
+    "created_at": 1794373246102,
+    "item": {
+      "id": "gh:1447227957",
+      "src": "GitHub",
+      "name": "IainKay/ram-altman",
+      "desc": "Monitors your RAM and reports any \"quite terrible\" unused capacity directly to the CEO of OpenAI.",
+      "url": "https://github.com/IainKay/ram-altman",
+      "score": 1821,
+      "lang": "Shell",
+      "topics": [
+        "bash",
+        "cron",
+        "dram",
+        "email",
+        "humor"
+      ],
+      "created": "2026-11-05T16:16:41Z"
+    },
+    "published_at": 1794373260476
+  },
+  {
     "title": "Cinecode: Rendering Full Short Films and Ads Entirely from Agentic Code",
     "slug": "cinecode-rendering-films-from-agentic-code",
     "tldr": "Cinecode takes a radical new approach to AI video generation by letting coding agents write scripts, render visual frames programmatically using Three.js and headless Chrome, and compile final MP4s with sound. With over 1,700 stars on GitHub, this Python-driven framework turns video production into a deterministic software workflow.",
