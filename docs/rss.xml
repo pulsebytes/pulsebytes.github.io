@@ -9,7 +9,7 @@
     <atom:link href="https://pulsebytes.github.io/feed.xml" rel="self" type="application/rss+xml" />
     <link>https://pulsebytes.github.io/</link>
     <description>In-depth architectural breakdowns, engineering deep-dives, and curated open-source projects for developers.</description>
-    <lastBuildDate>Fri, 13 Nov 2026 04:27:34 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 13 Nov 2026 08:00:49 +0000</lastBuildDate>
     <language>en-US</language>
     <generator>Pulsebyte RSS Engine 2.0</generator>
     <image>
@@ -18,10 +18,25 @@
       <link>https://pulsebytes.github.io/</link>
     </image>
     <item>
+      <title>HolyArrs: Streamlining Your Homelab Media Stack into a Single Go Engine</title>
+      <link>https://pulsebytes.github.io/articles/holyarrs-streamlining-your-homelab-media-stack.html</link>
+      <guid isPermaLink="true">https://pulsebytes.github.io/articles/holyarrs-streamlining-your-homelab-media-stack.html</guid>
+      <pubDate>Fri, 13 Nov 2026 08:00:33 +0000</pubDate>
+      <dc:creator><![CDATA[Pulsebyte Editorial]]></dc:creator>
+      <category>Go</category>
+      <category>Homelab</category>
+      <category>Docker</category>
+      <category>Media Server</category>
+      <category>Self-Hosted</category>
+      <description><![CDATA[HolyArrs unifies management for your movies, TV shows, music, and download queues into a single self-hosted application built in Go. Designed for homelab enthusiasts, it simplifies self-hosting without the clutter of managing countless individual dashboards.]]></description>
+      <content:encoded><![CDATA[<h3>1. The Problem</h3><p>For homelab enthusiasts and self-hosters managing personal media suites, operational complexity quickly becomes a bottleneck. Setting up, updating, and maintaining individual service instances for movies, TV series, music, and download monitoring requires juggling multiple web interfaces, network ports, reverse proxies, and API keys. This fragmentation creates significant overhead and friction for users who simply want an all-in-one hub for their media server ecosystem.</p><h3>2. Architecture & Key Features</h3><p><strong>HolyArrs/HolyArrs</strong> approaches this challenge by consolidating your media workflow into one unified self-hosted application. Written in Go, the application takes full advantage of Go's concurrency, speed, and low memory consumption, making it well-suited for lightweight homelab servers, NAS devices, or single-board computers.</p><p>Key features of <strong>HolyArrs/HolyArrs</strong> include:</p><ul><li><strong>Unified Media Engine:</strong> Single interface to monitor and manage your TV shows, movies, music, and active downloads in one place.</li><li><strong>Media Server Integration:</strong> Built to complement popular self-hosted media solutions like Plex and Jellyfin.</li><li><strong>High Performance via Go:</strong> Minimal memory footprint and quick startup times compared to heavy runtime environments.</li><li><strong>Multi-Language Accessibility:</strong> Native interface support for English, Spanish, Portuguese, French, German, Russian, Simplified Chinese, Japanese, Hindi, Arabic, and more.</li></ul><h3>3. Quick Start & Practical Use Case</h3><p>Deploying <code>HolyArrs/HolyArrs</code> in a Docker-centric homelab environment is quick and straightforward.</p><p>To deploy using Docker:</p><code>docker run -d \<br>  --name holyarrs \<br>  -p 8080:8080 \<br>  -v /path/to/config:/config \<br>  --restart unless-stopped \<br>  holyarrs/holyarrs:latest</code><p>Once deployed, navigate to <code>http://localhost:8080</code> to configure your media libraries, link downstream download engines, and connect your Plex or Jellyfin media servers.</p><h3>4. Why It Matters</h3><p>With an impressive GitHub community score of 996 points, <strong>HolyArrs/HolyArrs</strong> demonstrates the self-hosted community's strong appetite for simplified, centralized management tools. By unifying fragmented media pipelines under a clean Go runtime, it reduces administrative hassle while preserving performance.</p><blockquote>Check out the source code, roadmap, and official release updates directly on the <a href="https://github.com/HolyArrs/HolyArrs">HolyArrs GitHub Repository</a>.</blockquote>]]></content:encoded>
+      <enclosure url="https://pulsebytes.github.io/assets/og-image.png" length="0" type="image/png" />
+    </item>
+    <item>
       <title>The Maximalist LLM: Unpacking the Qwen-27B &#x27;Heretic&#x27; NEO-CODER Powerhouse</title>
       <link>https://pulsebytes.github.io/articles/qwen-27b-heretic-neo-coder-max-gguf-guide.html</link>
       <guid isPermaLink="true">https://pulsebytes.github.io/articles/qwen-27b-heretic-neo-coder-max-gguf-guide.html</guid>
-      <pubDate>Wed, 11 Nov 2026 14:49:48 +0000</pubDate>
+      <pubDate>Fri, 13 Nov 2026 07:52:25 +0000</pubDate>
       <dc:creator><![CDATA[Pulsebyte Editorial]]></dc:creator>
       <category>GGUF</category>
       <category>Unsloth</category>

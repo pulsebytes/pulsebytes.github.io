@@ -1,5 +1,40 @@
 [
   {
+    "title": "HolyArrs: Streamlining Your Homelab Media Stack into a Single Go Engine",
+    "slug": "holyarrs-streamlining-your-homelab-media-stack",
+    "tldr": "HolyArrs unifies management for your movies, TV shows, music, and download queues into a single self-hosted application built in Go. Designed for homelab enthusiasts, it simplifies self-hosting without the clutter of managing countless individual dashboards.",
+    "read_time": "4 min read",
+    "tags": [
+      "Go",
+      "Homelab",
+      "Docker",
+      "Media Server",
+      "Self-Hosted"
+    ],
+    "content": "<h3>1. The Problem</h3><p>For homelab enthusiasts and self-hosters managing personal media suites, operational complexity quickly becomes a bottleneck. Setting up, updating, and maintaining individual service instances for movies, TV series, music, and download monitoring requires juggling multiple web interfaces, network ports, reverse proxies, and API keys. This fragmentation creates significant overhead and friction for users who simply want an all-in-one hub for their media server ecosystem.</p><h3>2. Architecture & Key Features</h3><p><strong>HolyArrs/HolyArrs</strong> approaches this challenge by consolidating your media workflow into one unified self-hosted application. Written in Go, the application takes full advantage of Go's concurrency, speed, and low memory consumption, making it well-suited for lightweight homelab servers, NAS devices, or single-board computers.</p><p>Key features of <strong>HolyArrs/HolyArrs</strong> include:</p><ul><li><strong>Unified Media Engine:</strong> Single interface to monitor and manage your TV shows, movies, music, and active downloads in one place.</li><li><strong>Media Server Integration:</strong> Built to complement popular self-hosted media solutions like Plex and Jellyfin.</li><li><strong>High Performance via Go:</strong> Minimal memory footprint and quick startup times compared to heavy runtime environments.</li><li><strong>Multi-Language Accessibility:</strong> Native interface support for English, Spanish, Portuguese, French, German, Russian, Simplified Chinese, Japanese, Hindi, Arabic, and more.</li></ul><h3>3. Quick Start & Practical Use Case</h3><p>Deploying <code>HolyArrs/HolyArrs</code> in a Docker-centric homelab environment is quick and straightforward.</p><p>To deploy using Docker:</p><code>docker run -d \\<br>  --name holyarrs \\<br>  -p 8080:8080 \\<br>  -v /path/to/config:/config \\<br>  --restart unless-stopped \\<br>  holyarrs/holyarrs:latest</code><p>Once deployed, navigate to <code>http://localhost:8080</code> to configure your media libraries, link downstream download engines, and connect your Plex or Jellyfin media servers.</p><h3>4. Why It Matters</h3><p>With an impressive GitHub community score of 996 points, <strong>HolyArrs/HolyArrs</strong> demonstrates the self-hosted community's strong appetite for simplified, centralized management tools. By unifying fragmented media pipelines under a clean Go runtime, it reduces administrative hassle while preserving performance.</p><blockquote>Check out the source code, roadmap, and official release updates directly on the <a href=\"https://github.com/HolyArrs/HolyArrs\">HolyArrs GitHub Repository</a>.</blockquote>",
+    "id": "gh:1452008226",
+    "status": "published",
+    "created_at": 1794556517036,
+    "item": {
+      "id": "gh:1452008226",
+      "src": "GitHub",
+      "name": "HolyArrs/HolyArrs",
+      "desc": "One self-hosted app for your shows, movies and music.",
+      "url": "https://github.com/HolyArrs/HolyArrs",
+      "score": 996,
+      "lang": "Go",
+      "topics": [
+        "docker",
+        "homelab",
+        "jellyfin",
+        "media-server",
+        "plex"
+      ],
+      "created": "2026-11-09T23:53:25Z"
+    },
+    "published_at": 1794556833380
+  },
+  {
     "title": "The Maximalist LLM: Unpacking the Qwen-27B 'Heretic' NEO-CODER Powerhouse",
     "slug": "qwen-27b-heretic-neo-coder-max-gguf-guide",
     "tldr": "A massive 27B parameter multimodal powerhouse optimized with Unsloth for local GGUF inference, offering uncensored coding and vision capabilities. This 'Cold Fusion' fine-tune represents a new peak in community-driven, high-performance model merging.",
@@ -34,7 +69,7 @@
       "blurb": "This GGUF-quantized 27B model combines vision, unrestricted text generation, and advanced coding capabilities for local deployments."
     },
     "scheduled_for": 1794381120000,
-    "published_at": 1794408588746
+    "published_at": 1794556345204
   },
   {
     "title": "Inside Chimera: The Rust-Powered WebAssembly Vocal Synthesizer Modeling Human Airways in Real Time",
